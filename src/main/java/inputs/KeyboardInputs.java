@@ -1,6 +1,5 @@
 package inputs;
 
-import main.Game;
 import main.GamePanel;
 
 import java.awt.event.KeyEvent;
@@ -15,7 +14,7 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        //muie
+
     }
 
     @Override

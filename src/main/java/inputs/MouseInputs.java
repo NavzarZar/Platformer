@@ -6,7 +6,7 @@ import main.GamePanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-//a
+
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private final GamePanel gamePanel;
@@ -14,7 +14,6 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
     {
         this.gamePanel = gamePanel;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -26,7 +25,6 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     }
 
-    //muie//cacat
     @Override
     public void mouseReleased(MouseEvent e) {
 
