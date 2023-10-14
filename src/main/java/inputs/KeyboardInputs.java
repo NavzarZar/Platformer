@@ -20,7 +20,7 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        int delta = 5;
+        int delta = 10;
 
         //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
         switch (e.getKeyCode()) {
