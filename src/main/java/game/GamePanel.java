@@ -76,7 +76,7 @@ public class GamePanel extends JPanel{
     private void drawMap(Graphics g) {
         for(int i = 0; i < map.getMapList().size(); i++) {
             for (int j = 0; j < map.getMapList().get(i); j++) {
-                g.fillRect(
+                g.drawRect(
                         i * map.getMapElementWidth(),
                         GameWindow.height - (Map.levelHeight + j * map.getMapElementHeight()),
                         map.getMapElementWidth(),
