@@ -3,7 +3,7 @@ import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
 import javax.swing.*;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class GamePanel extends JPanel{
     //Coordinates where rectangle is drawn at
@@ -40,9 +40,17 @@ public class GamePanel extends JPanel{
     }
 
     private void makePlayerFall() {
-        if (playerY < 500) {
+        if (!mapBlockUnderPlayer()) {
             changePlayerY(1);
         }
+    }
+
+    private boolean mapBlockUnderPlayer() {
+        Point bottomRightCorner = new Point(playerX+playerWidth, playerY);
+        return (playerY == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() * map.getMapList().get(playerX/map.getMapElementWidth())))
+                || (bottomRightCorner.y == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() * map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth())));
     }
 
     public void changePlayerX(int value){
