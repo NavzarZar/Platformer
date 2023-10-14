@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel{
-    //Coordinates where rectangle is drawn at
     private int playerX = 0, playerY = 0;
     private final int playerWidth = 50, playerHeight = 50;
     Map map;
@@ -92,9 +91,5 @@ public class GamePanel extends JPanel{
                 );
             }
         }
-    }
-
-    public void displayMap() {
-
     }
 }

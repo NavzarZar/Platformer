@@ -22,5 +22,4 @@ public class GameWindow extends JFrame {
         //We ses the frame
         jframe.setVisible(true);
     }
-
 }
