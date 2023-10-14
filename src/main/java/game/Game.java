@@ -1,4 +1,4 @@
-package main;
+package game;
 
 public class Game implements Runnable {
     private final GamePanel gamePanel;

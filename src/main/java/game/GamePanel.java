@@ -1,4 +1,4 @@
-package main;
+package game;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
@@ -19,10 +19,12 @@ public class GamePanel extends JPanel{
         addMouseMotionListener(mouseInputs);
         map = new Map();
     }
+
     public void changeX(int value){
         this.xDelta += value;
 
     }
+
     public void changeY(int value){
         this.yDelta += value;
 
@@ -31,7 +33,6 @@ public class GamePanel extends JPanel{
     {
         this.xDelta = x;
         this.yDelta = y;
-
     }
 
     @Override
@@ -49,7 +50,8 @@ public class GamePanel extends JPanel{
 
         //Draw functions
         g.fillRect(xDelta,yDelta,50, 50);
-        g.drawRect(400, 400, 2000, 1000);
+
+
         frames++;
         //Check if a second passes/ has passed.
         if(System.currentTimeMillis() - lastChecked >= 1000) {
