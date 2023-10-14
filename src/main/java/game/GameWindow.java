@@ -3,11 +3,13 @@ package game;
 import javax.swing.*;
 
 public class GameWindow extends JFrame {
+    static final int width = 1920;
+    static final int height = 1080;
     public GameWindow(GamePanel gamePanel)
     {
         //Create new JFrame frame object
         JFrame jframe = new JFrame();
-        jframe.setSize(800, 800);
+        jframe.setSize(width, height);
 
         //The program stops running when the frame is closed
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,4 +22,5 @@ public class GameWindow extends JFrame {
         //We ses the frame
         jframe.setVisible(true);
     }
+
 }

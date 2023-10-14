@@ -6,27 +6,27 @@ import java.util.ArrayList;
 
 public class Map extends JPanel {
     private Graphics graphics;
-    private ArrayList<Integer> mapList = new ArrayList<>();
+    private final ArrayList<Integer> mapList = new ArrayList<>();
 
-    private int mapElementWidth = 50;
-    private int mapElementHeight = 100;
+    static final int levelHeight = 500;
+
+    private final int mapElementWidth = 75;
+    private final int mapElementHeight = 50;
 
     public Map()
     {
-        mapList.add(1);
-        mapList.add(3);
-        mapList.add(1);
-        mapList.add(3);
-        mapList.add(1);
-        mapList.add(3);
-    }
-
-    public int getMapElementWidth() {
-        return mapElementWidth;
+        int[] heights = new int[] {1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1};
+        for (int height : heights) {
+            mapList.add(height);
+        }
     }
 
     public ArrayList<Integer> getMapList() {
         return new ArrayList<>(mapList);
+    }
+
+    public int getMapElementWidth() {
+        return mapElementWidth;
     }
 
     public int getMapElementHeight() {
