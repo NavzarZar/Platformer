@@ -28,16 +28,12 @@ public class GamePanel extends JPanel{
     @Override
     public void paintComponent(Graphics g){
 
-        //Keeping the drawing sheet clean
         super.paintComponent(g);
 
         // Draw map
         drawMap(g);
 
-        //Draw player
-
         makePlayerFall();
-
         drawPlayer(g);
 
         // displayFrames();
