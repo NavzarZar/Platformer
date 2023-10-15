@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
     public Player player = new Player();
-    private final int playerWidth = player.getPlayerWidth();
-    private final int playerHeight = player.getPlayerHeight();
     int fallingSpeed = 1;
     Map map;
     private int frames = 0;
