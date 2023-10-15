@@ -14,7 +14,7 @@ public class Map extends JPanel {
     private final int mapElementHeight = 50;
 
     public Map() {
-        int[] heights = new int[]{1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1};
+        int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2};
         for (int height : heights) {
             mapList.add(height);
         }
