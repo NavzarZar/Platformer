@@ -27,4 +27,19 @@ public class Player {
     }
 
 
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
+
+    public void setPlayerX(int playerX) {
+        this.playerX = playerX;
+    }
 }

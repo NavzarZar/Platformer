@@ -6,9 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel{
-    Player player = new Player();
-    private int playerX = player.getPlayerPosition().x;
-    private int playerY = player.getPlayerPosition().y;
+    public Player player = new Player();
+
 
     private final int playerWidth = player.getPlayerWidth();
     private final int playerHeight = player.getPlayerHeight();
@@ -25,8 +24,8 @@ public class GamePanel extends JPanel{
 
         map = new Map();
 
-        this.playerX = 0;
-        this.playerY = 0;
+        player.setPlayerX(0);
+        player.setPlayerY(0);
     }
 
     @Override
@@ -44,52 +43,24 @@ public class GamePanel extends JPanel{
 
     private void makePlayerFall() {
         if (!mapBlockUnderPlayer()) {
-           changePlayerY(fallingSpeed);
+           player.setPlayerX(player.getPlayerY() + fallingSpeed);
         }
     }
 
     // Doesn't work if the map is not big enough, easy check to fix this though
     private boolean mapBlockUnderPlayer() {
-        Point bottomRightCorner = new Point(playerX+playerWidth, playerY + playerHeight);
-        return (playerY + playerHeight + fallingSpeed == GameWindow.height - (Map.levelHeight +
+        Point bottomRightCorner = new Point(player.getPlayerX() + player.getPlayerWidth(), player.getPlayerY() + player.getPlayerHeight());
+        return (player.getPlayerY() + player.getPlayerHeight() + fallingSpeed == GameWindow.height - (Map.levelHeight +
                 map.getMapElementHeight() *
-                        (map.getMapList().get(playerX/map.getMapElementWidth()) - 1)))
+                        (map.getMapList().get(player.getPlayerX() / map.getMapElementWidth()) - 1)))
                 || (bottomRightCorner.y + fallingSpeed == GameWindow.height - (Map.levelHeight +
                 map.getMapElementHeight() *
-                        (map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth()) - 1)));
-    }
-
-    public int getPlayerX() {
-        return playerX;
-    }
-
-    public int getPlayerY() {
-        return playerY;
+                        (map.getMapList().get(bottomRightCorner.x / map.getMapElementWidth()) - 1)));
     }
 
     public int getPlayerWidth() {
         return playerWidth;
     }
-
-    public int getPlayerHeight() {
-        return playerHeight;
-    }
-
-    public void changePlayerX(int value){
-        this.playerX += value;
-    }
-
-    public void changePlayerY(int value){
-        this.playerY += value;
-
-    }
-    public void drawRect(int x, int y)
-    {
-        this.playerX = x;
-        this.playerY = y;
-    }
-
-
     private void displayFrames() {
         frames++;
         if(System.currentTimeMillis() - lastChecked >= 1000) {
@@ -100,7 +71,7 @@ public class GamePanel extends JPanel{
     }
 
     private void drawPlayer(Graphics g) {
-        g.fillRect(playerX, playerY, playerWidth, playerHeight);
+        g.fillRect(player.getPlayerX(), player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
     }
 
     private void drawMap(Graphics g) {
@@ -114,5 +85,23 @@ public class GamePanel extends JPanel{
                 );
             }
         }
+    }
+
+    public void moveLeft() {
+        if(!collisionLeft())
+            player.setPlayerX(player.getPlayerX() -1);
+    }
+
+    private boolean collisionLeft() {
+        return false;
+    }
+
+    public void moveRight() {
+        if(!collisionRight())
+        player.setPlayerX(player.getPlayerX()+1);
+    }
+
+    private boolean collisionRight() {
+        return false;
     }
 }

@@ -40,16 +40,16 @@ public class Game implements Runnable {
             now = System.nanoTime();
             if(now - lastFrame >= timePerFrame)
             {
-                coordinateLabel1.setText("Up-left Corner: " + "X: " + gamePanel.getPlayerX() + " Y: " + gamePanel.getPlayerY());
+                coordinateLabel1.setText("Up-left Corner: " + "X: " + gamePanel.player.getPlayerX() + " Y: " + gamePanel.player.getPlayerY());
                 gamePanel.add(coordinateLabel1);
 
-                coordinateLabel2.setText("Up-right Corner: " + "X: " + (gamePanel.getPlayerX() + gamePanel.getPlayerWidth()) + " Y: " + gamePanel.getPlayerY());
+                coordinateLabel2.setText("Up-right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.getPlayerWidth()) + " Y: " + gamePanel.player.getPlayerY());
                 gamePanel.add(coordinateLabel2);
 
-                coordinateLabel3.setText("Down-Left Corner: " + "X: " + gamePanel.getPlayerX() + " Y: " + (gamePanel.getPlayerY() + gamePanel.getPlayerHeight()));
+                coordinateLabel3.setText("Down-Left Corner: " + "X: " + gamePanel.player.getPlayerX() + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel3);
 
-                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (gamePanel.getPlayerX() + gamePanel.getPlayerWidth()) + " Y: " + (gamePanel.getPlayerY() + gamePanel.getPlayerHeight()));
+                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.getPlayerWidth()) + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel4);
 
                 gamePanel.repaint();
