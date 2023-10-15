@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel{
-    //Coordinates where rectangle is drawn at
     private int playerX = 0, playerY = 0;
-    private final int playerWidth = 50, playerHeight = 50;
+    private final int playerWidth = 50, playerHeight = 100;
+    int fallingSpeed = 1;
     Map map;
     private int frames = 0;
     private long lastChecked = 0;
@@ -32,7 +32,6 @@ public class GamePanel extends JPanel{
 
         // Draw map
         drawMap(g);
-
         makePlayerFall();
         drawPlayer(g);
 
@@ -41,16 +40,19 @@ public class GamePanel extends JPanel{
 
     private void makePlayerFall() {
         if (!mapBlockUnderPlayer()) {
-            changePlayerY(1);
+            changePlayerY(fallingSpeed);
         }
     }
 
+    // Doesn't work if the map is not big enough, easy check to fix this though
     private boolean mapBlockUnderPlayer() {
-        Point bottomRightCorner = new Point(playerX+playerWidth, playerY);
-        return (playerY == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() * map.getMapList().get(playerX/map.getMapElementWidth())))
-                || (bottomRightCorner.y == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() * map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth())));
+        Point bottomRightCorner = new Point(playerX+playerWidth, playerY + playerHeight);
+        return (playerY + playerHeight + fallingSpeed == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() *
+                        (map.getMapList().get(playerX/map.getMapElementWidth()) - 1)))
+                || (bottomRightCorner.y + fallingSpeed == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() *
+                        (map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth()) - 1)));
     }
 
     public void changePlayerX(int value){
@@ -92,9 +94,5 @@ public class GamePanel extends JPanel{
                 );
             }
         }
-    }
-
-    public void displayMap() {
-
     }
 }

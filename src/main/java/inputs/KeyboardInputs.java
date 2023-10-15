@@ -4,7 +4,7 @@ import game.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-//a
+
 public class KeyboardInputs implements KeyListener {
 
     private final GamePanel gamePanel;
@@ -19,7 +19,6 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
         int delta = 4;
 
         //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
