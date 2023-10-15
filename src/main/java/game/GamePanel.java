@@ -9,6 +9,7 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     public Player player = new Player();
     int fallingSpeed = 1;
+    int moveSpeed = 5;
     Map map;
     private int frames = 0;
     private long lastChecked = 0;
@@ -83,6 +84,7 @@ public class GamePanel extends JPanel {
 
     private boolean collisionLeft() {
         return false;
+//        return player.getPlayerX() - moveSpeed == GameWindow.height - Map.levelHeight
     }
 
     private boolean collisionRight() {
@@ -91,13 +93,13 @@ public class GamePanel extends JPanel {
 
     public void moveLeft() {
         if (!collisionLeft()) {
-            player.setPlayerX(player.getPlayerX() - 1);
+            player.setPlayerX(player.getPlayerX() - moveSpeed);
         }
     }
 
     public void moveRight() {
         if (!collisionRight())
-            player.setPlayerX(player.getPlayerX() + 1);
+            player.setPlayerX(player.getPlayerX() + moveSpeed);
     }
 
 }
