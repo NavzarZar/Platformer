@@ -6,8 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel{
-    private int playerX = 0, playerY = 0;
-    private final int playerWidth = 50, playerHeight = 100;
+    Player player = new Player();
+    private int playerX = player.getPlayerPosition().x;
+    private int playerY = player.getPlayerPosition().y;
+
+    private final int playerWidth = player.getPlayerWidth();
+    private final int playerHeight = player.getPlayerHeight();
     int fallingSpeed = 1;
     Map map;
     private int frames = 0;
@@ -40,7 +44,7 @@ public class GamePanel extends JPanel{
 
     private void makePlayerFall() {
         if (!mapBlockUnderPlayer()) {
-            changePlayerY(fallingSpeed);
+           changePlayerY(fallingSpeed);
         }
     }
 
