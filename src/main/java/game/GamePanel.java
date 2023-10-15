@@ -55,6 +55,22 @@ public class GamePanel extends JPanel{
                         (map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth()) - 1)));
     }
 
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    public int getPlayerWidth() {
+        return playerWidth;
+    }
+
+    public int getPlayerHeight() {
+        return playerHeight;
+    }
+
     public void changePlayerX(int value){
         this.playerX += value;
     }
