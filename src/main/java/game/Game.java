@@ -9,14 +9,14 @@ public class Game implements Runnable {
     private final GamePanel gamePanel;
 
 
-    private void startGameLoop(){
+    private void startGameLoop() {
         Thread gameThread = new Thread(this);
         gameThread.start();
     }
-    public void run()
-    {
+
+    public void run() {
         int SET_FPS = 120;
-        double timePerFrame = 1000000000.0/ SET_FPS;
+        double timePerFrame = 1000000000.0 / SET_FPS;
         boolean gameOver = false;
         long lastFrame = System.nanoTime();
         long now;
@@ -35,21 +35,19 @@ public class Game implements Runnable {
         coordinateLabel3.setLocation(10, 15);
         coordinateLabel4.setLocation(10, 20);
 
-        while(!gameOver)
-        {
+        while (!gameOver) {
             now = System.nanoTime();
-            if(now - lastFrame >= timePerFrame)
-            {
+            if (now - lastFrame >= timePerFrame) {
                 coordinateLabel1.setText("Up-left Corner: " + "X: " + gamePanel.player.getPlayerX() + " Y: " + gamePanel.player.getPlayerY());
                 gamePanel.add(coordinateLabel1);
 
-                coordinateLabel2.setText("Up-right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.getPlayerWidth()) + " Y: " + gamePanel.player.getPlayerY());
+                coordinateLabel2.setText("Up-right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerWidth()) + " Y: " + gamePanel.player.getPlayerY());
                 gamePanel.add(coordinateLabel2);
 
                 coordinateLabel3.setText("Down-Left Corner: " + "X: " + gamePanel.player.getPlayerX() + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel3);
 
-                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.getPlayerWidth()) + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
+                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerWidth()) + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel4);
 
                 gamePanel.repaint();
@@ -58,8 +56,7 @@ public class Game implements Runnable {
         }
     }
 
-    public Game()
-    {
+    public Game() {
         gamePanel = new GamePanel();
         GameWindow gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();

@@ -5,8 +5,8 @@ import javax.swing.*;
 public class GameWindow extends JFrame {
     static final int width = 1920;
     static final int height = 1080;
-    public GameWindow(GamePanel gamePanel)
-    {
+
+    public GameWindow(GamePanel gamePanel) {
         //Create new JFrame frame object
         JFrame jframe = new JFrame();
         jframe.setSize(width, height);

@@ -1,14 +1,13 @@
 package game;
+
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel {
     public Player player = new Player();
-
-
     private final int playerWidth = player.getPlayerWidth();
     private final int playerHeight = player.getPlayerHeight();
     int fallingSpeed = 1;
@@ -29,7 +28,7 @@ public class GamePanel extends JPanel{
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
@@ -43,7 +42,7 @@ public class GamePanel extends JPanel{
 
     private void makePlayerFall() {
         if (!mapBlockUnderPlayer()) {
-           player.setPlayerX(player.getPlayerY() + fallingSpeed);
+            player.setPlayerY(player.getPlayerY() + fallingSpeed);
         }
     }
 
@@ -58,12 +57,9 @@ public class GamePanel extends JPanel{
                         (map.getMapList().get(bottomRightCorner.x / map.getMapElementWidth()) - 1)));
     }
 
-    public int getPlayerWidth() {
-        return playerWidth;
-    }
     private void displayFrames() {
         frames++;
-        if(System.currentTimeMillis() - lastChecked >= 1000) {
+        if (System.currentTimeMillis() - lastChecked >= 1000) {
             lastChecked = System.currentTimeMillis();
             System.out.println("FPS: " + frames);
             frames = 0;
@@ -75,7 +71,7 @@ public class GamePanel extends JPanel{
     }
 
     private void drawMap(Graphics g) {
-        for(int i = 0; i < map.getMapList().size(); i++) {
+        for (int i = 0; i < map.getMapList().size(); i++) {
             for (int j = 0; j < map.getMapList().get(i); j++) {
                 g.drawRect(
                         i * map.getMapElementWidth(),
@@ -87,21 +83,23 @@ public class GamePanel extends JPanel{
         }
     }
 
-    public void moveLeft() {
-        if(!collisionLeft())
-            player.setPlayerX(player.getPlayerX() -1);
-    }
-
     private boolean collisionLeft() {
         return false;
-    }
-
-    public void moveRight() {
-        if(!collisionRight())
-        player.setPlayerX(player.getPlayerX()+1);
     }
 
     private boolean collisionRight() {
         return false;
     }
+
+    public void moveLeft() {
+        if (!collisionLeft()) {
+            player.setPlayerX(player.getPlayerX() - 1);
+        }
+    }
+
+    public void moveRight() {
+        if (!collisionRight())
+            player.setPlayerX(player.getPlayerX() + 1);
+    }
+
 }

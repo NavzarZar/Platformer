@@ -36,10 +36,12 @@ public class Player {
     }
 
     public void setPlayerY(int playerY) {
+        System.out.println("Setting player y to " + playerY);
         this.playerY = playerY;
     }
 
     public void setPlayerX(int playerX) {
+        System.out.println("Setting player x to " + playerY);
         this.playerX = playerX;
     }
 }
