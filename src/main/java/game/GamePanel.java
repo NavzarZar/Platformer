@@ -8,6 +8,7 @@ import java.awt.*;
 public class GamePanel extends JPanel{
     private int playerX = 0, playerY = 0;
     private final int playerWidth = 50, playerHeight = 100;
+    int fallingSpeed = 1;
     Map map;
     private int frames = 0;
     private long lastChecked = 0;
@@ -40,16 +41,18 @@ public class GamePanel extends JPanel{
 
     private void makePlayerFall() {
         if (!mapBlockUnderPlayer()) {
-            changePlayerY(1);
+            changePlayerY(fallingSpeed);
         }
     }
 
     private boolean mapBlockUnderPlayer() {
         Point bottomRightCorner = new Point(playerX+playerWidth, playerY + playerHeight);
-        return (playerY + playerHeight == GameWindow.height - (Map.levelHeight +
-                (map.getMapElementHeight()-1) * (map.getMapList().get(playerX/map.getMapElementWidth())-1)))
-                || (bottomRightCorner.y == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() * (map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth())-1)));
+        return (playerY + playerHeight + fallingSpeed == GameWindow.height - (Map.levelHeight +
+                (map.getMapElementHeight()-1) *
+                        (map.getMapList().get(playerX/map.getMapElementWidth()) - 1)))
+                || (bottomRightCorner.y + fallingSpeed == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() *
+                        (map.getMapList().get(bottomRightCorner.x/map.getMapElementWidth()) - 1)));
     }
 
     public void changePlayerX(int value){
