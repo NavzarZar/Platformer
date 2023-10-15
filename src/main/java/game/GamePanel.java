@@ -32,7 +32,6 @@ public class GamePanel extends JPanel{
 
         // Draw map
         drawMap(g);
-
         makePlayerFall();
         drawPlayer(g);
 
@@ -45,10 +44,11 @@ public class GamePanel extends JPanel{
         }
     }
 
+    // Doesn't work if the map is not big enough, easy check to fix this though
     private boolean mapBlockUnderPlayer() {
         Point bottomRightCorner = new Point(playerX+playerWidth, playerY + playerHeight);
         return (playerY + playerHeight + fallingSpeed == GameWindow.height - (Map.levelHeight +
-                (map.getMapElementHeight()-1) *
+                map.getMapElementHeight() *
                         (map.getMapList().get(playerX/map.getMapElementWidth()) - 1)))
                 || (bottomRightCorner.y + fallingSpeed == GameWindow.height - (Map.levelHeight +
                 map.getMapElementHeight() *
