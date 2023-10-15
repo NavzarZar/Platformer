@@ -83,12 +83,16 @@ public class GamePanel extends JPanel {
     }
 
     private boolean collisionLeft() {
-        return false;
-//        return player.getPlayerX() - moveSpeed == GameWindow.height - Map.levelHeight
+        if(player.getPlayerX() - moveSpeed <= 0) {
+            return true;
+        }
+        return (GameWindow.height - Map.levelHeight - player.getPlayerY()) / map.getMapElementHeight() <
+                map.getMapList().get((player.getPlayerX() - moveSpeed) / map.getMapElementWidth());
     }
 
     private boolean collisionRight() {
-        return false;
+        return (GameWindow.height - Map.levelHeight - player.getPlayerY()) / map.getMapElementHeight() <
+                map.getMapList().get((player.getPlayerX() + player.getPlayerWidth() + moveSpeed) / map.getMapElementWidth());
     }
 
     public void moveLeft() {
