@@ -58,22 +58,24 @@ public class Player {
     }
 
     public void moveLeft(Map map) {
-        this.setVelocityX(-moveSpeed);
         int mapX = (this.getPlayerX() / map.getMapElementWidth()) * (map.getMapElementWidth());
         if (!Collision.collisionLeft(this, map)) {
+            this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
         } else if(this.getPlayerX() - mapX <= moveSpeed) {
-            this.setPlayerX(mapX);
+            this.setVelocityX(0);
+            this.setPlayerX(0);
         }
     }
 
     public void moveRight(Map map) {
-        this.setVelocityX(moveSpeed);
         int mapX = (this.getPlayerX() / map.getMapElementWidth() + 1) * (map.getMapElementWidth());
         if (!Collision.collisionRight(this, map)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
+            this.setVelocityX(moveSpeed);
         } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
             this.setPlayerX(mapX - this.getPlayerWidth());
+            this.setVelocityX(0);
         }
     }
 

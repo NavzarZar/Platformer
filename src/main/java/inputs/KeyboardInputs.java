@@ -24,6 +24,7 @@ public class KeyboardInputs implements KeyListener {
         //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A -> {
+                System.out.println("A pressed");
                 gamePanel.player.moveLeft(gamePanel.getMap());
                 movingLeft = true;
             }
