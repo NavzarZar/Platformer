@@ -1,13 +1,9 @@
 package game;
 
-import inputs.MouseInputs;
-
 import javax.swing.*;
-import java.time.chrono.JapaneseEra;
 
 public class Game implements Runnable {
     private final GamePanel gamePanel;
-
 
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
@@ -15,7 +11,7 @@ public class Game implements Runnable {
     }
 
     public void run() {
-        int SET_FPS = 120;
+        int SET_FPS = 60;
         double timePerFrame = 1000000000.0 / SET_FPS;
         boolean gameOver = false;
         long lastFrame = System.nanoTime();

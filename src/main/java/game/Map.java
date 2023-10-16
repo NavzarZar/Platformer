@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Map extends JPanel {
-    private Graphics graphics;
+public class Map {
     private final ArrayList<Integer> mapList = new ArrayList<>();
 
     static final int levelHeight = 500;
@@ -14,7 +13,7 @@ public class Map extends JPanel {
     private final int mapElementHeight = 50;
 
     public Map() {
-        int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2};
+        int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2};
         for (int height : heights) {
             mapList.add(height);
         }

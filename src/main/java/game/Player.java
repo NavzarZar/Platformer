@@ -6,6 +6,8 @@ public class Player {
     int playerY = 50;
     int playerX = 50;
 
+    int moveSpeed = 5;
+
     int playerWidth = 50;
     int playerHeight = 50;
 
@@ -26,6 +28,29 @@ public class Player {
         return new Point(playerX, playerY);
     }
 
+    public boolean collisionLeft(Map map) {
+        if(this.getPlayerX() - moveSpeed <= 0) {
+            return true;
+        }
+        return (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() <
+                map.getMapList().get((this.getPlayerX() - moveSpeed) / map.getMapElementWidth());
+    }
+
+    public boolean collisionRight(Map map) {
+        return (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() <
+                map.getMapList().get((this.getPlayerX() + this.getPlayerWidth() + moveSpeed) / map.getMapElementWidth());
+    }
+
+    public void moveLeft(Map map) {
+        if (!collisionLeft(map)) {
+            this.setPlayerX(this.getPlayerX() - moveSpeed);
+        }
+    }
+
+    public void moveRight(Map map) {
+        if (!collisionRight(map))
+            this.setPlayerX(this.getPlayerX() + moveSpeed);
+    }
 
     public int getPlayerY() {
         return playerY;

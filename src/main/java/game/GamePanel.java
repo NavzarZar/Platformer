@@ -26,6 +26,10 @@ public class GamePanel extends JPanel {
         player.setPlayerY(0);
     }
 
+    public Map getMap() {
+        return map;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
 
@@ -80,30 +84,6 @@ public class GamePanel extends JPanel {
                 );
             }
         }
-    }
-
-    private boolean collisionLeft() {
-        if(player.getPlayerX() - moveSpeed <= 0) {
-            return true;
-        }
-        return (GameWindow.height - Map.levelHeight - player.getPlayerY()) / map.getMapElementHeight() <
-                map.getMapList().get((player.getPlayerX() - moveSpeed) / map.getMapElementWidth());
-    }
-
-    private boolean collisionRight() {
-        return (GameWindow.height - Map.levelHeight - player.getPlayerY()) / map.getMapElementHeight() <
-                map.getMapList().get((player.getPlayerX() + player.getPlayerWidth() + moveSpeed) / map.getMapElementWidth());
-    }
-
-    public void moveLeft() {
-        if (!collisionLeft()) {
-            player.setPlayerX(player.getPlayerX() - moveSpeed);
-        }
-    }
-
-    public void moveRight() {
-        if (!collisionRight())
-            player.setPlayerX(player.getPlayerX() + moveSpeed);
     }
 
 }
