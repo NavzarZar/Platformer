@@ -1,4 +1,8 @@
-package game;
+package physics;
+
+import game.GameWindow;
+import game.Map;
+import game.Player;
 
 public class Collision {
     public static boolean collisionLeft(Player player, Map map) {

@@ -1,12 +1,14 @@
 package game;
 
+import physics.Collision;
+
 import java.awt.*;
 
 public class Player {
-    int playerY = 50;
-    int playerX = 50;
+    private int playerY = 50;
+    private int playerX = 50;
 
-    int moveSpeed = 5;
+    public int moveSpeed = 5;
     int fallingSpeed = 1;
 
     int playerWidth = 50;

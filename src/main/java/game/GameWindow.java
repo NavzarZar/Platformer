@@ -3,8 +3,8 @@ package game;
 import javax.swing.*;
 
 public class GameWindow extends JFrame {
-    static final int width = 1920;
-    static final int height = 1080;
+    public static final int width = 1920;
+    public static final int height = 1080;
 
     public GameWindow(GamePanel gamePanel) {
         //Create new JFrame frame object

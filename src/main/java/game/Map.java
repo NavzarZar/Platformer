@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Map {
     private final ArrayList<Integer> mapList = new ArrayList<>();
 
-    static final int levelHeight = 500;
+    public static final int levelHeight = 500;
 
     private final int mapElementWidth = 100;
     private final int mapElementHeight = 100;
