@@ -8,11 +8,25 @@ public class Player {
     private int playerY = 500;
     private int playerX = 0;
 
-    public int moveSpeed = 5;
+    public int moveSpeed = 1;
+
+    public int velocityX = 0;
+    public int velocityY = 5;
+
     int fallingSpeed = 1;
 
     int playerWidth = 50;
     int playerHeight = 50;
+
+
+    public int getPlayerVelocityX() {
+        return velocityX;
+    }
+
+    public int getPlayerVelocityY() {
+        return velocityY;
+    }
+
 
     public int getPlayerWidth() {
         return playerWidth;
@@ -27,6 +41,14 @@ public class Player {
         this.playerY = point.y;
     }
 
+    public void setVelocityX(int velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public void setVelocityY(int velocityY) {
+        this.velocityY = velocityY;
+    }
+
     public Point getPlayerPosition() {
         return new Point(playerX, playerY);
     }
@@ -36,6 +58,7 @@ public class Player {
     }
 
     public void moveLeft(Map map) {
+        this.setVelocityX(-moveSpeed);
         int mapX = (this.getPlayerX() / map.getMapElementWidth()) * (map.getMapElementWidth());
         if (!Collision.collisionLeft(this, map)) {
             this.setPlayerX(this.getPlayerX() - moveSpeed);
@@ -45,6 +68,7 @@ public class Player {
     }
 
     public void moveRight(Map map) {
+        this.setVelocityX(moveSpeed);
         int mapX = (this.getPlayerX() / map.getMapElementWidth() + 1) * (map.getMapElementWidth());
         if (!Collision.collisionRight(this, map)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
