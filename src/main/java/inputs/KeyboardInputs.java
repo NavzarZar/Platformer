@@ -25,6 +25,7 @@ public class KeyboardInputs implements KeyListener {
             case KeyEvent.VK_A -> gamePanel.player.moveLeft(gamePanel.getMap());
             case KeyEvent.VK_D -> gamePanel.player.moveRight(gamePanel.getMap());
             case KeyEvent.VK_SPACE -> {
+                gamePanel.player.jump(gamePanel.getMap());
             }
         }
     }

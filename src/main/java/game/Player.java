@@ -5,8 +5,8 @@ import physics.Collision;
 import java.awt.*;
 
 public class Player {
-    private int playerY = 50;
-    private int playerX = 50;
+    private int playerY = 500;
+    private int playerX = 0;
 
     public int moveSpeed = 5;
     int fallingSpeed = 1;
@@ -29,6 +29,10 @@ public class Player {
 
     public Point getPlayerPosition() {
         return new Point(playerX, playerY);
+    }
+
+    public void jump(Map map) {
+        this.setPlayerY(this.getPlayerY() - 100);
     }
 
     public void moveLeft(Map map) {

@@ -21,9 +21,6 @@ public class GamePanel extends JPanel {
         addMouseMotionListener(mouseInputs);
 
         map = new Map();
-
-        player.setPlayerX(0);
-        player.setPlayerY(0);
     }
 
     public Map getMap() {
