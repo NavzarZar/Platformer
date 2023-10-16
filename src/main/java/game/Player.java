@@ -32,24 +32,36 @@ public class Player {
         if(this.getPlayerX() - moveSpeed <= 0) {
             return true;
         }
-        return (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() <
-                map.getMapList().get((this.getPlayerX() - moveSpeed) / map.getMapElementWidth());
+        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() + 1;
+        int heightOfMapLeftOfPlayer = map.getMapList().get((this.getPlayerX() - moveSpeed) / map.getMapElementWidth());
+
+        return heightOfPlayerRespectiveToMap < heightOfMapLeftOfPlayer;
     }
 
     public boolean collisionRight(Map map) {
-        return (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() <
-                map.getMapList().get((this.getPlayerX() + this.getPlayerWidth() + moveSpeed) / map.getMapElementWidth());
+        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() + 1;
+        int heightOfMapRightOfPlayer = map.getMapList().get((this.getPlayerX() + this.getPlayerWidth() + moveSpeed) / map.getMapElementWidth());
+        return heightOfPlayerRespectiveToMap < heightOfMapRightOfPlayer;
     }
 
     public void moveLeft(Map map) {
+        int mapX = (this.getPlayerX() / map.getMapElementWidth()) * (map.getMapElementWidth());
         if (!collisionLeft(map)) {
             this.setPlayerX(this.getPlayerX() - moveSpeed);
+        } else if(this.getPlayerX() - mapX <= moveSpeed) {
+            this.setPlayerX(mapX);
         }
+
     }
 
     public void moveRight(Map map) {
-        if (!collisionRight(map))
+        int mapX = (this.getPlayerX() / map.getMapElementWidth() + 1) * (map.getMapElementWidth());
+        System.out.println(playerX + playerWidth + " " + mapX);
+        if (!collisionRight(map)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
+        } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
+            this.setPlayerX(mapX - this.getPlayerWidth());
+        }
     }
 
     public int getPlayerY() {
