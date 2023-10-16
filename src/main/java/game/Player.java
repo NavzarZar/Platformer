@@ -7,6 +7,7 @@ public class Player {
     int playerX = 50;
 
     int moveSpeed = 5;
+    int fallingSpeed = 1;
 
     int playerWidth = 50;
     int playerHeight = 50;
@@ -28,40 +29,39 @@ public class Player {
         return new Point(playerX, playerY);
     }
 
-    public boolean collisionLeft(Map map) {
-        if(this.getPlayerX() - moveSpeed <= 0) {
-            return true;
-        }
-        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() + 1;
-        int heightOfMapLeftOfPlayer = map.getMapList().get((this.getPlayerX() - moveSpeed) / map.getMapElementWidth());
-
-        return heightOfPlayerRespectiveToMap < heightOfMapLeftOfPlayer;
-    }
-
-    public boolean collisionRight(Map map) {
-        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - this.getPlayerY()) / map.getMapElementHeight() + 1;
-        int heightOfMapRightOfPlayer = map.getMapList().get((this.getPlayerX() + this.getPlayerWidth() + moveSpeed) / map.getMapElementWidth());
-        return heightOfPlayerRespectiveToMap < heightOfMapRightOfPlayer;
-    }
-
     public void moveLeft(Map map) {
         int mapX = (this.getPlayerX() / map.getMapElementWidth()) * (map.getMapElementWidth());
-        if (!collisionLeft(map)) {
+        if (!Collision.collisionLeft(this, map)) {
             this.setPlayerX(this.getPlayerX() - moveSpeed);
         } else if(this.getPlayerX() - mapX <= moveSpeed) {
             this.setPlayerX(mapX);
         }
-
     }
 
     public void moveRight(Map map) {
         int mapX = (this.getPlayerX() / map.getMapElementWidth() + 1) * (map.getMapElementWidth());
         System.out.println(playerX + playerWidth + " " + mapX);
-        if (!collisionRight(map)) {
+        if (!Collision.collisionRight(this, map)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
         } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
             this.setPlayerX(mapX - this.getPlayerWidth());
         }
+    }
+
+    public void makePlayerFall(Map map) {
+        if (!mapBlockUnderPlayer(map)) {
+            this.setPlayerY(this.getPlayerY() + fallingSpeed);
+        }
+    }
+
+    private boolean mapBlockUnderPlayer(Map map) {
+        Point bottomRightCorner = new Point(this.getPlayerX() + this.getPlayerWidth(), this.getPlayerY() + this.getPlayerHeight());
+        return (this.getPlayerY() + this.getPlayerHeight() + fallingSpeed == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() *
+                        (map.getMapList().get(this.getPlayerX() / map.getMapElementWidth()) - 1)))
+                || (bottomRightCorner.y + fallingSpeed == GameWindow.height - (Map.levelHeight +
+                map.getMapElementHeight() *
+                        (map.getMapList().get(bottomRightCorner.x / map.getMapElementWidth()) - 1)));
     }
 
     public int getPlayerY() {

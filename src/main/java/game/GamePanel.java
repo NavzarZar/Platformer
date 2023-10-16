@@ -35,30 +35,13 @@ public class GamePanel extends JPanel {
 
         super.paintComponent(g);
 
-        // Draw map
         drawMap(g);
-        makePlayerFall();
+        player.makePlayerFall(map);
         drawPlayer(g);
 
         // displayFrames();
     }
 
-    private void makePlayerFall() {
-        if (!mapBlockUnderPlayer()) {
-            player.setPlayerY(player.getPlayerY() + fallingSpeed);
-        }
-    }
-
-    // Doesn't work if the map is not big enough, easy check to fix this though
-    private boolean mapBlockUnderPlayer() {
-        Point bottomRightCorner = new Point(player.getPlayerX() + player.getPlayerWidth(), player.getPlayerY() + player.getPlayerHeight());
-        return (player.getPlayerY() + player.getPlayerHeight() + fallingSpeed == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() *
-                        (map.getMapList().get(player.getPlayerX() / map.getMapElementWidth()) - 1)))
-                || (bottomRightCorner.y + fallingSpeed == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() *
-                        (map.getMapList().get(bottomRightCorner.x / map.getMapElementWidth()) - 1)));
-    }
 
     private void displayFrames() {
         frames++;
