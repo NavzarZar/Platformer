@@ -40,7 +40,6 @@ public class Player {
 
     public void moveRight(Map map) {
         int mapX = (this.getPlayerX() / map.getMapElementWidth() + 1) * (map.getMapElementWidth());
-        System.out.println(playerX + playerWidth + " " + mapX);
         if (!Collision.collisionRight(this, map)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
         } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
