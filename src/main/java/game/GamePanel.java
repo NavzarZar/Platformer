@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
     public Player player = new Player();
-    int fallingSpeed = 1;
-    int moveSpeed = 5;
     Map map;
     private int frames = 0;
     private long lastChecked = 0;
@@ -33,7 +31,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         drawMap(g);
-        player.setPlayerX(player.getPlayerX() + player.getPlayerVelocityX());
+        player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
         player.makePlayerFall(map);
         drawPlayer(g);
 

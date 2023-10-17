@@ -8,10 +8,14 @@ public class Player {
     private int playerY = 500;
     private int playerX = 0;
 
+    private boolean playerIsJumping = false;
+
     public int moveSpeed = 1;
 
-    public int velocityX = 0;
-    public int velocityY = 5;
+    public double velocityX = 0;
+    public double velocityY = 1;
+
+    public double jumpVelocity = 1;
 
     int fallingSpeed = 1;
 
@@ -19,11 +23,11 @@ public class Player {
     int playerHeight = 50;
 
 
-    public int getPlayerVelocityX() {
+    public double getPlayerVelocityX() {
         return velocityX;
     }
 
-    public int getPlayerVelocityY() {
+    public double getPlayerVelocityY() {
         return velocityY;
     }
 
@@ -54,7 +58,9 @@ public class Player {
     }
 
     public void jump(Map map) {
-        this.setPlayerY(this.getPlayerY() - 100);
+        if (mapBlockUnderPlayer(map)) {
+            playerIsJumping = true;
+        }
     }
 
     public void moveLeft(Map map) {
@@ -78,11 +84,23 @@ public class Player {
             this.setVelocityX(0);
         }
     }
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
 
     public void makePlayerFall(Map map) {
-        if (!mapBlockUnderPlayer(map)) {
-            this.setPlayerY(this.getPlayerY() + fallingSpeed);
+        if (!mapBlockUnderPlayer(map) && velocityY <= fallingSpeed && !playerIsJumping) {
+            velocityY += 0.01;
+        } else if (velocityY <= -jumpVelocity) {
+            velocityY = fallingSpeed-0.2;
+            playerIsJumping = false;
+        }else if (playerIsJumping) {
+            velocityY -= 0.01;
+        }  else if(mapBlockUnderPlayer(map)) {
+            velocityY = 0;
         }
+
+        this.setPlayerY((int) (this.getPlayerY() + velocityY));
     }
 
     private boolean mapBlockUnderPlayer(Map map) {
@@ -103,9 +121,6 @@ public class Player {
         return playerX;
     }
 
-    public void setPlayerY(int playerY) {
-        this.playerY = playerY;
-    }
 
     public void setPlayerX(int playerX) {
         this.playerX = playerX;

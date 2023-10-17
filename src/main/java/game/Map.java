@@ -9,8 +9,8 @@ public class Map {
 
     public static final int levelHeight = 500;
 
-    private final int mapElementWidth = 100;
-    private final int mapElementHeight = 100;
+    private final int mapElementWidth = 75;
+    private final int mapElementHeight = 75;
 
     public Map() {
         int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2};
