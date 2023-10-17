@@ -90,7 +90,7 @@ public class Player {
 
     public void makePlayerFall(Map map) {
         if (!mapBlockUnderPlayer(map) && velocityY <= fallingSpeed && !playerIsJumping) {
-            velocityY += 0.01;
+            velocityY += 0.03;
         } else if (velocityY <= -jumpVelocity) {
             velocityY = fallingSpeed-0.2;
             playerIsJumping = false;
