@@ -1,6 +1,7 @@
 package game;
 
 import javax.swing.*;
+import inputs.KeyboardInputs;
 
 public class Game implements Runnable {
     private final GamePanel gamePanel;
@@ -45,6 +46,17 @@ public class Game implements Runnable {
 
                 coordinateLabel4.setText("Down-Right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerWidth()) + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel4);
+
+
+
+                if (KeyboardInputs.movingLeft) {
+                    gamePanel.player.moveLeft(gamePanel.getMap());
+                } else if (KeyboardInputs.movingRight) {
+                    gamePanel.player.moveRight(gamePanel.getMap());
+                }
+
+                gamePanel.player.setPlayerX((int) (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerVelocityX()));
+                gamePanel.player.makePlayerFall(gamePanel.getMap());
 
                 gamePanel.repaint();
                 lastFrame = now;

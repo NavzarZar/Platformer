@@ -31,8 +31,8 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         drawMap(g);
-        player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
-        player.makePlayerFall(map);
+//        player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
+//        player.makePlayerFall(map);
         drawPlayer(g);
 
         // displayFrames();

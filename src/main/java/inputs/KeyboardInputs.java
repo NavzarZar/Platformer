@@ -18,19 +18,21 @@ public class KeyboardInputs implements KeyListener {
 
     }
 
-    private boolean movingLeft = false;
+    public static boolean movingLeft = false;
+    public static boolean movingRight = false;
     @Override
     public void keyPressed(KeyEvent e) {
         //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A -> {
-                System.out.println("A pressed");
                 gamePanel.player.moveLeft(gamePanel.getMap());
                 movingLeft = true;
+                movingRight = false;
             }
             case KeyEvent.VK_D -> {
                 gamePanel.player.moveRight(gamePanel.getMap());
                 movingLeft = false;
+                movingRight = true;
             }
             case KeyEvent.VK_SPACE -> {
                 gamePanel.player.jump(gamePanel.getMap());
@@ -43,10 +45,12 @@ public class KeyboardInputs implements KeyListener {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_A && movingLeft) {
             gamePanel.player.setVelocityX(0);
+            movingLeft = false;
         }
 
         if (key == KeyEvent.VK_D && !movingLeft) {
             gamePanel.player.setVelocityX(0);
+            movingRight = false;
         }
     }
 }

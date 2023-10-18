@@ -9,6 +9,10 @@ public class Player {
     private int playerX = 0;
 
     private boolean playerIsJumping = false;
+    private boolean movingLeft = false;
+    private static boolean movingRight = false;
+
+
 
     public int moveSpeed = 1;
 
@@ -68,9 +72,8 @@ public class Player {
         if (!Collision.collisionLeft(this, map)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
-        } else if(this.getPlayerX() - mapX <= moveSpeed) {
+        } else if(mapX - playerX <= moveSpeed) {
             this.setVelocityX(0);
-            this.setPlayerX(0);
         }
     }
 
