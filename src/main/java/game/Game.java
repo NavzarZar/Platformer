@@ -54,9 +54,8 @@ public class Game implements Runnable {
                 } else if (KeyboardInputs.movingRight) {
                     gamePanel.player.moveRight(gamePanel.getMap());
                 }
-
-                gamePanel.player.setPlayerX((int) (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerVelocityX()));
                 gamePanel.player.makePlayerFall(gamePanel.getMap());
+                gamePanel.player.setPlayerX((int) (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerVelocityX()));
 
                 gamePanel.repaint();
                 lastFrame = now;
