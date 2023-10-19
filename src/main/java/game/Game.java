@@ -3,9 +3,10 @@ package game;
 import javax.swing.*;
 import inputs.KeyboardInputs;
 
+import java.awt.*;
+
 public class Game implements Runnable {
     private final GamePanel gamePanel;
-
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
         gameThread.start();
@@ -15,6 +16,7 @@ public class Game implements Runnable {
         int SET_FPS = 120;
         double timePerFrame = 1000000000.0 / SET_FPS;
         boolean gameOver = false;
+        boolean gameMenu = true;
         long lastFrame = System.nanoTime();
         long now;
         JLabel coordinateLabel1 = new JLabel();
@@ -65,7 +67,9 @@ public class Game implements Runnable {
 
     public Game() {
         gamePanel = new GamePanel();
+
         GameWindow gameWindow = new GameWindow(gamePanel);
+
         gamePanel.requestFocus();
         startGameLoop();
     }
