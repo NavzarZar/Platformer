@@ -61,15 +61,15 @@ public class Player {
         return new Point(playerX, playerY);
     }
 
-    public void jump(Map map) {
-        if (Collision.mapBlockUnderPlayer(map, this)) {
+    public void jump() {
+        if (Collision.mapBlockUnderPlayer(this)) {
             playerIsJumping = true;
         }
     }
 
-    public void moveLeft(Map map) {
-        int mapX = (this.getPlayerX() / map.getMapElementWidth()) * (map.getMapElementWidth());
-        if (!Collision.collisionLeft(this, map)) {
+    public void moveLeft() {
+        int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
+        if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
         } else if(mapX - playerX <= moveSpeed) {
@@ -77,9 +77,9 @@ public class Player {
         }
     }
 
-    public void moveRight(Map map) {
-        int mapX = (this.getPlayerX() / map.getMapElementWidth() + 1) * (map.getMapElementWidth());
-        if (!Collision.collisionRight(this, map)) {
+    public void moveRight() {
+        int mapX = (this.getPlayerX() / Map.mapElementWidth + 1) * (Map.mapElementWidth);
+        if (!Collision.collisionRight(this)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
             this.setVelocityX(moveSpeed);
         } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
@@ -91,15 +91,15 @@ public class Player {
         this.playerY = playerY;
     }
 
-    public void makePlayerFall(Map map) {
-        if (!Collision.mapBlockUnderPlayer(map, this) && velocityY <= fallingSpeed && !playerIsJumping) {
+    public void makePlayerFall() {
+        if (!Collision.mapBlockUnderPlayer(this) && velocityY <= fallingSpeed && !playerIsJumping) {
             velocityY += 0.03;
         } else if (velocityY <= -jumpVelocity) {
             velocityY = fallingSpeed-0.2;
             playerIsJumping = false;
         }else if (playerIsJumping) {
             velocityY -= 0.01;
-        }  else if(Collision.mapBlockUnderPlayer(map, this)) {
+        }  else if(Collision.mapBlockUnderPlayer(this)) {
             velocityY = 0;
         }
 

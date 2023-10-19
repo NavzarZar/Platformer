@@ -7,29 +7,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    public Player player = new Player();
-    Map map;
+    public final Player player;
     private int frames = 0;
     private long lastChecked = 0;
 
-    public GamePanel() {
+
+    public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
-        addKeyListener(new KeyboardInputs(this));
+        addKeyListener(new KeyboardInputs(player));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
 
-        map = new Map();
+        this.player = player;
+
+        Map.mapOffset = player.playerHeight;
     }
 
-    public Map getMap() {
-        return map;
-    }
 
     @Override
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
+        Map.mapOffset = player.getPlayerX();
         drawMap(g);
 //        player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
 //        player.makePlayerFall(map);
@@ -53,13 +53,13 @@ public class GamePanel extends JPanel {
     }
 
     private void drawMap(Graphics g) {
-        for (int i = 0; i < map.getMapList().size(); i++) {
-            for (int j = 0; j < map.getMapList().get(i); j++) {
+        for (int i = 0; i < Map.mapList.size(); i++) {
+            for (int j = 0; j < Map.mapList.get(i); j++) {
                 g.drawRect(
-                        i * map.getMapElementWidth(),
-                        GameWindow.height - (Map.levelHeight + j * map.getMapElementHeight()),
-                        map.getMapElementWidth(),
-                        map.getMapElementHeight()
+                        i * Map.mapElementWidth,
+                        GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
+                        Map.mapElementWidth,
+                        Map.mapElementHeight
                 );
             }
         }
