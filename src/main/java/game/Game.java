@@ -3,10 +3,10 @@ package game;
 import javax.swing.*;
 import inputs.KeyboardInputs;
 
-import java.awt.*;
-
 public class Game implements Runnable {
     private final GamePanel gamePanel;
+    private final Player player = new Player();
+
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
         gameThread.start();
@@ -16,7 +16,6 @@ public class Game implements Runnable {
         int SET_FPS = 120;
         double timePerFrame = 1000000000.0 / SET_FPS;
         boolean gameOver = false;
-        boolean gameMenu = true;
         long lastFrame = System.nanoTime();
         long now;
         JLabel coordinateLabel1 = new JLabel();
@@ -37,27 +36,27 @@ public class Game implements Runnable {
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
-                coordinateLabel1.setText("Up-left Corner: " + "X: " + gamePanel.player.getPlayerX() + " Y: " + gamePanel.player.getPlayerY());
+                coordinateLabel1.setText("Up-left Corner: " + "X: " + player.getPlayerX() + " Y: " + player.getPlayerY());
                 gamePanel.add(coordinateLabel1);
 
-                coordinateLabel2.setText("Up-right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerWidth()) + " Y: " + gamePanel.player.getPlayerY());
+                coordinateLabel2.setText("Up-right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + player.getPlayerY());
                 gamePanel.add(coordinateLabel2);
 
-                coordinateLabel3.setText("Down-Left Corner: " + "X: " + gamePanel.player.getPlayerX() + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
+                coordinateLabel3.setText("Down-Left Corner: " + "X: " + player.getPlayerX() + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel3);
 
-                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerWidth()) + " Y: " + (gamePanel.player.getPlayerY() + gamePanel.player.getPlayerHeight()));
+                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel4);
 
 
 
                 if (KeyboardInputs.movingLeft) {
-                    gamePanel.player.moveLeft(gamePanel.getMap());
+                    player.moveLeft();
                 } else if (KeyboardInputs.movingRight) {
-                    gamePanel.player.moveRight(gamePanel.getMap());
+                    player.moveRight();
                 }
-                gamePanel.player.makePlayerFall(gamePanel.getMap());
-                gamePanel.player.setPlayerX((int) (gamePanel.player.getPlayerX() + gamePanel.player.getPlayerVelocityX()));
+                player.makePlayerFall();
+                player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
 
                 gamePanel.repaint();
                 lastFrame = now;
@@ -66,10 +65,8 @@ public class Game implements Runnable {
     }
 
     public Game() {
-        gamePanel = new GamePanel();
-
+        gamePanel = new GamePanel(player);
         GameWindow gameWindow = new GameWindow(gamePanel);
-
         gamePanel.requestFocus();
         startGameLoop();
     }
