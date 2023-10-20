@@ -1,7 +1,8 @@
 package inputs;
 
-import game.GamePanel;
 import game.Player;
+import menus.PauseMenuPanel;
+import menus.PauseMenuWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -35,6 +36,9 @@ public class KeyboardInputs implements KeyListener {
             }
             case KeyEvent.VK_SPACE -> {
                 player.jump();
+            }
+            case KeyEvent.VK_ESCAPE -> {
+                 new PauseMenuWindow(new PauseMenuPanel());
             }
         }
     }

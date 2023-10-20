@@ -1,22 +1,20 @@
-package game;
+package menus;
 
 import javax.swing.*;
 
-public class MenuWindow extends JFrame {
+public class PauseMenuWindow extends JFrame {
     public static final int width = 1920;
     public static final int height = 1080;
-
-    public MenuWindow(StartMenu startMenu) {
-
-        //Create new JFrame frame object
+    public PauseMenuWindow(PauseMenuPanel pauseMenuPanel)
+    {
         JFrame jframe = new JFrame();
         jframe.setSize(width, height);
 
         //The program stops running when the frame is closed
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //We add the panel with the menu inside the frame
-        jframe.add(startMenu);
+        //We add the panel with the pause menu inside the frame
+        jframe.add(pauseMenuPanel);
 
         //Sets the window to pop up in centre
         jframe.setLocationRelativeTo(null);

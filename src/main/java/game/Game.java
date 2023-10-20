@@ -2,10 +2,12 @@ package game;
 
 import javax.swing.*;
 import inputs.KeyboardInputs;
+import menus.PauseMenuPanel;
 
 public class Game implements Runnable {
     private final GamePanel gamePanel;
     private final Player player = new Player();
+    private final PauseMenuPanel pauseMenuPanel;
 
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
@@ -66,6 +68,7 @@ public class Game implements Runnable {
 
     public Game() {
         gamePanel = new GamePanel(player);
+        pauseMenuPanel = new PauseMenuPanel();
         GameWindow gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startGameLoop();

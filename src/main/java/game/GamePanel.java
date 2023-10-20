@@ -19,7 +19,6 @@ public class GamePanel extends JPanel {
         addMouseMotionListener(mouseInputs);
 
         this.player = player;
-
         Map.mapOffset = player.playerHeight;
     }
 
