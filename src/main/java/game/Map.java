@@ -5,29 +5,19 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Map {
-    private final ArrayList<Integer> mapList = new ArrayList<>();
+    public static final ArrayList<Integer> mapList = new ArrayList<>();
 
     public static final int levelHeight = 500;
 
-    private final int mapElementWidth = 75;
-    private final int mapElementHeight = 75;
+    public static final int mapElementWidth = 75;
+    public static final int mapElementHeight = 75;
 
-    public Map() {
-        int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2};
+    public static int mapOffset = 5;
+
+    static {
+        int[] heights = new int[]{1, 1, 2, 1, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
         for (int height : heights) {
             mapList.add(height);
         }
-    }
-
-    public ArrayList<Integer> getMapList() {
-        return new ArrayList<>(mapList);
-    }
-
-    public int getMapElementWidth() {
-        return mapElementWidth;
-    }
-
-    public int getMapElementHeight() {
-        return mapElementHeight;
     }
 }

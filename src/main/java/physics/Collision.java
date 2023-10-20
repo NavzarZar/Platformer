@@ -7,33 +7,31 @@ import game.Player;
 import java.awt.*;
 
 public class Collision {
-    public static boolean collisionLeft(Player player, Map map) {
+    public static boolean collisionLeft(Player player) {
         if(player.getPlayerX() - player.moveSpeed <= 0) {
             return true;
         }
 
-        int heightOfPlayerInBlocks = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight()) / map.getMapElementHeight() + 1;
-        int heightOfMapLeftOfPlayer = map.getMapList().get((player.getPlayerX() - player.moveSpeed) / map.getMapElementWidth());
+        int heightOfPlayerInBlocks = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight()) / Map.mapElementHeight + 1;
+        int heightOfMapLeftOfPlayer = Map.mapList.get((player.getPlayerX() - player.moveSpeed) / Map.mapElementWidth);
 
-//        System.out.println("Height of player: " + heightOfPlayerInBlocks + "\nheight of map: " + heightOfMapLeftOfPlayer);
-//        System.out.println(heightOfPlayerInBlocks < heightOfMapLeftOfPlayer);
         return heightOfPlayerInBlocks < heightOfMapLeftOfPlayer;
     }
 
-    public static boolean collisionRight(Player player, Map map) {
-        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight()) / map.getMapElementHeight() + 1;
-        int heightOfMapRightOfPlayer = map.getMapList().get((player.getPlayerX() + player.getPlayerWidth() + player.moveSpeed) / map.getMapElementWidth());
-//        System.out.println("Player height: " + heightOfPlayerRespectiveToMap + "\nMap height: " + heightOfMapRightOfPlayer);
+    public static boolean collisionRight(Player player) {
+        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight()) / Map.mapElementHeight + 1;
+        int heightOfMapRightOfPlayer = Map.mapList.get((player.getPlayerX() + player.getPlayerWidth() + player.moveSpeed) / Map.mapElementWidth);
+
         return heightOfPlayerRespectiveToMap < heightOfMapRightOfPlayer;
     }
 
-    public static boolean mapBlockUnderPlayer(Map map, Player player) {
+    public static boolean mapBlockUnderPlayer(Player player) {
         Point bottomRightCorner = new Point(player.getPlayerX() + player.getPlayerWidth(), player.getPlayerY() + player.getPlayerHeight());
         return (player.getPlayerY() + player.getPlayerHeight() + player.fallingSpeed == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() *
-                        (map.getMapList().get(player.getPlayerX() / map.getMapElementWidth()) - 1)))
+                Map.mapElementHeight *
+                        (Map.mapList.get(player.getPlayerX() / Map.mapElementWidth) - 1)))
                 || (bottomRightCorner.y + player.fallingSpeed == GameWindow.height - (Map.levelHeight +
-                map.getMapElementHeight() *
-                        (map.getMapList().get(bottomRightCorner.x / map.getMapElementWidth()) - 1)));
+                Map.mapElementHeight *
+                        (Map.mapList.get(bottomRightCorner.x / Map.mapElementWidth) - 1)));
     }
 }
