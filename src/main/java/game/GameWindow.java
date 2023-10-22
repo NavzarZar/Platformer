@@ -3,7 +3,7 @@ package game;
 import javax.swing.*;
 
 public class GameWindow extends JFrame {
-    public static final int width = 1920;
+    public static final int width = 1440;
     public static final int height = 1080;
 
     public GameWindow(GamePanel gamePanel) {
