@@ -11,7 +11,6 @@ public class GamePanel extends JPanel {
     private int frames = 0;
     private long lastChecked = 0;
 
-
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
         addKeyListener(new KeyboardInputs(player));
@@ -29,10 +28,7 @@ public class GamePanel extends JPanel {
 
         super.paintComponent(g);
 
-        Map.mapOffset = player.getPlayerX();
         drawMap(g);
-//        player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
-//        player.makePlayerFall(map);
         drawPlayer(g);
 
         // displayFrames();
@@ -49,12 +45,13 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPlayer(Graphics g) {
-        g.fillRect(player.getPlayerX(), player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
+        g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
     }
 
     private void drawMap(Graphics g) {
-        for (int i = 0; i < Map.mapList.size(); i++) {
-            for (int j = 0; j < Map.mapList.get(i); j++) {
+        Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
+        for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
+            for (int j = 0; j < Map.mapList.get(i + Map.mapOffset); j++) {
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
