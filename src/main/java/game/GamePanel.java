@@ -1,7 +1,9 @@
 package game;
 
+
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import inputs.mouseAndKeyboard.MouseInputs;
+import physics.Collision;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,6 @@ public class GamePanel extends JPanel {
     public final Player player;
     private int frames = 0;
     private long lastChecked = 0;
-
 
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
@@ -28,13 +29,19 @@ public class GamePanel extends JPanel {
 
         super.paintComponent(g);
 
-        Map.mapOffset = player.getPlayerX();
         drawMap(g);
-//        player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
-//        player.makePlayerFall(map);
         drawPlayer(g);
 
         // displayFrames();
+    }
+
+    public void drawSpike(Graphics g, int mapBlockNumber) {
+
+        int mapOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
+        int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth, (mapBlockNumber+1) * Map.mapElementWidth, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2};
+        int[] yCoordinates = new int[]{mapOffset, mapOffset, mapOffset - Map.spikeHeight};
+
+        g.fillPolygon(xCoordinates, yCoordinates, 3);
     }
 
 
@@ -48,12 +55,15 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPlayer(Graphics g) {
-        g.fillRect(player.getPlayerX(), player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
+        g.setColor(Color.red);
+        g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
+        g.setColor(Color.black);
     }
 
     private void drawMap(Graphics g) {
-        for (int i = 0; i < Map.mapList.size(); i++) {
-            for (int j = 0; j < Map.mapList.get(i); j++) {
+        Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
+        for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
+            for (int j = 0; j < Map.mapList.get(i + Map.mapOffset); j++) {
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
@@ -61,6 +71,10 @@ public class GamePanel extends JPanel {
                         Map.mapElementHeight
                 );
             }
+        }
+
+        for (int i : Map.spikeList) {
+            drawSpike(g, i);
         }
     }
 

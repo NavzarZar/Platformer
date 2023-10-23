@@ -51,6 +51,9 @@ public class Game implements Runnable {
                 coordinateLabel4.setText("Down-Right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel4);
 
+                if (player.hasHitSpike()) {
+                    gameOver = true;
+                }
 
                 if (KeyboardInputs.movingLeft) {
                     player.moveLeft();
