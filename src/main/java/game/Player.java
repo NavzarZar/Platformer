@@ -77,7 +77,7 @@ public class Player {
     public void moveLeft() {
         int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
 
-        int playerXRelativeToMap = (playerX+1)/Map.mapElementWidth;
+        int playerXRelativeToMap = (playerX + 1) / Map.mapElementWidth;
         if (Map.spikeList.contains(playerXRelativeToMap)) {
             hitSpike = true;
         }
@@ -93,11 +93,11 @@ public class Player {
     public void moveRight() {
         int mapX = (this.getPlayerX() / Map.mapElementWidth + 1) * (Map.mapElementWidth);
 
-        if (playerX > GameWindow.width*(Map.mapList.size()/(GameWindow.width/Map.mapElementWidth))) {
+        if (playerX > GameWindow.width * (Map.mapList.size() / (GameWindow.width / Map.mapElementWidth))) {
             return;
         }
 
-        int playerRightX = (playerX+playerWidth-1)/Map.mapElementWidth;
+        int playerRightX = (playerX + playerWidth - 1) / Map.mapElementWidth;
         if (Map.spikeList.contains(playerRightX)) {
             hitSpike = true;
         }
@@ -110,7 +110,7 @@ public class Player {
             this.setVelocityX(0);
         }
 
-        if (playerX > GameWindow.width*(Map.mapList.size())) {
+        if (playerX > GameWindow.width * (Map.mapList.size())) {
             this.setPlayerX(GameWindow.width - playerWidth);
         }
     }
@@ -150,8 +150,8 @@ public class Player {
         } else if (playerIsJumping) {
             velocityY -= 0.01;
 
-        }  else if(playerHasBlockUnder) {
-          
+        } else if (playerHasBlockUnder) {
+
             velocityY = 0;
         }
 

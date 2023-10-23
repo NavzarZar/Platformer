@@ -12,7 +12,6 @@ public class Map {
 
     public static final int mapElementWidth = 80;
     public static final int mapElementHeight = 75;
-
     public static final int spikeHeight = 50;
 
     public static int mapOffset = 0;
@@ -21,7 +20,7 @@ public class Map {
         int[] heights = new int[]{1, 1, 2, 1, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-        int[] spikes = new int[] {4, 5, 6};
+        int[] spikes = new int[] {3, 4, 5, 6};
         for (int spike : spikes) {
             spikeList.add(spike);
         }

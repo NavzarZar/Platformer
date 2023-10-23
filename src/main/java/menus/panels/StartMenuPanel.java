@@ -3,6 +3,7 @@ package menus.panels;
 import inputs.buttonListeners.StartMenuButtonListener;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
@@ -19,7 +20,7 @@ public class StartMenuPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         startMenuButtonListener = new StartMenuButtonListener(this);
-        titleLabel = new JLabel();
+        titleLabel = new JLabel("Welcome to game!");
 
         startButton = styledButton("Start Game");
         chooseLvlButton = styledButton("Choose Level");
@@ -53,8 +54,8 @@ public class StartMenuPanel extends JPanel {
         gbc.gridy += 1;
         this.add(exitButton, gbc);
 
-        titleLabel.setText("Welcome to game");
-
+        titleLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        titleLabel.setSize(40, 40);
 
         controlsButton.setVisible(true);
         chooseLvlButton.setVisible(true);

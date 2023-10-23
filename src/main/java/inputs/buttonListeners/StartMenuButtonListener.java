@@ -35,7 +35,7 @@ public class StartMenuButtonListener implements ActionListener {
         }
         if (e.getSource() == startMenuPanel.getControlsButton()) {
             new ControlMenu();
-            getFrameForComponent(startMenuPanel.getControlsButton()).dispose();
+            getFrameForComponent(startMenuPanel).dispose();
         }
 
     }

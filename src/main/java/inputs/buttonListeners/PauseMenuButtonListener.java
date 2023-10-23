@@ -18,10 +18,9 @@ public class PauseMenuButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pauseMenuPanel.getContinueButton()) {
-            getFrameForComponent(pauseMenuPanel.getContinueButton()).dispose();
+            getFrameForComponent(pauseMenuPanel).dispose();
         }
         if (e.getSource() == pauseMenuPanel.getRestartButton()) {
-
             new Game();
             getFrameForComponent(pauseMenuPanel.getRestartButton()).dispose();
         }

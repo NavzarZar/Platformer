@@ -1,5 +1,8 @@
 package menus.panels;
 
+import game.GamePanel;
+import game.GameWindow;
+import game.Player;
 import inputs.buttonListeners.PauseMenuButtonListener;
 
 import javax.swing.*;

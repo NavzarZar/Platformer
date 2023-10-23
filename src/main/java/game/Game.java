@@ -3,13 +3,14 @@ package game;
 import javax.swing.*;
 
 import inputs.mouseAndKeyboard.KeyboardInputs;
+import menus.GameOverMenu;
 import menus.panels.PauseMenuPanel;
 
 public class Game implements Runnable {
     private final GamePanel gamePanel;
     private final Player player = new Player();
-    private final PauseMenuPanel pauseMenuPanel;
-
+    public static boolean isNotPaused = false;
+    public  static boolean gameOver = false;
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
         gameThread.start();
@@ -18,7 +19,6 @@ public class Game implements Runnable {
     public void run() {
         int SET_FPS = 120;
         double timePerFrame = 1000000000.0 / SET_FPS;
-        boolean gameOver = false;
         long lastFrame = System.nanoTime();
         long now;
         JLabel coordinateLabel1 = new JLabel();
@@ -36,7 +36,7 @@ public class Game implements Runnable {
         coordinateLabel3.setLocation(10, 15);
         coordinateLabel4.setLocation(10, 20);
 
-        while (!gameOver) {
+        while (!gameOver && !isNotPaused) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
                 coordinateLabel1.setText("Up-left Corner: " + "X: " + player.getPlayerX() + " Y: " + player.getPlayerY());
@@ -45,7 +45,7 @@ public class Game implements Runnable {
                 coordinateLabel2.setText("Up-right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + player.getPlayerY());
                 gamePanel.add(coordinateLabel2);
 
-                coordinateLabel3.setText("Down-Left Corner: " + "X: " + player.getPlayerX() + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
+                coordinateLabel3.setText("Down-Left Corner: v " + "X: " + player.getPlayerX() + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
                 gamePanel.add(coordinateLabel3);
 
                 coordinateLabel4.setText("Down-Right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
@@ -53,8 +53,9 @@ public class Game implements Runnable {
 
                 if (player.hasHitSpike()) {
                     gameOver = true;
+                    new GameOverMenu();
+                    player.setVelocityX(0);
                 }
-
                 if (KeyboardInputs.movingLeft) {
                     player.moveLeft();
                 } else if (KeyboardInputs.movingRight) {
@@ -71,7 +72,6 @@ public class Game implements Runnable {
 
     public Game() {
         gamePanel = new GamePanel(player);
-        pauseMenuPanel = new PauseMenuPanel();
         GameWindow gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startGameLoop();

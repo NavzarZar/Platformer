@@ -1,5 +1,7 @@
 package inputs.mouseAndKeyboard;
 
+import game.Game;
+import game.GamePanel;
 import game.Player;
 import menus.PauseMenu;
 import menus.panels.PauseMenuPanel;
@@ -8,12 +10,16 @@ import menus.windows.PauseMenuWindow;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import static menus.GlobalMethods.getFrameForComponent;
+
 public class KeyboardInputs implements KeyListener {
 
     private final Player player;
+    private final GamePanel gamePanel;
 
-    public KeyboardInputs(Player player) {
+    public KeyboardInputs(Player player, GamePanel gamePanel) {
         this.player = player;
+        this.gamePanel = gamePanel;
     }
 
     @Override
@@ -40,7 +46,9 @@ public class KeyboardInputs implements KeyListener {
                 player.jump();
             }
             case KeyEvent.VK_ESCAPE -> {
+                Game.isNotPaused = false;
                 new PauseMenu();
+                getFrameForComponent(gamePanel).dispose();
             }
         }
     }
