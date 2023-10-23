@@ -1,4 +1,4 @@
-package inputs;
+package inputs.mouseAndKeyboard;
 
 import game.GamePanel;
 
@@ -9,8 +9,8 @@ import java.awt.event.MouseMotionListener;
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private final GamePanel gamePanel;
-    public MouseInputs(GamePanel gamePanel)
-    {
+
+    public MouseInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 

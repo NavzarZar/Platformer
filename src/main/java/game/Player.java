@@ -16,6 +16,7 @@ public class Player {
     private boolean hitSpike = false;
     private static boolean movingRight = false;
 
+
     public boolean hasHitSpike() {
         return hitSpike;
     }
@@ -84,7 +85,7 @@ public class Player {
         if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
-        } else if(mapX - playerX <= moveSpeed) {
+        } else if (mapX - playerX <= moveSpeed) {
             this.setVelocityX(0);
         }
     }
@@ -104,7 +105,7 @@ public class Player {
         if (!Collision.collisionRight(this)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
             this.setVelocityX(moveSpeed);
-        } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
+        } else if (mapX - (playerX + playerWidth) <= moveSpeed) {
             this.setPlayerX(mapX - this.getPlayerWidth());
             this.setVelocityX(0);
         }
@@ -113,6 +114,7 @@ public class Player {
             this.setPlayerX(GameWindow.width - playerWidth);
         }
     }
+
     public void setPlayerY(int playerY) {
         this.playerY = playerY;
     }
@@ -143,10 +145,13 @@ public class Player {
             velocityY += 0.4;
         } else if (velocityY <= -jumpVelocity) {
             velocityY = fallingSpeed - 0.01;
+
             playerIsJumping = false;
-        }else if (playerIsJumping) {
+        } else if (playerIsJumping) {
             velocityY -= 0.01;
+
         }  else if(playerHasBlockUnder) {
+          
             velocityY = 0;
         }
 

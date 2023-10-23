@@ -1,7 +1,9 @@
-package inputs;
+package inputs.mouseAndKeyboard;
 
-import game.GamePanel;
 import game.Player;
+import menus.PauseMenu;
+import menus.panels.PauseMenuPanel;
+import menus.windows.PauseMenuWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,6 +23,7 @@ public class KeyboardInputs implements KeyListener {
 
     public static boolean movingLeft = false;
     public static boolean movingRight = false;
+
     @Override
     public void keyPressed(KeyEvent e) {
         //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
@@ -35,6 +38,9 @@ public class KeyboardInputs implements KeyListener {
             }
             case KeyEvent.VK_SPACE -> {
                 player.jump();
+            }
+            case KeyEvent.VK_ESCAPE -> {
+                new PauseMenu();
             }
         }
     }
