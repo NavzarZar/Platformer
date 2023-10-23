@@ -1,8 +1,8 @@
 package inputs;
 
 import game.Player;
-import menus.PauseMenuPanel;
-import menus.PauseMenuWindow;
+import menus.panels.PauseMenuPanel;
+import menus.windows.PauseMenuWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

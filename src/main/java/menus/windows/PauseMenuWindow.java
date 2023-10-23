@@ -1,4 +1,6 @@
-package menus;
+package menus.windows;
+
+import menus.panels.PauseMenuPanel;
 
 import javax.swing.*;
 

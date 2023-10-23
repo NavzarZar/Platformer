@@ -2,7 +2,7 @@ package game;
 
 import javax.swing.*;
 import inputs.KeyboardInputs;
-import menus.PauseMenuPanel;
+import menus.panels.PauseMenuPanel;
 
 public class Game implements Runnable {
     private final GamePanel gamePanel;
@@ -69,7 +69,7 @@ public class Game implements Runnable {
     public Game() {
         gamePanel = new GamePanel(player);
         pauseMenuPanel = new PauseMenuPanel();
-        GameWindow gameWindow = new GameWindow(gamePanel);
+        GameWindow gameWindow = new GameWindow(gamePanel  );
         gamePanel.requestFocus();
         startGameLoop();
     }

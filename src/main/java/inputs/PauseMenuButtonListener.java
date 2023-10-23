@@ -1,7 +1,6 @@
 package inputs;
 
-import menus.GameMenu;
-import menus.PauseMenuPanel;
+import menus.panels.PauseMenuPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

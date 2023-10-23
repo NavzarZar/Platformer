@@ -1,7 +1,7 @@
 package menus;
 
-import menus.StartMenuPanel;
-import menus.StartMenuWindow;
+import menus.panels.StartMenuPanel;
+import menus.windows.StartMenuWindow;
 
 public class GameMenu {
     StartMenuPanel startMenuPanel;

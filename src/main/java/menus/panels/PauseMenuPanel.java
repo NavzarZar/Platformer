@@ -1,4 +1,4 @@
-package menus;
+package menus.panels;
 
 import inputs.PauseMenuButtonListener;
 
