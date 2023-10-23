@@ -1,10 +1,11 @@
 package menus.panels;
 
-import inputs.ControlMouseButtonListener;
+import inputs.buttonListeners.ControlMouseButtonListener;
 import menus.windows.ControlsWindow;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
+
+import static menus.GlobalMethods.styledButton;
 
 public class ControlsPanel extends JPanel {
     private JButton returnButton;
@@ -12,8 +13,8 @@ public class ControlsPanel extends JPanel {
 
     final ControlsWindow controlsWindow = new ControlsWindow(this);
     public ControlsPanel() {
-        controlMouseButtonListener = new ControlMouseButtonListener(this, controlsWindow);
-        returnButton = new JButton("Return to Main Menu");
+        controlMouseButtonListener = new ControlMouseButtonListener(this);
+        returnButton = styledButton("Return to Main Menu");
 
         returnButton.addActionListener(controlMouseButtonListener);
 

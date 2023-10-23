@@ -6,8 +6,8 @@ import menus.windows.StartMenuWindow;
 public class GameMenu {
     StartMenuPanel startMenuPanel;
     StartMenuWindow startMenuWindow;
-    public GameMenu()
-    {
+
+    public GameMenu() {
         startMenuPanel = new StartMenuPanel();
         startMenuWindow = new StartMenuWindow(startMenuPanel);
     }

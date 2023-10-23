@@ -1,28 +1,31 @@
-package inputs;
+package inputs.buttonListeners;
 
 import game.Game;
+import game.GameWindow;
 import menus.GameMenu;
 import menus.panels.ControlsPanel;
+import menus.panels.StartMenuPanel;
 import menus.windows.ControlsWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+import static menus.GlobalMethods.getFrameForComponent;
+
 public class ControlMouseButtonListener implements ActionListener {
     private final ControlsPanel controlsPanel;
-    private final ControlsWindow controlsWindow;
-    public ControlMouseButtonListener(ControlsPanel controlsPanel, ControlsWindow controlsWindow) {
+
+    public ControlMouseButtonListener(ControlsPanel controlsPanel) {
         this.controlsPanel = controlsPanel;
-        this.controlsWindow = controlsWindow;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == controlsPanel.getReturnButton()) {
-            controlsWindow.dispose();
-            controlsWindow.setVisible(false);
+        if (e.getSource() == controlsPanel.getReturnButton()) {
             new GameMenu();
+            (getFrameForComponent(controlsPanel.getReturnButton())).dispose();
         }
     }
 }

@@ -1,22 +1,33 @@
 package menus.panels;
 
-import inputs.PauseMenuButtonListener;
+import inputs.buttonListeners.PauseMenuButtonListener;
 
 import javax.swing.*;
 
+import static menus.GlobalMethods.styledButton;
+
 public class PauseMenuPanel extends JPanel {
     PauseMenuButtonListener pauseMenuButtonListener = new PauseMenuButtonListener(this);
-    private JButton continueButton;
-        public PauseMenuPanel() {
+    private final JButton restartButton;
+    private final JButton continueButton;
 
-            continueButton = new JButton();
+    public PauseMenuPanel() {
 
-            this.add(continueButton);
+        continueButton = styledButton("Return");
+        restartButton = styledButton("Restart Game");
 
-            continueButton.addActionListener(pauseMenuButtonListener);
-        }
+        this.add(continueButton);
+        this.add(restartButton);
+
+        continueButton.addActionListener(pauseMenuButtonListener);
+        restartButton.addActionListener(pauseMenuButtonListener);
+    }
 
     public JButton getContinueButton() {
         return continueButton;
+    }
+
+    public JButton getRestartButton() {
+        return restartButton;
     }
 }

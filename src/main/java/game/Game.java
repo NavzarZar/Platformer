@@ -1,7 +1,8 @@
 package game;
 
 import javax.swing.*;
-import inputs.KeyboardInputs;
+
+import inputs.mouseAndKeyboard.KeyboardInputs;
 import menus.panels.PauseMenuPanel;
 
 public class Game implements Runnable {
@@ -51,7 +52,6 @@ public class Game implements Runnable {
                 gamePanel.add(coordinateLabel4);
 
 
-
                 if (KeyboardInputs.movingLeft) {
                     player.moveLeft();
                 } else if (KeyboardInputs.movingRight) {
@@ -69,7 +69,7 @@ public class Game implements Runnable {
     public Game() {
         gamePanel = new GamePanel(player);
         pauseMenuPanel = new PauseMenuPanel();
-        GameWindow gameWindow = new GameWindow(gamePanel  );
+        GameWindow gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startGameLoop();
     }

@@ -1,14 +1,11 @@
 package menus.panels;
 
-import inputs.StartMenuButtonListener;
+import inputs.buttonListeners.StartMenuButtonListener;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+import static menus.GlobalMethods.styledButton;
 
 public class StartMenuPanel extends JPanel {
     private JButton startButton, exitButton, chooseLvlButton, controlsButton;
@@ -24,10 +21,10 @@ public class StartMenuPanel extends JPanel {
         startMenuButtonListener = new StartMenuButtonListener(this);
         titleLabel = new JLabel();
 
-        startButton = createStyledButton("Start Game");
-        chooseLvlButton = createStyledButton("Choose Level");
-        controlsButton = createStyledButton("Controls");
-        exitButton = createStyledButton("Exit");
+        startButton = styledButton("Start Game");
+        chooseLvlButton = styledButton("Choose Level");
+        controlsButton = styledButton("Controls");
+        exitButton = styledButton("Exit");
 
         startButton.addActionListener(startMenuButtonListener);
         exitButton.addActionListener(startMenuButtonListener);
@@ -48,7 +45,7 @@ public class StartMenuPanel extends JPanel {
         this.add(exitButton, gbc);
 
         gbc.gridy += 1;
-        this.add(chooseLvlButton,gbc);
+        this.add(chooseLvlButton, gbc);
 
         gbc.gridy += 1;
         this.add(controlsButton, gbc);
@@ -84,55 +81,6 @@ public class StartMenuPanel extends JPanel {
         return controlsButton;
     }
 
-    private static JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        int spacing = 5; // Adjust this value for the desired spacing
-        Color borderColor = Color.BLACK; // Customize the border color
-        int borderThickness = 3; // Customize the border thickness
 
-        // Create a CompoundBorder with EmptyBorder and customized LineBorder
-        CompoundBorder border = new CompoundBorder(
-                new EmptyBorder(spacing, spacing, spacing, spacing),
-                new LineBorder(borderColor, borderThickness)
-        );
-
-        button.setBorder(border);
-
-        // Make the button edges round
-        int arc = 15; // Adjust this value for the desired roundness
-        button.setBorder(BorderFactory.createLineBorder(borderColor, borderThickness));
-        button.setContentAreaFilled(false);
-        button.setOpaque(true);
-        button.setBackground(Color.WHITE);
-        button.setFocusPainted(false);
-        button.setMargin(new Insets(spacing, spacing, spacing, spacing));
-        button.setForeground(borderColor);
-        button.setBorderPainted(false);
-
-        // Add a MouseListener to change the button color on hover and press
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setBackground(Color.GRAY);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                button.setBackground(Color.WHITE);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                button.setBackground(borderColor.brighter());
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                button.setBackground(borderColor.darker());
-            }
-        });
-
-        return button;
-    }
 }
 
