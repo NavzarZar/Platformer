@@ -2,6 +2,7 @@ package game;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import physics.Collision;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +35,15 @@ public class GamePanel extends JPanel {
         // displayFrames();
     }
 
+    public void drawSpike(Graphics g, int mapBlockNumber) {
+
+        int mapOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
+        int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth, (mapBlockNumber+1) * Map.mapElementWidth, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2};
+        int[] yCoordinates = new int[]{mapOffset, mapOffset, mapOffset - Map.spikeHeight};
+
+        g.fillPolygon(xCoordinates, yCoordinates, 3);
+    }
+
 
     private void displayFrames() {
         frames++;
@@ -45,7 +55,9 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPlayer(Graphics g) {
+        g.setColor(Color.red);
         g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
+        g.setColor(Color.black);
     }
 
     private void drawMap(Graphics g) {
@@ -59,6 +71,10 @@ public class GamePanel extends JPanel {
                         Map.mapElementHeight
                 );
             }
+        }
+
+        for (int i : Map.spikeList) {
+            drawSpike(g, i);
         }
     }
 
