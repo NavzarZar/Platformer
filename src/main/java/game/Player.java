@@ -78,12 +78,21 @@ public class Player {
 
     public void moveRight() {
         int mapX = (this.getPlayerX() / Map.mapElementWidth + 1) * (Map.mapElementWidth);
+
+        if (playerX > GameWindow.width*(Map.mapList.size()/(GameWindow.width/Map.mapElementWidth))) {
+            return;
+        }
+
         if (!Collision.collisionRight(this)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
             this.setVelocityX(moveSpeed);
         } else if (mapX - (playerX + playerWidth) <= moveSpeed) {
             this.setPlayerX(mapX - this.getPlayerWidth());
             this.setVelocityX(0);
+        }
+
+        if (playerX > GameWindow.width*(Map.mapList.size())) {
+            this.setPlayerX(GameWindow.width - playerWidth);
         }
     }
 
@@ -92,6 +101,22 @@ public class Player {
     }
 
     public void makePlayerFall() {
+        int mapUnderLeftCorner = GameWindow.height - (Map.levelHeight +
+                Map.mapElementHeight *
+                        (Map.mapList.get(playerX / Map.mapElementWidth) - 1));
+
+        int mapUnderRightCorner = GameWindow.height - (Map.levelHeight +
+                Map.mapElementHeight *
+                        (Map.mapList.get((playerX + playerWidth) / Map.mapElementWidth) - 1));
+
+        System.out.println("PlayerY " + playerY + " Map under left corner: " + mapUnderLeftCorner + " Map under right corner: " + mapUnderRightCorner);
+
+//        if (playerY + playerHeight - mapUnderLeftCorner < fallingSpeed) {
+//            playerY += (playerY - mapUnderLeftCorner);
+//        }
+//        if(playerY + playerHeight - mapUnderRightCorner < fallingSpeed) {
+//            playerY += (playerY - mapUnderRightCorner);
+//        }
         if (!Collision.mapBlockUnderPlayer(this) && velocityY <= fallingSpeed && !playerIsJumping) {
             velocityY += 0.03;
         } else if (velocityY <= -jumpVelocity) {
