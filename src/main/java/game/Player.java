@@ -75,6 +75,7 @@ public class Player {
     }
 
     public void moveLeft() {
+        System.out.println("moving left");
         int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
 
         int playerXRelativeToMap = (playerX + 1) / Map.mapElementWidth;
@@ -91,6 +92,7 @@ public class Player {
     }
 
     public void moveRight() {
+        System.out.println("moving right");
         int mapX = (this.getPlayerX() / Map.mapElementWidth + 1) * (Map.mapElementWidth);
 
         if (playerX > GameWindow.width * (Map.mapList.size() / (GameWindow.width / Map.mapElementWidth))) {

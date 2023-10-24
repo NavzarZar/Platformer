@@ -16,7 +16,7 @@ public class PauseMenuPanel extends JPanel {
 
     public PauseMenuPanel() {
 
-        continueButton = styledButton("Return");
+        continueButton = styledButton("Continue");
         restartButton = styledButton("Restart Game");
 
         this.add(continueButton);

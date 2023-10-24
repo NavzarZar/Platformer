@@ -4,19 +4,18 @@ import game.Game;
 import game.GamePanel;
 import menus.panels.GameOverPanel;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
 
 public class GameOverMouseButtonListener implements ActionListener {
-
     GameOverPanel gameOverPanel;
-    GamePanel gamePanel;
 
-    public GameOverMouseButtonListener(GameOverPanel gameOverPanel, GamePanel gamePanel) {
+    public GameOverMouseButtonListener(GameOverPanel gameOverPanel) {
         this.gameOverPanel = gameOverPanel;
-        this.gamePanel = gamePanel;
     }
 
     @Override
@@ -26,8 +25,8 @@ public class GameOverMouseButtonListener implements ActionListener {
         }
         if (e.getSource() == gameOverPanel.getRetryButton()) {
             Game.gameOver = false;
-            new Game();
-            getFrameForComponent(gameOverPanel).dispose();
+            Game game = new Game();
+            getFrameForComponent(gameOverPanel).dispatchEvent(new WindowEvent(getFrameForComponent(gameOverPanel), WindowEvent.WINDOW_CLOSING));
         }
     }
 }

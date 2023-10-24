@@ -2,15 +2,19 @@ package game;
 
 import javax.swing.*;
 
+import inputs.buttonListeners.PauseMenuButtonListener;
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import menus.GameOverMenu;
-import menus.panels.PauseMenuPanel;
+
+import java.awt.event.WindowEvent;
+
+import static menus.GlobalMethods.getFrameForComponent;
 
 public class Game implements Runnable {
-    private final GamePanel gamePanel;
+    public GamePanel gamePanel;
     private final Player player = new Player();
-    public static boolean isNotPaused = false;
-    public  static boolean gameOver = false;
+    public static boolean isPaused = false;
+    public static boolean gameOver = false;
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
         gameThread.start();
@@ -21,47 +25,26 @@ public class Game implements Runnable {
         double timePerFrame = 1000000000.0 / SET_FPS;
         long lastFrame = System.nanoTime();
         long now;
-        JLabel coordinateLabel1 = new JLabel();
-        JLabel coordinateLabel2 = new JLabel();
-        JLabel coordinateLabel3 = new JLabel();
-        JLabel coordinateLabel4 = new JLabel();
 
-        coordinateLabel1.setSize(400, 50);
-        coordinateLabel2.setSize(400, 100);
-        coordinateLabel3.setSize(400, 150);
-        coordinateLabel4.setSize(400, 200);
-
-        coordinateLabel1.setLocation(10, 0);
-        coordinateLabel2.setLocation(10, 5);
-        coordinateLabel3.setLocation(10, 15);
-        coordinateLabel4.setLocation(10, 20);
-
-        while (!gameOver && !isNotPaused) {
+        while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
-                coordinateLabel1.setText("Up-left Corner: " + "X: " + player.getPlayerX() + " Y: " + player.getPlayerY());
-                gamePanel.add(coordinateLabel1);
-
-                coordinateLabel2.setText("Up-right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + player.getPlayerY());
-                gamePanel.add(coordinateLabel2);
-
-                coordinateLabel3.setText("Down-Left Corner: v " + "X: " + player.getPlayerX() + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
-                gamePanel.add(coordinateLabel3);
-
-                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
-                gamePanel.add(coordinateLabel4);
 
                 if (player.hasHitSpike()) {
+                    player.setVelocityX(0);
                     gameOver = true;
                     new GameOverMenu();
-                    player.setVelocityX(0);
+                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                 }
-                if (KeyboardInputs.movingLeft) {
-                    player.moveLeft();
-                } else if (KeyboardInputs.movingRight) {
-                    player.moveRight();
+                if(!isPaused)
+                {
+                    if (KeyboardInputs.movingLeft) {
+                        player.moveLeft();
+                    } else if (KeyboardInputs.movingRight) {
+                        player.moveRight();
+                    }
+                    player.makePlayerFall();
                 }
-                player.makePlayerFall();
                 player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
 
                 gamePanel.repaint();
@@ -69,7 +52,6 @@ public class Game implements Runnable {
             }
         }
     }
-
     public Game() {
         gamePanel = new GamePanel(player);
         GameWindow gameWindow = new GameWindow(gamePanel);

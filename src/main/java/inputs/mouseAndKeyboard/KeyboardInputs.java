@@ -4,35 +4,26 @@ import game.Game;
 import game.GamePanel;
 import game.Player;
 import menus.PauseMenu;
-import menus.panels.PauseMenuPanel;
-import menus.windows.PauseMenuWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import static menus.GlobalMethods.getFrameForComponent;
-
 public class KeyboardInputs implements KeyListener {
 
     private final Player player;
-    private final GamePanel gamePanel;
 
-    public KeyboardInputs(Player player, GamePanel gamePanel) {
+    public KeyboardInputs(Player player) {
         this.player = player;
-        this.gamePanel = gamePanel;
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
-
     public static boolean movingLeft = false;
     public static boolean movingRight = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A -> {
                 movingLeft = true;
@@ -46,9 +37,8 @@ public class KeyboardInputs implements KeyListener {
                 player.jump();
             }
             case KeyEvent.VK_ESCAPE -> {
-                Game.isNotPaused = false;
+                Game.isPaused = true;
                 new PauseMenu();
-                getFrameForComponent(gamePanel).dispose();
             }
         }
     }

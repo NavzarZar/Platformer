@@ -11,7 +11,6 @@ public class ControlsPanel extends JPanel {
     private JButton returnButton;
     ControlMouseButtonListener controlMouseButtonListener;
 
-    final ControlsWindow controlsWindow = new ControlsWindow(this);
     public ControlsPanel() {
         controlMouseButtonListener = new ControlMouseButtonListener(this);
         returnButton = styledButton("Return to Main Menu");

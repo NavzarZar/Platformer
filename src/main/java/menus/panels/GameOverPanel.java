@@ -16,12 +16,13 @@ import static menus.GlobalMethods.styledButton;
 public class GameOverPanel extends JPanel {
     private final JButton retryButton;
     private final JButton exitButton;
+
     private JLabel gameOverLabel;
     GameOverMouseButtonListener gameOverMouseButtonListener;
 
     public GameOverPanel()
     {
-        gameOverMouseButtonListener = new GameOverMouseButtonListener(this, new GamePanel(new Player()));
+        gameOverMouseButtonListener = new GameOverMouseButtonListener(this);
 
         retryButton = styledButton("Retry");
         exitButton = styledButton("Exit");

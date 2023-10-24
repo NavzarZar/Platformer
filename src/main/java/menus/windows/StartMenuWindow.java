@@ -15,7 +15,7 @@ public class StartMenuWindow extends JFrame {
         jframe.setSize(width, height);
 
         //The program stops running when the frame is closed
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //We add the panel with the menu inside the frame
         jframe.add(startMenuPanel);

@@ -3,7 +3,6 @@ package game;
 
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import inputs.mouseAndKeyboard.MouseInputs;
-import physics.Collision;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
-        addKeyListener(new KeyboardInputs(player, this));
+        addKeyListener(new KeyboardInputs(player));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
 
