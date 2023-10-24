@@ -16,7 +16,10 @@ public class Player {
     private boolean hitSpike = false;
     private static boolean movingRight = false;
 
+
     public boolean getHasHitSpike() {
+
+    public boolean hasHitSpike() {
         return hitSpike;
     }
 
@@ -80,35 +83,51 @@ public class Player {
     }
 
     public void moveLeft() {
+        System.out.println("moving left");
         int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
+
+        int playerXRelativeToMap = (playerX + 1) / Map.mapElementWidth;
+        if (Map.spikeList.contains(playerXRelativeToMap)) {
+            hitSpike = true;
+        }
+
 
         if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
-        } else if(mapX - playerX <= moveSpeed) {
+        } else if (mapX - playerX <= moveSpeed) {
             this.setVelocityX(0);
         }
     }
 
     public void moveRight() {
+        System.out.println("moving right");
         int mapX = (this.getPlayerX() / Map.mapElementWidth + 1) * (Map.mapElementWidth);
 
         if (playerX > GameWindow.width * (Map.mapList.size() / (GameWindow.width / Map.mapElementWidth))) {
             return;
         }
 
+
+        int playerRightX = (playerX + playerWidth - 1) / Map.mapElementWidth;
+        if (Map.spikeList.contains(playerRightX)) {
+            hitSpike = true;
+        }
+
+
         if (!Collision.collisionRight(this)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
             this.setVelocityX(moveSpeed);
-        } else if (mapX - (playerX+playerWidth) <= moveSpeed) {
+        } else if (mapX - (playerX + playerWidth) <= moveSpeed) {
             this.setPlayerX(mapX - this.getPlayerWidth());
             this.setVelocityX(0);
         }
 
-        if (playerX > GameWindow.width*(Map.mapList.size())) {
+        if (playerX > GameWindow.width * (Map.mapList.size())) {
             this.setPlayerX(GameWindow.width - playerWidth);
         }
     }
+
     public void setPlayerY(int playerY) {
         this.playerY = playerY;
     }
@@ -139,10 +158,13 @@ public class Player {
             velocityY += 0.4;
         } else if (velocityY <= -jumpVelocity) {
             velocityY = fallingSpeed - 0.01;
+
             playerIsJumping = false;
-        }else if (playerIsJumping) {
+        } else if (playerIsJumping) {
             velocityY -= 0.01;
-        }  else if(playerHasBlockUnder) {
+
+        } else if (playerHasBlockUnder) {
+
             velocityY = 0;
         }
 

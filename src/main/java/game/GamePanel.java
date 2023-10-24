@@ -1,7 +1,11 @@
 package game;
 
+
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import inputs.mouseAndKeyboard.KeyboardInputs;
+import inputs.mouseAndKeyboard.MouseInputs;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +22,6 @@ public class GamePanel extends JPanel {
         addMouseMotionListener(mouseInputs);
 
         this.player = player;
-
         Map.mapOffset = player.playerHeight;
     }
 
