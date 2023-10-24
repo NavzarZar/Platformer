@@ -2,6 +2,8 @@ package game;
 
 import javax.swing.*;
 
+import inputs.KeyboardInputs;
+import physics.Collision;
 import inputs.buttonListeners.PauseMenuButtonListener;
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import menus.GameOverMenu;
@@ -9,6 +11,7 @@ import menus.GameOverMenu;
 import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
+
 
 public class Game implements Runnable {
     public GamePanel gamePanel;
@@ -29,6 +32,7 @@ public class Game implements Runnable {
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
+
 
                 if (player.hasHitSpike()) {
                     player.setVelocityX(0);
