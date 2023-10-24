@@ -2,7 +2,6 @@ package game;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
-import physics.Collision;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +62,10 @@ public class GamePanel extends JPanel {
     private void drawMap(Graphics g) {
         Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
         for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
-            for (int j = 0; j < Map.mapList.get(i + Map.mapOffset); j++) {
+            if (Map.holePositionList.contains(i)) {
+                continue;
+            }
+            for (int j = -2; j < Map.mapList.get(i + Map.mapOffset); j++) {
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
@@ -73,7 +75,10 @@ public class GamePanel extends JPanel {
             }
         }
 
-        for (int i : Map.spikeList) {
+        for (int i : Map.spikePositionList) {
+            if (Map.holePositionList.contains(i)) {
+                continue;
+            }
             drawSpike(g, i);
         }
     }
