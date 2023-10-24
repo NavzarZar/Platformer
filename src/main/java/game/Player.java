@@ -17,17 +17,9 @@ public class Player {
     private static boolean movingRight = false;
 
 
-    public boolean getHasHitSpike() {
-
     public boolean hasHitSpike() {
         return hitSpike;
     }
-
-    public void setHasHitSpike(boolean hitSpike) {
-        this.hitSpike = hitSpike;
-    }
-
-
 
     public int moveSpeed = 1;
 
@@ -91,7 +83,6 @@ public class Player {
             hitSpike = true;
         }
 
-
         if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
@@ -108,12 +99,10 @@ public class Player {
             return;
         }
 
-
         int playerRightX = (playerX + playerWidth - 1) / Map.mapElementWidth;
         if (Map.spikeList.contains(playerRightX)) {
             hitSpike = true;
         }
-
 
         if (!Collision.collisionRight(this)) {
             this.setPlayerX(this.getPlayerX() + moveSpeed);
