@@ -11,13 +11,16 @@ public class Collision {
         if(player.getPlayerX() - player.moveSpeed <= 0) {
             return true;
         }
-        int playerXRelativeToMap = (player.getPlayerX() - player.moveSpeed) / Map.mapElementWidth;
+
+        int playerXRelativeToMap = (player.getPlayerX() - player.moveSpeed - 1) / Map.mapElementWidth;
         if (Map.holePositionList.contains(playerXRelativeToMap)) {
             return false;
         }
 
-        int heightOfPlayerInBlocks = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight()) / Map.mapElementHeight + 1;
-        int heightOfMapLeftOfPlayer = Map.mapList.get((player.getPlayerX() - player.moveSpeed) / Map.mapElementWidth);
+        int heightOfPlayerInBlocks = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight() - Map.mapElementHeight) / Map.mapElementHeight;
+        int heightOfMapLeftOfPlayer = Map.mapList.get((player.getPlayerX() - player.moveSpeed) / Map.mapElementWidth) - 1;
+
+        System.out.println("Height of player: " + heightOfPlayerInBlocks + " Height of map: " + heightOfMapLeftOfPlayer);
 
         return heightOfPlayerInBlocks < heightOfMapLeftOfPlayer;
     }
@@ -35,8 +38,10 @@ public class Collision {
         return heightOfPlayerRespectiveToMap < heightOfMapRightOfPlayer;
     }
 
+
     public static boolean collisionSpikeRight(Player player) {
         int playerRightXRelativeToMap = (player.getPlayerX() + player.getPlayerWidth() - 1) / Map.mapElementWidth;
+
         if (Map.holePositionList.contains(playerRightXRelativeToMap)) {
             return false;
         }
