@@ -11,7 +11,7 @@ public class Collision {
         if(player.getPlayerX() - player.moveSpeed <= 0) {
             return true;
         }
-
+        //
         int playerXRelativeToMap = (player.getPlayerX() - player.moveSpeed - 1) / Map.mapElementWidth;
         if (Map.holePositionList.contains(playerXRelativeToMap)) {
             return false;

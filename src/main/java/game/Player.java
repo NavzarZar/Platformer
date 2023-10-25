@@ -83,7 +83,7 @@ public class Player {
         int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
 
 //        System.out.println(Collision.collisionLeft(this));
-
+//
         if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
