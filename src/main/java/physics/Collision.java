@@ -22,27 +22,34 @@ public class Collision {
         }
 
 
-        if (GameWindow.height - (Map.levelHeight + player.getPlayerY() - player.getPlayerHeight()) > 0) {
+        if (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight()) >= 0) {
             heightOfPlayerInBlocks = (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight())) / Map.mapElementHeight;
         } else {
             heightOfPlayerInBlocks = (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight() + Map.mapElementHeight)) / Map.mapElementHeight;
         }
         int heightOfMapLeftOfPlayer = Map.mapList.get((player.getPlayerX() - player.moveSpeed) / Map.mapElementWidth) - 1;
 
+        System.out.println(heightOfPlayerInBlocks + " " + heightOfMapLeftOfPlayer);
         return heightOfPlayerInBlocks < heightOfMapLeftOfPlayer;
     }
 
     public static boolean collisionRight(Player player) {
-        int heightOfPlayerRespectiveToMap = (GameWindow.height - Map.levelHeight - player.getPlayerY() - player.getPlayerHeight()) / Map.mapElementHeight;
+        int heightOfPlayerInBlocks;
         int playerXRelativeToMap = (player.getPlayerX() + player.getPlayerWidth() + player.moveSpeed) / Map.mapElementWidth;
         int heightOfMapRightOfPlayer = Map.mapList.get(playerXRelativeToMap) - 1;
-
 
         if (Map.holePositionList.contains(playerXRelativeToMap)) {
             return false;
         }
 
-        return heightOfPlayerRespectiveToMap < heightOfMapRightOfPlayer;
+        if (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight()) >= 0) {
+            heightOfPlayerInBlocks = (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight())) / Map.mapElementHeight;
+        } else {
+            heightOfPlayerInBlocks = (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight() + Map.mapElementHeight)) / Map.mapElementHeight;
+        }
+
+
+        return heightOfPlayerInBlocks < heightOfMapRightOfPlayer;
     }
 
 
@@ -91,7 +98,8 @@ public class Collision {
 
     public static boolean mapBlockUnderPlayer(Player player) {
         Point bottomRightCorner = new Point(player.getPlayerX() + player.getPlayerWidth() + 1, player.getPlayerY() + player.getPlayerHeight());
-        if (Map.holePositionList.contains((player.getPlayerX()) / Map.mapElementWidth) && Map.holePositionList.contains((player.getPlayerX()+player.getPlayerWidth()-1)/Map.mapElementWidth)) {
+
+        if (Map.holePositionList.contains((player.getPlayerX()) / Map.mapElementWidth) && Map.holePositionList.contains((player.getPlayerX()+player.getPlayerWidth() - 1)/Map.mapElementWidth)) {
             return false;
         }
 
@@ -114,7 +122,16 @@ public class Collision {
                 Map.mapElementHeight *
                         (Map.mapList.get((bottomRightCorner.x-2) / Map.mapElementWidth) - 1));
 
-        return mapLeftCornerHighestY - (player.getPlayerY() + player.getPlayerHeight()) < player.fallingSpeed
-                || mapRightCornerHighestY - bottomRightCorner.y < player.fallingSpeed;
+        boolean collisionOnLeftCorner = mapLeftCornerHighestY - (player.getPlayerY() + player.getPlayerHeight()) < player.fallingSpeed;
+        boolean collisionOnRightCorner = mapRightCornerHighestY - bottomRightCorner.y < player.fallingSpeed;
+
+        if (Map.holePositionList.contains((player.getPlayerX() + player.getPlayerWidth()) / Map.mapElementWidth)) {
+            return collisionOnLeftCorner;
+        }
+        if (Map.holePositionList.contains((player.getPlayerX()) / Map.mapElementWidth)) {
+            return collisionOnRightCorner;
+        }
+        return collisionOnLeftCorner
+                || collisionOnRightCorner;
     }
 }

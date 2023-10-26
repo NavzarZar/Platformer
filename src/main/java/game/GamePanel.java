@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
 
         int mapVerticalOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
         int mapOffset = GameWindow.width * (player.getPlayerX() / GameWindow.width);
-        System.out.println(mapOffset);
+
         int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth - mapOffset, (mapBlockNumber+1) * Map.mapElementWidth - mapOffset, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2 - mapOffset};
         int[] yCoordinates = new int[]{mapVerticalOffset, mapVerticalOffset, mapVerticalOffset - Map.spikeHeight};
 
@@ -64,10 +64,11 @@ public class GamePanel extends JPanel {
     private void drawMap(Graphics g) {
         Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
         for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
-            if (Map.holePositionList.contains(i)) {
+            if (Map.holePositionList.contains(i + Map.mapOffset)) {
                 continue;
             }
             for (int j = -2; j < Map.mapList.get(i + Map.mapOffset); j++) {
+
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),

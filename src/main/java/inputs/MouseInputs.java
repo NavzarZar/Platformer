@@ -1,6 +1,7 @@
 package inputs;
 
 import game.GamePanel;
+import game.Map;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

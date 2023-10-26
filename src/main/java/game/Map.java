@@ -17,12 +17,12 @@ public class Map {
     public static int mapOffset = 0;
 
     static {
-        int[] heights = new int[]{1, 2, 2, 1, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        int[] heights = new int[]{1, 1, 2, 1, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-        int[] spikes = new int[] {4, 5, 6, 24, 25};
+        int[] spikes = new int[] {4, 5, 6, 24, 25, 29};
 
-        int[] holes = new int[] {2, 3};
+        int[] holes = new int[] {2, 3, 24, 26, 27};
         for (int spike : spikes) {
             spikePositionList.add(spike);
         }
