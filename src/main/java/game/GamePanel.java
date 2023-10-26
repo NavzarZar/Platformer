@@ -36,9 +36,11 @@ public class GamePanel extends JPanel {
 
     public void drawSpike(Graphics g, int mapBlockNumber) {
 
-        int mapOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
-        int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth, (mapBlockNumber+1) * Map.mapElementWidth, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2};
-        int[] yCoordinates = new int[]{mapOffset, mapOffset, mapOffset - Map.spikeHeight};
+        int mapVerticalOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
+        int mapOffset = GameWindow.width * (player.getPlayerX() / GameWindow.width);
+        System.out.println(mapOffset);
+        int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth - mapOffset, (mapBlockNumber+1) * Map.mapElementWidth - mapOffset, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2 - mapOffset};
+        int[] yCoordinates = new int[]{mapVerticalOffset, mapVerticalOffset, mapVerticalOffset - Map.spikeHeight};
 
         g.fillPolygon(xCoordinates, yCoordinates, 3);
     }
