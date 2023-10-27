@@ -1,7 +1,7 @@
 package game;
 
-import inputs.KeyboardInputs;
-import inputs.MouseInputs;
+import inputs.mouseAndKeyboard.KeyboardInputs;
+import inputs.mouseAndKeyboard.MouseInputs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +34,17 @@ public class GamePanel extends JPanel {
         // displayFrames();
     }
 
+    public void drawSpike(Graphics g, int mapBlockNumber) {
+
+        int mapVerticalOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
+        int mapOffset = GameWindow.width * (player.getPlayerX() / GameWindow.width);
+
+        int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth - mapOffset, (mapBlockNumber+1) * Map.mapElementWidth - mapOffset, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2 - mapOffset};
+        int[] yCoordinates = new int[]{mapVerticalOffset, mapVerticalOffset, mapVerticalOffset - Map.spikeHeight};
+
+        g.fillPolygon(xCoordinates, yCoordinates, 3);
+    }
+
 
     private void displayFrames() {
         frames++;
@@ -45,13 +56,18 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPlayer(Graphics g) {
+        g.setColor(Color.red);
         g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
+        g.setColor(Color.black);
     }
 
     private void drawMap(Graphics g) {
         Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
         for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
-            for (int j = 0; j < Map.mapList.get(i + Map.mapOffset); j++) {
+            if (Map.holePositionList.contains(i + Map.mapOffset)) {
+                continue;
+            }
+            for (int j = -((GameWindow.height-Map.levelHeight)/Map.mapElementHeight); j < Map.mapList.get(i + Map.mapOffset); j++) {
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
@@ -59,6 +75,13 @@ public class GamePanel extends JPanel {
                         Map.mapElementHeight
                 );
             }
+        }
+
+        for (int i : Map.spikePositionList) {
+            if (Map.holePositionList.contains(i)) {
+                continue;
+            }
+            drawSpike(g, i);
         }
     }
 

@@ -1,6 +1,8 @@
-package inputs;
+package inputs.mouseAndKeyboard;
 
 import game.GamePanel;
+import game.GameWindow;
+import game.Map;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,14 +11,14 @@ import java.awt.event.MouseMotionListener;
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private final GamePanel gamePanel;
-    public MouseInputs(GamePanel gamePanel)
-    {
+
+    public MouseInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        gamePanel.player.setPlayerX(e.getX());
+        gamePanel.player.setPlayerX(e.getX() + GameWindow.width * (gamePanel.player.getPlayerX() / GameWindow.width));
         gamePanel.player.setPlayerY(e.getY());
     }
 
