@@ -27,9 +27,10 @@ public class Player {
     public double velocityX = 0;
     public double velocityY = 0;
 
-    public double jumpVelocity = 1;
-
-    public double fallingSpeed = 1;
+    public final int jumpHeight = 100;
+    public final int jumpSpeed = 2;
+    public int distanceJumped = 0;
+    public double fallingSpeed = 2;
 
     int playerWidth = 50;
     int playerHeight = 50;
@@ -122,41 +123,20 @@ public class Player {
     }
 
     public void makePlayerFall() {
-//        int mapUnderLeftCorner = GameWindow.height - (Map.levelHeight +
-//                Map.mapElementHeight *
-//                        (Map.mapList.get(playerX / Map.mapElementWidth) - 1));
-//
-//        int mapUnderRightCorner = GameWindow.height - (Map.levelHeight +
-//                Map.mapElementHeight *
-//                        (Map.mapList.get((playerX + playerWidth) / Map.mapElementWidth) - 1));
-//
-//
-//        int distanceLeftCornerToMap = mapUnderLeftCorner - (playerY + playerHeight) + 1;
-//        int distanceRightCornerToMap = mapUnderRightCorner - (playerY + playerHeight) + 1;
-
-//        System.out.println(distanceLeftCornerToMap + " " + distanceRightCornerToMap);
-//        if (distanceLeftCornerToMap <= fallingSpeed
-//                || distanceRightCornerToMap  <= fallingSpeed && distanceLeftCornerToMap > 0 && distanceRightCornerToMap > 0) {
-////            System.out.println(min(mapUnderLeftCorner, mapUnderRightCorner) - (playerY+playerHeight));
-//            playerY += min(mapUnderLeftCorner, mapUnderRightCorner) - (playerY+playerHeight);
-//        }
 
         boolean playerHasBlockUnder = Collision.mapBlockUnderPlayer(this);
 
-        if (!playerHasBlockUnder && velocityY <= fallingSpeed && !playerIsJumping) {
-            velocityY += 0.4;
-        } else if (velocityY <= -jumpVelocity) {
-            velocityY = fallingSpeed - 0.01;
-
+        if (!playerHasBlockUnder && !playerIsJumping) {
+            velocityY = fallingSpeed;
+        } else if (distanceJumped >= jumpHeight) {
+            distanceJumped = 0;
             playerIsJumping = false;
         } else if (playerIsJumping) {
-            velocityY -= 0.02;
-
-        } else if (playerHasBlockUnder) {
-
+            velocityY = -jumpSpeed;
+            distanceJumped += jumpSpeed;
+        } else {
             velocityY = 0;
         }
-
         this.setPlayerY((int) (this.getPlayerY() + velocityY));
     }
 
