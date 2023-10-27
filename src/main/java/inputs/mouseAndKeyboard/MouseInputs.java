@@ -1,6 +1,7 @@
 package inputs.mouseAndKeyboard;
 
 import game.GamePanel;
+import game.GameWindow;
 import game.Map;
 
 import java.awt.event.MouseEvent;
@@ -17,7 +18,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        gamePanel.player.setPlayerX(e.getX());
+        gamePanel.player.setPlayerX(e.getX() + GameWindow.width * (gamePanel.player.getPlayerX() / GameWindow.width));
         gamePanel.player.setPlayerY(e.getY());
     }
 
