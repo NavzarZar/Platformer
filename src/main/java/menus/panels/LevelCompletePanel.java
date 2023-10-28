@@ -9,7 +9,7 @@ import java.awt.*;
 import static menus.GlobalMethods.styledButton;
 
 public class LevelCompletePanel extends JPanel {
-    private JButton mainMenuButton, exitButton;
+    private JButton mainMenuButton, exitButton, continueButton;
     private LevelCompleteButtonListener levelCompleteButtonListener;
     public LevelCompletePanel()
     {
@@ -19,9 +19,11 @@ public class LevelCompletePanel extends JPanel {
 
         mainMenuButton = styledButton("Main Menu");
         exitButton = styledButton("Exit");
+        continueButton = styledButton("Next Level");
 
         mainMenuButton.addActionListener(levelCompleteButtonListener);
         exitButton.addActionListener(levelCompleteButtonListener);
+        continueButton.addActionListener(levelCompleteButtonListener);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -31,8 +33,12 @@ public class LevelCompletePanel extends JPanel {
         this.add(mainMenuButton, gbc);
 
         gbc.gridy += 1;
+        this.add(continueButton, gbc);
+
+        gbc.gridy += 1;
         this.add(exitButton, gbc);
 
+        continueButton.setVisible(true);
         mainMenuButton.setVisible(true);
         exitButton.setVisible(true);
     }
@@ -43,5 +49,9 @@ public class LevelCompletePanel extends JPanel {
 
     public JButton getExitButton() {
         return exitButton;
+    }
+
+    public JButton getContinueButton() {
+        return continueButton;
     }
 }

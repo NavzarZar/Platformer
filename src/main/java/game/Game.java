@@ -1,5 +1,6 @@
 package game;
 
+import menus.LevelCompleteMenu;
 import physics.Collision;
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import menus.GameOverMenu;
@@ -16,7 +17,6 @@ public class Game implements Runnable {
     public static boolean pressedReturnToMainMenu = false;
 
     private static int level = 1;
-
 
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
@@ -65,13 +65,19 @@ public class Game implements Runnable {
                     player.setPlayerY(500);
                     pressedRestart = false;
                 }
+
+                if (levelWon) {
+                    new LevelCompleteMenu();
+                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                    levelWon = false;
+                    KeyboardInputs.movingRight = false;
+                    KeyboardInputs.movingLeft = false;
+                    break;
+                }
+
                 if (gameOver) {
                     KeyboardInputs.movingRight = false;
                     KeyboardInputs.movingLeft = false;
-                }
-
-                if (levelWon) {
-
                 }
 
                 gamePanel.repaint();
@@ -93,4 +99,7 @@ public class Game implements Runnable {
         return level;
     }
 
+    public static void setLevel(int level) {
+        Game.level = level;
+    }
 }
