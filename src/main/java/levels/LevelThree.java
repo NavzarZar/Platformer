@@ -15,12 +15,12 @@ public class LevelThree  implements Level {
     public static int mapOffset = 0;
 
     static {
-        int[] heights = new int[]{1, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 2, 1, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 20};
+        int[] heights = new int[]{1, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 3, 4, 4, 3, 2, 4, 4, 4, 2, 1, 2, 4, 3,
+                3, 3, 3, 1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11};
 
-        int[] spikes = new int[]{};
+        int[] spikes = new int[]{5, 6, 14, 15, 19, 20, 21, 23, 27, 28};
 
-        int[] holes = new int[]{};
+        int[] holes = new int[]{2, 10, 11, 24, 25, 30};
         for (int spike : spikes) {
             spikePositionList.add(spike);
         }
