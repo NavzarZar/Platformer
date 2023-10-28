@@ -29,11 +29,8 @@ public class Collision {
     static ArrayList<Integer> mapList;
 
     static {
-        setLevel(1);
+        setLevel(Game.getLevel());
     }
-
-
-
 
     public static boolean collisionLeft(Player player) {
         if(player.getPlayerX() - player.moveSpeed <= 0) {
