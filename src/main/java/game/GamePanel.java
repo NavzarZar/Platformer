@@ -90,7 +90,7 @@ public class GamePanel extends JPanel {
         this.player = player;
         levelText.setFont(new Font("Serif", Font.BOLD, 50));
         levelText.setForeground(Color.white);
-        levelText.setBounds(0, 0, GameWindow.width, GameWindow.height);
+        levelText.setBounds(1000, 0, GameWindow.width, GameWindow.height);
         levelText.setVisible(true);
 
         this.add(levelText);

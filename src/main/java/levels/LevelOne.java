@@ -2,18 +2,10 @@ package levels;
 
 import java.util.ArrayList;
 
-public class LevelOne implements Level {
+public class LevelOne extends Level {
     public static final ArrayList<Integer> mapList = new ArrayList<>();
     public static final ArrayList<Integer> spikePositionList = new ArrayList<>();
     public static final ArrayList<Integer> holePositionList = new ArrayList<>();
-    public static final int levelHeight = 500;
-    public static final int mapElementWidth = 80;
-    public static final int mapElementHeight = 60;
-
-    public static final int spikeHeight = 50;
-
-    public static int mapOffset = 0;
-
     static {
         int[] heights = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 4, 4, 4, 3, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4,
                 4, 3, 3, 4, 4, 4, 3, 3, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1};

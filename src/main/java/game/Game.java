@@ -16,7 +16,7 @@ public class Game implements Runnable {
     private static boolean levelWon = false;
     public static boolean pressedReturnToMainMenu = false;
 
-    private static int level = 1;
+    private static int level = 2;
 
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
