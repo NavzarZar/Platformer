@@ -1,11 +1,9 @@
-package inputs.mouseAndKeyboard;
+package inputs.keyboard;
 
 import game.Game;
-import game.GamePanel;
 import game.Player;
 import menus.PauseMenu;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

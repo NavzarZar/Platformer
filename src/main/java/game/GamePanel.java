@@ -1,6 +1,6 @@
 package game;
 
-import inputs.mouseAndKeyboard.KeyboardInputs;
+import inputs.keyboard.KeyboardInputs;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -96,8 +96,12 @@ public class GamePanel extends JPanel {
             if (Map.holePositionList.contains(i)) {
                 continue;
             }
+            System.out.println("Hello World");
             drawSpike(g, i);
         }
     }
+
+
+
 
 }

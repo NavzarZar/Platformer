@@ -3,7 +3,7 @@ package game;
 import menus.FinishedGameMenu;
 import menus.LevelCompleteMenu;
 import physics.Collision;
-import inputs.mouseAndKeyboard.KeyboardInputs;
+import inputs.keyboard.KeyboardInputs;
 import menus.GameOverMenu;
 import java.awt.event.WindowEvent;
 import static menus.GlobalMethods.getFrameForComponent;
