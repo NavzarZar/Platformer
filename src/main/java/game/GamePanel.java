@@ -1,7 +1,6 @@
 package game;
 
 import inputs.mouseAndKeyboard.KeyboardInputs;
-import inputs.mouseAndKeyboard.MouseInputs;
 import levels.Level;
 import levels.LevelOne;
 import levels.LevelThree;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
     public final Player player;
-    private int frames = 0;
-    private long lastChecked = 0;
 
     final BufferedImage image;
 
@@ -41,10 +38,7 @@ public class GamePanel extends JPanel {
     Color[] playerColors = new Color[]{Color.decode("#6237b8"), Color.decode("#4f2b8f"), Color.decode("#324029")};
 
     public GamePanel(Player player) {
-        MouseInputs mouseInputs = new MouseInputs(this);
         addKeyListener(new KeyboardInputs(player));
-        addMouseListener(mouseInputs);
-        addMouseMotionListener(mouseInputs);
         try {
             image = ImageIO.read(new File("src/main/resources/images/background" + Game.getLevel() + ".png"));
         } catch (IOException e) {
