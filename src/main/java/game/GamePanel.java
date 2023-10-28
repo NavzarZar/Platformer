@@ -129,6 +129,14 @@ public class GamePanel extends JPanel {
         g.setColor(Color.black);
     }
 
+    private void drawFlag(Graphics g, int x, int y) {
+        g.setColor(Color.black);
+        g.fillRect(x, y, 5, 180);
+
+        g.setColor(Color.red);
+        g.fillRect(x-100, y, 100, 50);
+    }
+
     private void drawMap(Graphics g) {
 
         mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / mapElementWidth));
@@ -136,7 +144,36 @@ public class GamePanel extends JPanel {
             if (holePositionList.contains(i + mapOffset)) {
                 continue;
             }
+
             for (int j = -((GameWindow.height - levelHeight) / mapElementHeight); j < mapList.get(i + mapOffset); j++) {
+
+                if (player.getPlayerX() / GameWindow.width == 2) {
+
+                    drawFlag(g, 18 * mapElementWidth-50, GameWindow.height - (levelHeight + mapList.get(53) * mapElementHeight + 100));
+                    if (i == 15 || i == 16 || i == 17) {
+                        if ((i + j) % 2 == 0) {
+                            g.setColor(Color.black);
+                        } else {
+                            g.setColor(Color.white);
+                        }
+
+                        g.fillRect(
+                                i * mapElementWidth,
+                                GameWindow.height - (levelHeight + j * mapElementHeight),
+                                mapElementWidth,
+                                mapElementHeight
+                        );
+                        g.setColor(Color.black);
+                        g.drawRect(
+                                i * mapElementWidth,
+                                GameWindow.height - (levelHeight + j * mapElementHeight),
+                                mapElementWidth,
+                                mapElementHeight
+                        );
+                        continue;
+                    }
+                }
+
                 g.setColor(blockColors[Game.getLevel() - 1]);
                 g.fillRect(
                         i * mapElementWidth,
