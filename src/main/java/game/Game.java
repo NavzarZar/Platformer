@@ -13,6 +13,10 @@ public class Game implements Runnable {
     public static boolean isPaused = false;
     public static boolean gameOver = false;
     public static boolean pressedReturnToMainMenu = false;
+
+    private static int level = 1;
+
+
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
         gameThread.start();
@@ -75,4 +79,9 @@ public class Game implements Runnable {
         gamePanel.requestFocus();
         startGameLoop();
     }
+
+    public static int getLevel() {
+        return level;
+    }
+
 }

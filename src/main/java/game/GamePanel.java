@@ -71,6 +71,7 @@ public class GamePanel extends JPanel {
     }
 
     private void drawMap(Graphics g) {
+
         Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
         for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
             if (Map.holePositionList.contains(i + Map.mapOffset)) {
