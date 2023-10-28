@@ -2,7 +2,7 @@ package levels;
 
 import java.util.ArrayList;
 
-public class LevelTwo extends Level {
+public class LevelTwo extends Level {//
     public static final ArrayList<Integer> mapList = new ArrayList<>();
     public static final ArrayList<Integer> spikePositionList = new ArrayList<>();
     public static final ArrayList<Integer> holePositionList = new ArrayList<>();

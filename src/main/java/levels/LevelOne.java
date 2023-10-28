@@ -18,7 +18,7 @@ public class LevelOne extends Level {
             spikePositionList.add(spike);
         }
         for (int height : heights) {
-            mapList.add(height);
+            mapList.add(height);//
         }
         for (int hole : holes) {
             holePositionList.add(hole);
