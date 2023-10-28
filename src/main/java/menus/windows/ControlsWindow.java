@@ -1,11 +1,8 @@
 package menus.windows;
 
-import game.Game;
 import menus.panels.ControlsPanel;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class ControlsWindow extends JFrame {
     public static final int width = 640;
@@ -22,11 +19,7 @@ public class ControlsWindow extends JFrame {
 
         //Sets the window to pop up in centre
         jframe.setLocationRelativeTo(null);
-
-        //We see the frame and it cannot be resized
+        //We ses the frame
         jframe.setVisible(true);
-        jframe.setResizable(false);
-
-
     }
 }
