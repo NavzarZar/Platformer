@@ -21,8 +21,6 @@ import java.util.ArrayList;
  */
 public class GamePanel extends JPanel {
     public final Player player;
-    private int frames = 0;
-    private long lastChecked = 0;
 
     final BufferedImage image;
 
