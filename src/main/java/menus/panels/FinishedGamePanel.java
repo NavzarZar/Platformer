@@ -7,6 +7,9 @@ import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
+/**
+ *
+ */
 public class FinishedGamePanel extends JPanel {
     private JLabel thankYouLabel;
     private JButton mainMenu, exitButton;

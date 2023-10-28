@@ -13,6 +13,9 @@ import java.io.IOException;
 
 import static menus.GlobalMethods.styledButton;
 
+/**
+ *
+ */
 public class StartMenuPanel extends JPanel {
     private JButton startButton, exitButton, chooseLvlButton, controlsButton;
     private JLabel titleLabel;

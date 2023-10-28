@@ -2,7 +2,9 @@ package menus;
 
 import menus.panels.GameOverPanel;
 import menus.windows.GameOverWindow;
-
+/**
+ *
+ */
 public class GameOverMenu {
     GameOverPanel gameOverPanel;
     GameOverWindow gameOverWindow;

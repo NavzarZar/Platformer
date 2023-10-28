@@ -13,6 +13,9 @@ import java.util.IllegalFormatWidthException;
 
 import static menus.GlobalMethods.getFrameForComponent;
 
+/**
+ *
+ */
 public class StartMenuButtonListener implements ActionListener {
 
     StartMenuPanel startMenuPanel;

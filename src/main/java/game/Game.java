@@ -8,6 +8,10 @@ import menus.GameOverMenu;
 import java.awt.event.WindowEvent;
 import static menus.GlobalMethods.getFrameForComponent;
 
+
+/**
+ *
+ */
 public class Game implements Runnable {
     public static boolean pressedRestart = false;
     public GamePanel gamePanel;

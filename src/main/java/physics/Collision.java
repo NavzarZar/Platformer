@@ -15,6 +15,9 @@ import java.util.ArrayList;
 
 import static java.lang.Math.abs;
 
+/**
+ *
+ */
 public class Collision {
 
     static Class<? extends Level> CurrentLevel;

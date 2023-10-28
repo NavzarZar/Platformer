@@ -14,7 +14,9 @@ import java.awt.event.WindowEvent;
 
 
 import static menus.GlobalMethods.getFrameForComponent;
-
+/**
+ *
+ */
 public class ControlMouseButtonListener implements ActionListener {
     private final ControlsPanel controlsPanel;
 

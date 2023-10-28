@@ -4,6 +4,9 @@ import game.Player;
 import menus.panels.PauseMenuPanel;
 import menus.windows.PauseMenuWindow;
 
+/**
+ *
+ */
 public class PauseMenu {
     PauseMenuPanel pauseMenuPanel;
     PauseMenuWindow pauseMenuWindow;

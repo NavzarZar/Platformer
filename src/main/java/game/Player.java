@@ -2,6 +2,9 @@ package game;
 
 import physics.Collision;
 
+/**
+ *
+ */
 public class Player {
     private int playerY = 500;
     private int playerX = 0;
