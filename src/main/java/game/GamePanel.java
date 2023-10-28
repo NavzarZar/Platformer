@@ -1,7 +1,7 @@
 package game;
 
-import inputs.KeyboardInputs;
-import inputs.MouseInputs;
+import inputs.mouseAndKeyboard.KeyboardInputs;
+import inputs.mouseAndKeyboard.MouseInputs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,8 +67,7 @@ public class GamePanel extends JPanel {
             if (Map.holePositionList.contains(i + Map.mapOffset)) {
                 continue;
             }
-            for (int j = -2; j < Map.mapList.get(i + Map.mapOffset); j++) {
-
+            for (int j = -((GameWindow.height-Map.levelHeight)/Map.mapElementHeight); j < Map.mapList.get(i + Map.mapOffset); j++) {
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),

@@ -57,7 +57,7 @@ public class Collision {
     public static boolean collisionSpikeRight(Player player) {
         int playerRightXRelativeToMap = (player.getPlayerX() + player.getPlayerWidth()) / Map.mapElementWidth;
 
-        if (Map.holePositionList.contains(playerRightXRelativeToMap)) {
+        if (Map.holePositionList.contains(playerRightXRelativeToMap+1)) {
             return false;
         }
 
@@ -77,7 +77,7 @@ public class Collision {
 
     public static boolean collisionSpikeLeft(Player player) {
         int playerXRelativeToMap = (player.getPlayerX() + 1) / Map.mapElementWidth;
-        if (Map.holePositionList.contains(playerXRelativeToMap)) {
+        if (Map.holePositionList.contains(playerXRelativeToMap-1)) {
             return false;
         }
         int spikeHeightRelativeToMap = GameWindow.height -
