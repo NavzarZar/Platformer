@@ -66,6 +66,7 @@ public class Game implements Runnable {
                     pressedRestart = false;
                 }
 
+
                 if (levelWon) {
                     while (player.getPlayerY() + player.getPlayerHeight() > 0) {
                         player.setPlayerY(player.getPlayerY() - 1);
