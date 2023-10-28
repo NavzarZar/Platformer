@@ -7,8 +7,9 @@ public class LevelTwo extends Level {
     public static final ArrayList<Integer> spikePositionList = new ArrayList<>();
     public static final ArrayList<Integer> holePositionList = new ArrayList<>();
     static {
-        int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 4, 1, 5, 5, 4, 3, 3, 5, 4, 4, 4, 4, 3, 2, 2, 3, 3, 2, 1, 2, 2, 3, 3,
-                2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4, 5, 5, 6, 1, 1};
+        int[] heights = new int[]{1, 1, 1, 2, 1, 3, 1, 4, 1, 5, 5, 4, 3, 3, 5, 4, 4, 4,
+                                  4, 3, 2, 2, 3, 3, 2, 1, 2, 2, 3, 3, 2, 3, 3, 2, 2, 2,
+                                  2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4, 5, 5, 5};
 
         int[] spikes = new int[]{11, 12, 13, 23, 24, 25, 30, 43, 44, 49};
 
