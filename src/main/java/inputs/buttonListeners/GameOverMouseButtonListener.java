@@ -25,7 +25,7 @@ public class GameOverMouseButtonListener implements ActionListener {
         }
         if (e.getSource() == gameOverPanel.getRetryButton()) {
             Game.gameOver = false;
-            Game game = new Game();
+            new Game();
             getFrameForComponent(gameOverPanel).dispatchEvent(new WindowEvent(getFrameForComponent(gameOverPanel), WindowEvent.WINDOW_CLOSING));
         }
     }

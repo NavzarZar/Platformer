@@ -1,8 +1,11 @@
 package menus.windows;
 
+import game.Game;
 import menus.panels.PauseMenuPanel;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PauseMenuWindow extends JFrame {
     public static final int width = 640;
@@ -20,7 +23,18 @@ public class PauseMenuWindow extends JFrame {
 
         //Sets the window to pop up in centre
         jframe.setLocationRelativeTo(null);
-        //We ses the frame
+
+        //We see the frame and it can not be resized
+        jframe.setResizable(false);
         jframe.setVisible(true);
+
+        //Making the window close function more user-intuitively
+        jframe.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                    Game.isPaused = false;
+                    jframe.dispose();
+            }
+        });
     }
 }

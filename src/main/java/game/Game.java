@@ -1,5 +1,7 @@
 package game;
 
+import menus.FinishedGameMenu;
+import menus.LevelCompleteMenu;
 import physics.Collision;
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import menus.GameOverMenu;
@@ -12,10 +14,10 @@ public class Game implements Runnable {
     private final Player player = new Player();
     public static boolean isPaused = false;
     public static boolean gameOver = false;
+    private static boolean levelWon = false;
     public static boolean pressedReturnToMainMenu = false;
 
     private static int level = 1;
-
 
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
@@ -31,10 +33,13 @@ public class Game implements Runnable {
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
-
                 if(pressedReturnToMainMenu){
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                     pressedReturnToMainMenu = false;
+                }
+
+                if (player.getPlayerX() > GameWindow.width * 3 - 160) {
+                    levelWon = true;
                 }
 
                 if (Collision.collisionSpike(player) || player.getPlayerY() + player.getPlayerHeight() > GameWindow.height - 200) {
@@ -62,14 +67,45 @@ public class Game implements Runnable {
                     pressedRestart = false;
                 }
 
+
+                if (levelWon) {
+                    while (player.getPlayerY() + player.getPlayerHeight() > 0) {
+                        player.setPlayerY(player.getPlayerY() - 1);
+                        try {
+                            Thread.sleep(2);
+                            gamePanel.repaint();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    if(Game.getLevel() < 3) {
+                        new LevelCompleteMenu();
+                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        levelWon = false;
+                        KeyboardInputs.movingRight = false;
+                        KeyboardInputs.movingLeft = false;
+                        break;
+                    }
+                    else if(Game.getLevel() == 3){
+                        new FinishedGameMenu();
+                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        KeyboardInputs.movingRight = false;
+                        KeyboardInputs.movingLeft = false;
+                        levelWon = false;
+                        break;
+                    }
+                }
+
+                if (gameOver) {
+                    KeyboardInputs.movingRight = false;
+                    KeyboardInputs.movingLeft = false;
+                }
+
                 gamePanel.repaint();
                 lastFrame = now;
 
             }
-            if (gameOver) {
-                KeyboardInputs.movingRight = false;
-                KeyboardInputs.movingLeft = false;
-            }
+
         }
     }
 
@@ -84,4 +120,7 @@ public class Game implements Runnable {
         return level;
     }
 
+    public static void setLevel(int level) {
+        Game.level = level;
+    }
 }
