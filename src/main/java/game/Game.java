@@ -31,7 +31,6 @@ public class Game implements Runnable {
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                     pressedReturnToMainMenu = false;
                 }
-
                 if (Collision.collisionSpike(player)) {
                     System.out.println("Hit spike");
                     player.setVelocityX(0);

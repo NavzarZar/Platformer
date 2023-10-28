@@ -6,6 +6,8 @@ import game.Player;
 
 import java.awt.*;
 
+import static java.lang.Math.abs;
+
 public class Collision {
     public static boolean collisionLeft(Player player) {
         if(player.getPlayerX() - player.moveSpeed <= 0) {
@@ -52,46 +54,83 @@ public class Collision {
         return heightOfPlayerInBlocks < heightOfMapRightOfPlayer;
     }
 
+    public static boolean collisionSpikeLeft(Player player) {
+        int px = player.getPlayerX();
+        int py= player.getPlayerY() + player.getPlayerHeight();
+
+        for (int spike : Map.spikePositionList) {
+            System.out.println(spike);
+
+            int x1 = spike * Map.mapElementWidth;
+            int y1 = GameWindow.height - (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(spike)-1));
+
+            int x2 = x1 + Map.mapElementWidth;
+            int y2 = y1;
+
+            int x3 = x1 + Map.mapElementWidth / 2;
+            int y3 = y1 - Map.spikeHeight;
+
+            System.out.println("Point1: " + (x1) + " " + (y1) + "\nPoint2: " + x2 + " " + y2 + "\nPoint3: " + x3 + " " + y3);
+
+            // get the area of the triangle
+            float areaOrig = abs( (x2-x1)*(y3-y1) - (x3-x1)*(y2-y1) );
+
+            // get the area of 3 triangles made between the point
+            // and the corners of the triangle
+            float area1 =    abs( (x1-px)*(y2-py) - (x2-px)*(y1-py) );
+            float area2 =    abs( (x2-px)*(y3-py) - (x3-px)*(y2-py) );
+            float area3 =    abs( (x3-px)*(y1-py) - (x1-px)*(y3-py) );
+
+            // if the sum of the three areas equals the original,
+            // we're inside the triangle!
+            System.out.println((area1 + area2 + area3) + " " + areaOrig);
+
+            if (area1 + area2 + area3 <= areaOrig) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public static boolean collisionSpikeRight(Player player) {
-        int playerRightXRelativeToMap = (player.getPlayerX() + player.getPlayerWidth()) / Map.mapElementWidth;
+        int px = player.getPlayerX() + player.getPlayerWidth();
+        int py= player.getPlayerY() + player.getPlayerHeight();
 
-        if (Map.holePositionList.contains(playerRightXRelativeToMap+1)) {
-            return false;
-        }
+        for (int spike : Map.spikePositionList) {
+            System.out.println(spike);
 
-        int spikeHeightRelativeToMap = GameWindow.height -
-                (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(playerRightXRelativeToMap)-1));
+            int x1 = spike * Map.mapElementWidth;
+            int y1 = GameWindow.height - (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(spike)-1));
 
-        if (Map.spikePositionList.contains(playerRightXRelativeToMap) && player.getPlayerY() + player.getPlayerHeight() <= spikeHeightRelativeToMap
-                && player.getPlayerY() + player.getPlayerHeight() >= spikeHeightRelativeToMap - Map.spikeHeight) {
-            if (player.getPlayerY() + player.getPlayerHeight() > spikeHeightRelativeToMap - Map.spikeHeight/2) {
+            int x2 = x1 + Map.mapElementWidth;
+            int y2 = y1;
+
+            int x3 = x1 + Map.mapElementWidth / 2;
+            int y3 = y1 - Map.spikeHeight;
+
+
+            // get the area of the triangle
+            float areaOrig = abs( (x2-x1)*(y3-y1) - (x3-x1)*(y2-y1) );
+
+            // get the area of 3 triangles made between the point
+            // and the corners of the triangle
+            float area1 =    abs( (x1-px)*(y2-py) - (x2-px)*(y1-py) );
+            float area2 =    abs( (x2-px)*(y3-py) - (x3-px)*(y2-py) );
+            float area3 =    abs( (x3-px)*(y1-py) - (x1-px)*(y3-py) );
+
+            // if the sum of the three areas equals the original,
+            // we're inside the triangle!
+            System.out.println((area1 + area2 + area3) + " " + areaOrig);
+
+            if (area1 + area2 + area3 <= areaOrig) {
                 return true;
-            } else {
-                return (player.getPlayerX() + player.getPlayerWidth()) % Map.mapElementWidth >= Map.mapElementWidth / 3;
             }
         }
+
         return false;
     }
-
-    public static boolean collisionSpikeLeft(Player player) {
-        int playerXRelativeToMap = (player.getPlayerX() + 1) / Map.mapElementWidth;
-        if (Map.holePositionList.contains(playerXRelativeToMap-1)) {
-            return false;
-        }
-        int spikeHeightRelativeToMap = GameWindow.height -
-                (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(playerXRelativeToMap)-1));
-        if (Map.spikePositionList.contains(playerXRelativeToMap) && player.getPlayerY() + player.getPlayerHeight() <= spikeHeightRelativeToMap
-                && player.getPlayerY() + player.getPlayerHeight() >= spikeHeightRelativeToMap - Map.spikeHeight) {
-            if (player.getPlayerY() + player.getPlayerHeight() > spikeHeightRelativeToMap - Map.spikeHeight/2) {
-                return true;
-            } else {
-                return player.getPlayerX() % Map.mapElementWidth <= Map.mapElementWidth * 2 / 3;
-            }
-        }
-        return false;
-    }
-
     public static boolean collisionSpike(Player player) {
         return Collision.collisionSpikeLeft(player) || Collision.collisionSpikeRight(player);
     }
@@ -102,17 +141,6 @@ public class Collision {
         if (Map.holePositionList.contains((player.getPlayerX()) / Map.mapElementWidth) && Map.holePositionList.contains((player.getPlayerX()+player.getPlayerWidth() - 1)/Map.mapElementWidth)) {
             return false;
         }
-
-
-//        System.out.println(GameWindow.height
-//                - (Map.levelHeight +
-//                Map.mapElementHeight *
-//                        (Map.mapList.get((bottomRightCorner.x) / Map.mapElementWidth) - 1)) - bottomRightCorner.y < player.fallingSpeed);
-
-//        System.out.println(GameWindow.height
-//                - (Map.levelHeight +
-//                Map.mapElementHeight *
-//                        (Map.mapList.get((bottomRightCorner.x) / Map.mapElementWidth) - 1)));
 
         int mapLeftCornerHighestY = GameWindow.height - (Map.levelHeight +
                 Map.mapElementHeight *
