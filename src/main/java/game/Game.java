@@ -88,6 +88,7 @@ public class Game implements Runnable {
                     }
                     else if(Game.getLevel() == 3){
                         new FinishedGameMenu();
+                        levelWon = false;
                         getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                         KeyboardInputs.movingRight = false;
                         KeyboardInputs.movingLeft = false;
