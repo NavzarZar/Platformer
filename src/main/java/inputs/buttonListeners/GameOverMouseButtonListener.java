@@ -2,6 +2,7 @@ package inputs.buttonListeners;
 
 import game.Game;
 import game.GamePanel;
+import menus.GameMenu;
 import menus.panels.GameOverPanel;
 
 import java.awt.*;
@@ -26,6 +27,12 @@ public class GameOverMouseButtonListener implements ActionListener {
         if (e.getSource() == gameOverPanel.getRetryButton()) {
             Game.gameOver = false;
             new Game();
+            getFrameForComponent(gameOverPanel).dispatchEvent(new WindowEvent(getFrameForComponent(gameOverPanel), WindowEvent.WINDOW_CLOSING));
+        }
+        if(e.getSource() == gameOverPanel.getMainMenu()){
+
+            Game.pressedReturnToMainMenu = true;
+            new GameMenu();
             getFrameForComponent(gameOverPanel).dispatchEvent(new WindowEvent(getFrameForComponent(gameOverPanel), WindowEvent.WINDOW_CLOSING));
         }
     }
