@@ -38,6 +38,7 @@ public class Collision {
         int playerXRelativeToMap = (player.getPlayerX() + player.getPlayerWidth() + player.moveSpeed) / Map.mapElementWidth;
         int heightOfMapRightOfPlayer = Map.mapList.get(playerXRelativeToMap) - 1;
 
+
         if (Map.holePositionList.contains(playerXRelativeToMap)) {
             return false;
         }
