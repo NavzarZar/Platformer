@@ -1,7 +1,7 @@
 package game;
 
 import inputs.mouseAndKeyboard.KeyboardInputs;
-import inputs.mouseAndKeyboard.MouseInputs;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -24,10 +24,7 @@ public class GamePanel extends JPanel {
     Color[] playerColors = new Color[] {Color.decode("#eb8d00"), Color.decode("#4f2b8f"), Color.decode("#324029")};
 
     public GamePanel(Player player) {
-        MouseInputs mouseInputs = new MouseInputs(this);
         addKeyListener(new KeyboardInputs(player));
-        addMouseListener(mouseInputs);
-        addMouseMotionListener(mouseInputs);
         try {
             image  = ImageIO.read(new File("src/main/resources/images/background3.png"));
         } catch(IOException e) {
