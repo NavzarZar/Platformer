@@ -22,7 +22,9 @@ public class StartMenuWindow extends JFrame {
 
         //Sets the window to pop up in centre
         jframe.setLocationRelativeTo(null);
-        //We ses the frame
+
+        //We see the frame and it can not be resized
+        jframe.setResizable(false);
         jframe.setVisible(true);
     }
 }
