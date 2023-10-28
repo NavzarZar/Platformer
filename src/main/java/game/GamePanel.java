@@ -18,8 +18,8 @@ public class GamePanel extends JPanel {
     final BufferedImage image;
 
     int alpha = 127; // 50% transparent
-    Color purple = new Color(140, 46, 199, alpha);
-    Color playerColor = Color.decode("#eb8d00");
+    Color[] blockColors = new Color[] {new Color(140, 46, 199, alpha), new Color(44, 22, 135, alpha)};
+    Color[] playerColors = new Color[] {Color.decode("#eb8d00"), Color.decode("#4f2b8f")};
 
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
         try {
-            image  = ImageIO.read(new File("src/main/resources/images/background2.png"));
+            image  = ImageIO.read(new File("src/main/resources/images/background2.jpg"));
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
@@ -72,7 +72,7 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPlayer(Graphics g) {
-        g.setColor(playerColor);
+        g.setColor(playerColors[1]);
         g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
         g.setColor(Color.black);
     }
@@ -84,7 +84,7 @@ public class GamePanel extends JPanel {
                 continue;
             }
             for (int j = -((GameWindow.height-Map.levelHeight)/Map.mapElementHeight); j < Map.mapList.get(i + Map.mapOffset); j++) {
-                g.setColor(purple);
+                g.setColor(blockColors[1]);
                 g.fillRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),

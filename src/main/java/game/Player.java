@@ -21,7 +21,7 @@ public class Player {
     public double fallingSpeed = 2;
 
     int playerWidth = 50;
-    int playerHeight = 50;
+    int playerHeight = 75;
 
 
     public int getPlayerWidth() {
