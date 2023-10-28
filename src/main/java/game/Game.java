@@ -33,7 +33,7 @@ public class Game implements Runnable {
                     pressedReturnToMainMenu = false;
                 }
 
-                if (Collision.collisionSpike(player)) {
+                if (Collision.collisionSpike(player) || player.getPlayerY() + player.getPlayerHeight() > GameWindow.height - 200) {
                     player.setVelocityX(0);
                     gameOver = true;
                     new GameOverMenu();
