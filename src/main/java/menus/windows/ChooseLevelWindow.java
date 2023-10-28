@@ -4,7 +4,9 @@ import menus.panels.ChooseLevelPanel;
 import menus.panels.ControlsPanel;
 
 import javax.swing.*;
-
+/**
+ *
+ */
 public class ChooseLevelWindow extends JFrame {
     public static final int width = 640;
     public static final int height = 420;

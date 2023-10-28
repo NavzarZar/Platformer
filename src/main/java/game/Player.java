@@ -1,26 +1,17 @@
 package game;
 
-import inputs.mouseAndKeyboard.KeyboardInputs;
 import physics.Collision;
 
-import java.awt.*;
-
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
+/**
+ *
+ */
 public class Player {
     private int playerY = 500;
     private int playerX = 0;
 
     private boolean playerIsJumping = false;
-    private boolean movingLeft = false;
-    private boolean hitSpike = false;
-    private static boolean movingRight = false;
 
 
-    public boolean hasHitSpike() {
-        return hitSpike;
-    }
 
     public int moveSpeed = 3;
 
@@ -33,16 +24,7 @@ public class Player {
     public double fallingSpeed = 2;
 
     int playerWidth = 50;
-    int playerHeight = 50;
-
-
-    public double getPlayerVelocityX() {
-        return velocityX;
-    }
-
-    public double getPlayerVelocityY() {
-        return velocityY;
-    }
+    int playerHeight = 75;
 
 
     public int getPlayerWidth() {
@@ -53,21 +35,8 @@ public class Player {
         return playerHeight;
     }
 
-    public void changePlayerPosition(Point point) {
-        this.playerX = point.x;
-        this.playerY = point.y;
-    }
-
     public void setVelocityX(int velocityX) {
         this.velocityX = velocityX;
-    }
-
-    public void setVelocityY(int velocityY) {
-        this.velocityY = velocityY;
-    }
-
-    public Point getPlayerPosition() {
-        return new Point(playerX, playerY);
     }
 
     public void jump() {
@@ -79,10 +48,6 @@ public class Player {
     public void moveLeft() {
         int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
 
-        int playerXRelativeToMap = (playerX + 1) / Map.mapElementWidth;
-        if (Map.spikePositionList.contains(playerXRelativeToMap)) {
-            hitSpike = true;
-        }
 
         if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
@@ -98,11 +63,6 @@ public class Player {
 
         if (playerX > GameWindow.width * (Map.mapList.size() / (GameWindow.width / Map.mapElementWidth))) {
             return;
-        }
-
-        int playerRightX = (playerX + playerWidth - 1) / Map.mapElementWidth;
-        if (Map.spikePositionList.contains(playerRightX)) {
-            hitSpike = true;
         }
 
         if (!Collision.collisionRight(this)) {

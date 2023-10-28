@@ -11,6 +11,9 @@ import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
 
+/**
+ *
+ */
 public class PauseMenuButtonListener implements ActionListener {
     PauseMenuPanel pauseMenuPanel;
     Player player;

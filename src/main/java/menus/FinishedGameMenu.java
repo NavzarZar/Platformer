@@ -2,7 +2,9 @@ package menus;
 
 import menus.panels.FinishedGamePanel;
 import menus.windows.FinishedGameWindow;
-
+/**
+ *
+ */
 public class FinishedGameMenu {
     FinishedGamePanel finishedGamePanel;
     FinishedGameWindow finishedGameWindow;

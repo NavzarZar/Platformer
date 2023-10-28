@@ -13,6 +13,9 @@ import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
+/**
+ *
+ */
 public class PauseMenuPanel extends JPanel {
     PauseMenuButtonListener pauseMenuButtonListener = new PauseMenuButtonListener(this);
     private final JButton restartButton;

@@ -1,16 +1,18 @@
 package menus.windows;
 
+import menus.panels.GameOverPanel;
+import menus.panels.LevelCompletePanel;
 import menus.panels.StartMenuPanel;
 
 import javax.swing.*;
 /**
  *
  */
-public class StartMenuWindow extends JFrame {
+public class LevelCompleteWindow extends JFrame {
     public static final int width = 640;
     public static final int height = 480;
 
-    public StartMenuWindow(StartMenuPanel startMenuPanel) {
+    public LevelCompleteWindow(LevelCompletePanel levelCompletePanel) {
 
         //Create new JFrame frame object
         JFrame jframe = new JFrame();
@@ -20,11 +22,13 @@ public class StartMenuWindow extends JFrame {
         jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //We add the panel with the menu inside the frame
-        jframe.add(startMenuPanel);
+        jframe.add(levelCompletePanel);
 
         //Sets the window to pop up in centre
         jframe.setLocationRelativeTo(null);
-        //We ses the frame
+
+        //We see the frame and it can not be resized
+        jframe.setResizable(false);
         jframe.setVisible(true);
     }
 }

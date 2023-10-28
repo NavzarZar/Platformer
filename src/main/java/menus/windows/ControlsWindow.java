@@ -6,7 +6,9 @@ import menus.panels.ControlsPanel;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+/**
+ *
+ */
 public class ControlsWindow extends JFrame {
     public static final int width = 640;
     public static final int height = 420;

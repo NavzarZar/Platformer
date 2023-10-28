@@ -6,6 +6,9 @@ import game.Player;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class Collision {
     public static boolean collisionLeft(Player player) {
         if(player.getPlayerX() - player.moveSpeed <= 0) {

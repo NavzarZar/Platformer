@@ -9,6 +9,9 @@ import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
+/**
+ *
+ */
 public class ControlsPanel extends JPanel {
     private JButton returnButton;
     ControlMouseButtonListener controlMouseButtonListener;

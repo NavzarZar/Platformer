@@ -2,6 +2,9 @@ package game;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Map {
     public static final ArrayList<Integer> mapList = new ArrayList<>();
     public static final ArrayList<Integer> spikePositionList = new ArrayList<>();
