@@ -2,6 +2,7 @@ package inputs.mouseAndKeyboard;
 
 import game.GamePanel;
 import game.GameWindow;
+import game.Map;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

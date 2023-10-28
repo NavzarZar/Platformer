@@ -69,4 +69,11 @@ public abstract class GlobalMethods {
             return getFrameForComponent(comp.getParent());
         }
     }
+    public static JLabel createStyledLabel(String text, Font font, int fontSize, Color textColor) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+        label.setForeground(textColor);
+        // You can add more styling here if needed, such as background color, border, etc.
+        return label;
+    }
 }
