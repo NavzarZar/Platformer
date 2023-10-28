@@ -2,6 +2,11 @@ package game;
 
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import inputs.mouseAndKeyboard.MouseInputs;
+import levels.Level;
+import levels.LevelOne;
+import levels.LevelThree;
+import levels.LevelTwo;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -9,6 +14,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
     public final Player player;
@@ -16,6 +23,16 @@ public class GamePanel extends JPanel {
     private long lastChecked = 0;
 
     final BufferedImage image;
+
+    int mapOffset;
+    int mapElementWidth;
+    int mapElementHeight;
+    int levelHeight;
+    int spikeHeight;
+    ArrayList<Integer> holePositionList;
+    ArrayList<Integer> spikePositionList;
+    ArrayList<Integer> mapList;
+    JLabel levelText = new JLabel("Level " + Game.getLevel(), SwingConstants.CENTER);
 
     final int alpha = 127;
 
@@ -29,14 +46,56 @@ public class GamePanel extends JPanel {
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
         try {
-            image  = ImageIO.read(new File("src/main/resources/images/background3.png"));
+            image  = ImageIO.read(new File("src/main/resources/images/background" + Game.getLevel() +".jpg"));
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
 
-        this.player = player;
+        Class<? extends Level> CurrentLevel = switch (Game.getLevel()) {
+            case 1 -> LevelOne.class;
+            case 2 -> LevelTwo.class;
+            case 3 -> LevelThree.class;
+            default -> throw new IllegalStateException("Unexpected value: " + Game.getLevel());
+        };
 
-        Map.mapOffset = player.playerHeight;
+
+        try {
+            Field field = CurrentLevel.getField("mapOffset");
+            mapOffset = field.getInt(null);
+
+            field = CurrentLevel.getField("mapElementWidth");
+            mapElementWidth = field.getInt(null);
+
+            field = CurrentLevel.getField("mapElementHeight");
+            mapElementHeight = field.getInt(null);
+
+            field = CurrentLevel.getField("levelHeight");
+            levelHeight = field.getInt(null);
+
+            field = CurrentLevel.getField("spikeHeight");
+            spikeHeight = field.getInt(null);
+
+            field = CurrentLevel.getField("holePositionList");
+            holePositionList = (ArrayList<Integer>) field.get(null);
+
+            field = CurrentLevel.getField("spikePositionList");
+            spikePositionList = (ArrayList<Integer>) field.get(null);
+
+            field = CurrentLevel.getField("mapList");
+            mapList = (ArrayList<Integer>) field.get(null);
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        this.player = player;
+        levelText.setFont(new Font("Serif", Font.BOLD, 50));
+        levelText.setForeground(Color.white);
+        levelText.setBounds(0, 0, GameWindow.width, GameWindow.height);
+        levelText.setVisible(true);
+
+        this.add(levelText);
+
+        mapOffset = player.playerHeight;
     }
 
 
@@ -54,49 +113,49 @@ public class GamePanel extends JPanel {
 
     public void drawSpike(Graphics g, int mapBlockNumber) {
 
-        int mapVerticalOffset = GameWindow.height - (Map.levelHeight + (Map.mapElementHeight) * (Map.mapList.get(mapBlockNumber)-1));
+        int mapVerticalOffset = GameWindow.height - (levelHeight + (mapElementHeight) * (mapList.get(mapBlockNumber)-1));
         int mapOffset = GameWindow.width * (player.getPlayerX() / GameWindow.width);
 
-        int[] xCoordinates = new int[]{(mapBlockNumber) * Map.mapElementWidth - mapOffset, (mapBlockNumber+1) * Map.mapElementWidth - mapOffset, mapBlockNumber * Map.mapElementWidth + Map.mapElementWidth/2 - mapOffset};
-        int[] yCoordinates = new int[]{mapVerticalOffset, mapVerticalOffset, mapVerticalOffset - Map.spikeHeight};
+        int[] xCoordinates = new int[]{(mapBlockNumber) * mapElementWidth - mapOffset, (mapBlockNumber+1) * mapElementWidth - mapOffset, mapBlockNumber * mapElementWidth + mapElementWidth/2 - mapOffset};
+        int[] yCoordinates = new int[]{mapVerticalOffset, mapVerticalOffset, mapVerticalOffset - spikeHeight};
 
         g.fillPolygon(xCoordinates, yCoordinates, 3);
     }
 
 
     private void drawPlayer(Graphics g) {
-        g.setColor(playerColors[2]);
+        g.setColor(playerColors[1]);
         g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
         g.setColor(Color.black);
     }
 
     private void drawMap(Graphics g) {
 
-        Map.mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / Map.mapElementWidth));
-        for (int i = 0; i < GameWindow.width/Map.mapElementWidth; i++) {
-            if (Map.holePositionList.contains(i + Map.mapOffset)) {
+        mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / mapElementWidth));
+        for (int i = 0; i < GameWindow.width/mapElementWidth; i++) {
+            if (holePositionList.contains(i + mapOffset)) {
                 continue;
             }
-            for (int j = -((GameWindow.height-Map.levelHeight)/Map.mapElementHeight); j < Map.mapList.get(i + Map.mapOffset); j++) {
-                g.setColor(blockColors[2]);
+            for (int j = -((GameWindow.height-levelHeight)/mapElementHeight); j < mapList.get(i + mapOffset); j++) {
+                g.setColor(blockColors[1]);
                 g.fillRect(
-                        i * Map.mapElementWidth,
-                        GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
-                        Map.mapElementWidth,
-                        Map.mapElementHeight
+                        i * mapElementWidth,
+                        GameWindow.height - (levelHeight + j * mapElementHeight),
+                        mapElementWidth,
+                        mapElementHeight
                 );
                 g.setColor(Color.black);
                 g.drawRect(
-                        i * Map.mapElementWidth,
-                        GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
-                        Map.mapElementWidth,
-                        Map.mapElementHeight
+                        i * mapElementWidth,
+                        GameWindow.height - (levelHeight + j * mapElementHeight),
+                        mapElementWidth,
+                        mapElementHeight
                 );
             }
         }
 
-        for (int i : Map.spikePositionList) {
-            if (Map.holePositionList.contains(i)) {
+        for (int i : spikePositionList) {
+            if (holePositionList.contains(i)) {
                 continue;
             }
             drawSpike(g, i);

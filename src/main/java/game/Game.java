@@ -12,9 +12,10 @@ public class Game implements Runnable {
     private final Player player = new Player();
     public static boolean isPaused = false;
     public static boolean gameOver = false;
+    private static boolean levelWon = false;
     public static boolean pressedReturnToMainMenu = false;
 
-    private static int level = 1;
+    private static int level = 2;
 
 
     private void startGameLoop() {
@@ -31,10 +32,14 @@ public class Game implements Runnable {
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
-                System.out.println(player.getPlayerX()/Map.mapElementWidth);
                 if(pressedReturnToMainMenu){
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                     pressedReturnToMainMenu = false;
+                }
+
+                if (player.getPlayerX() > GameWindow.width * 3- 160) {
+                    System.out.println("Game Won");
+                    levelWon = true;
                 }
 
                 if (Collision.collisionSpike(player) || player.getPlayerY() + player.getPlayerHeight() > GameWindow.height - 200) {
@@ -61,14 +66,20 @@ public class Game implements Runnable {
                     player.setPlayerY(500);
                     pressedRestart = false;
                 }
+                if (gameOver) {
+                    KeyboardInputs.movingRight = false;
+                    KeyboardInputs.movingLeft = false;
+                }
+
+                if (levelWon) {
+
+                }
+
                 gamePanel.repaint();
                 lastFrame = now;
 
             }
-            if (gameOver) {
-                KeyboardInputs.movingRight = false;
-                KeyboardInputs.movingLeft = false;
-            }
+
         }
     }
 
