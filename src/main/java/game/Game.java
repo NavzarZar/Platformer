@@ -15,7 +15,7 @@ public class Game implements Runnable {
     private static boolean levelWon = false;
     public static boolean pressedReturnToMainMenu = false;
 
-    private static int level = 2;
+    private static int level = 3;
 
 
     private void startGameLoop() {
@@ -37,8 +37,7 @@ public class Game implements Runnable {
                     pressedReturnToMainMenu = false;
                 }
 
-                if (player.getPlayerX() > GameWindow.width * 3- 160) {
-                    System.out.println("Game Won");
+                if (player.getPlayerX() > GameWindow.width * 3 - 160) {
                     levelWon = true;
                 }
 

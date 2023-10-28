@@ -37,8 +37,8 @@ public class GamePanel extends JPanel {
     final int alpha = 127;
 
     final int alpha3 = 180;
-    Color[] blockColors = new Color[] {new Color(140, 46, 199, alpha), new Color(44, 22, 135, alpha), new Color(86, 97, 79, alpha3)};
-    Color[] playerColors = new Color[] {Color.decode("#eb8d00"), Color.decode("#4f2b8f"), Color.decode("#324029")};
+    Color[] blockColors = new Color[]{new Color(140, 46, 199, alpha), new Color(44, 22, 135, alpha), new Color(86, 97, 79, alpha3)};
+    Color[] playerColors = new Color[]{Color.decode("#eb8d00"), Color.decode("#4f2b8f"), Color.decode("#324029")};
 
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
@@ -46,8 +46,8 @@ public class GamePanel extends JPanel {
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
         try {
-            image  = ImageIO.read(new File("src/main/resources/images/background" + Game.getLevel() +".jpg"));
-        } catch(IOException e) {
+            image = ImageIO.read(new File("src/main/resources/images/background" + Game.getLevel() + ".png"));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -83,7 +83,7 @@ public class GamePanel extends JPanel {
 
             field = CurrentLevel.getField("mapList");
             mapList = (ArrayList<Integer>) field.get(null);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -113,10 +113,10 @@ public class GamePanel extends JPanel {
 
     public void drawSpike(Graphics g, int mapBlockNumber) {
 
-        int mapVerticalOffset = GameWindow.height - (levelHeight + (mapElementHeight) * (mapList.get(mapBlockNumber)-1));
+        int mapVerticalOffset = GameWindow.height - (levelHeight + (mapElementHeight) * (mapList.get(mapBlockNumber) - 1));
         int mapOffset = GameWindow.width * (player.getPlayerX() / GameWindow.width);
 
-        int[] xCoordinates = new int[]{(mapBlockNumber) * mapElementWidth - mapOffset, (mapBlockNumber+1) * mapElementWidth - mapOffset, mapBlockNumber * mapElementWidth + mapElementWidth/2 - mapOffset};
+        int[] xCoordinates = new int[]{(mapBlockNumber) * mapElementWidth - mapOffset, (mapBlockNumber + 1) * mapElementWidth - mapOffset, mapBlockNumber * mapElementWidth + mapElementWidth / 2 - mapOffset};
         int[] yCoordinates = new int[]{mapVerticalOffset, mapVerticalOffset, mapVerticalOffset - spikeHeight};
 
         g.fillPolygon(xCoordinates, yCoordinates, 3);
@@ -124,7 +124,7 @@ public class GamePanel extends JPanel {
 
 
     private void drawPlayer(Graphics g) {
-        g.setColor(playerColors[1]);
+        g.setColor(playerColors[Game.getLevel() - 1]);
         g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
         g.setColor(Color.black);
     }
@@ -132,12 +132,12 @@ public class GamePanel extends JPanel {
     private void drawMap(Graphics g) {
 
         mapOffset = (player.getPlayerX() / GameWindow.width * (GameWindow.width / mapElementWidth));
-        for (int i = 0; i < GameWindow.width/mapElementWidth; i++) {
+        for (int i = 0; i < GameWindow.width / mapElementWidth; i++) {
             if (holePositionList.contains(i + mapOffset)) {
                 continue;
             }
-            for (int j = -((GameWindow.height-levelHeight)/mapElementHeight); j < mapList.get(i + mapOffset); j++) {
-                g.setColor(blockColors[1]);
+            for (int j = -((GameWindow.height - levelHeight) / mapElementHeight); j < mapList.get(i + mapOffset); j++) {
+                g.setColor(blockColors[Game.getLevel() - 1]);
                 g.fillRect(
                         i * mapElementWidth,
                         GameWindow.height - (levelHeight + j * mapElementHeight),
