@@ -91,6 +91,7 @@ public class Game implements Runnable {
                         getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                         KeyboardInputs.movingRight = false;
                         KeyboardInputs.movingLeft = false;
+                        levelWon = false;
                         break;
                     }
                 }
