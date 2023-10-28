@@ -9,9 +9,6 @@ import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
-/**
- *
- */
 public class ChooseLevelPanel extends JPanel {
     private JButton lvlOne;
     private JButton lvlTwo;

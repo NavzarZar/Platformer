@@ -2,37 +2,26 @@ package game;
 
 import physics.Collision;
 
-import java.awt.*;
-
 public class Player {
     private int playerY = 500;
     private int playerX = 0;
 
     private boolean playerIsJumping = false;
-    private boolean movingLeft = false;
-    private static boolean movingRight = false;
 
 
-    public int moveSpeed = 1;
+
+    public int moveSpeed = 3;
 
     public double velocityX = 0;
-    public double velocityY = 1;
+    public double velocityY = 0;
 
-    public double jumpVelocity = 1;
-
-    public int fallingSpeed = 1;
+    public final int jumpHeight = 100;
+    public final int jumpSpeed = 2;
+    public int distanceJumped = 0;
+    public double fallingSpeed = 2;
 
     int playerWidth = 50;
-    int playerHeight = 50;
-
-
-    public double getPlayerVelocityX() {
-        return velocityX;
-    }
-
-    public double getPlayerVelocityY() {
-        return velocityY;
-    }
+    int playerHeight = 75;
 
 
     public int getPlayerWidth() {
@@ -43,21 +32,8 @@ public class Player {
         return playerHeight;
     }
 
-    public void changePlayerPosition(Point point) {
-        this.playerX = point.x;
-        this.playerY = point.y;
-    }
-
     public void setVelocityX(int velocityX) {
         this.velocityX = velocityX;
-    }
-
-    public void setVelocityY(int velocityY) {
-        this.velocityY = velocityY;
-    }
-
-    public Point getPlayerPosition() {
-        return new Point(playerX, playerY);
     }
 
     public void jump() {
@@ -68,6 +44,8 @@ public class Player {
 
     public void moveLeft() {
         int mapX = (this.getPlayerX() / Map.mapElementWidth) * (Map.mapElementWidth);
+
+
         if (!Collision.collisionLeft(this)) {
             this.setVelocityX(-moveSpeed);
             this.setPlayerX(this.getPlayerX() - moveSpeed);
@@ -76,10 +54,11 @@ public class Player {
         }
     }
 
+
     public void moveRight() {
         int mapX = (this.getPlayerX() / Map.mapElementWidth + 1) * (Map.mapElementWidth);
 
-        if (playerX > GameWindow.width*(Map.mapList.size()/(GameWindow.width/Map.mapElementWidth))) {
+        if (playerX > GameWindow.width * (Map.mapList.size() / (GameWindow.width / Map.mapElementWidth))) {
             return;
         }
 
@@ -91,7 +70,7 @@ public class Player {
             this.setVelocityX(0);
         }
 
-        if (playerX > GameWindow.width*(Map.mapList.size())) {
+        if (playerX > GameWindow.width * (Map.mapList.size())) {
             this.setPlayerX(GameWindow.width - playerWidth);
         }
     }
@@ -101,33 +80,20 @@ public class Player {
     }
 
     public void makePlayerFall() {
-        int mapUnderLeftCorner = GameWindow.height - (Map.levelHeight +
-                Map.mapElementHeight *
-                        (Map.mapList.get(playerX / Map.mapElementWidth) - 1));
 
-        int mapUnderRightCorner = GameWindow.height - (Map.levelHeight +
-                Map.mapElementHeight *
-                        (Map.mapList.get((playerX + playerWidth) / Map.mapElementWidth) - 1));
+        boolean playerHasBlockUnder = Collision.mapBlockUnderPlayer(this);
 
-        System.out.println("PlayerY " + playerY + " Map under left corner: " + mapUnderLeftCorner + " Map under right corner: " + mapUnderRightCorner);
-
-//        if (playerY + playerHeight - mapUnderLeftCorner < fallingSpeed) {
-//            playerY += (playerY - mapUnderLeftCorner);
-//        }
-//        if(playerY + playerHeight - mapUnderRightCorner < fallingSpeed) {
-//            playerY += (playerY - mapUnderRightCorner);
-//        }
-        if (!Collision.mapBlockUnderPlayer(this) && velocityY <= fallingSpeed && !playerIsJumping) {
-            velocityY += 0.03;
-        } else if (velocityY <= -jumpVelocity) {
-            velocityY = fallingSpeed - 0.2;
+        if (!playerHasBlockUnder && !playerIsJumping) {
+            velocityY = fallingSpeed;
+        } else if (distanceJumped >= jumpHeight) {
+            distanceJumped = 0;
             playerIsJumping = false;
         } else if (playerIsJumping) {
-            velocityY -= 0.01;
-        } else if (Collision.mapBlockUnderPlayer(this)) {
+            velocityY = -jumpSpeed;
+            distanceJumped += jumpSpeed;
+        } else {
             velocityY = 0;
         }
-
         this.setPlayerY((int) (this.getPlayerY() + velocityY));
     }
 
@@ -140,6 +106,9 @@ public class Player {
         return playerX;
     }
 
+    public void setPlayerIsJumping(boolean playerIsJumping) {
+        this.playerIsJumping = playerIsJumping;
+    }
 
     public void setPlayerX(int playerX) {
         this.playerX = playerX;

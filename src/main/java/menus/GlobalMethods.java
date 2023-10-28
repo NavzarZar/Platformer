@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public abstract class GlobalMethods {
-     public static JButton styledButton(String text) {
+    public static JButton styledButton(String text) {
         JButton button = new JButton(text);
         int spacing = 5; // Adjust this value for the desired spacing
         Color borderColor = Color.BLACK; // Customize the border color

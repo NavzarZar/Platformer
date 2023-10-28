@@ -10,9 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
-/**
- *
- */
+
 public class GameOverMouseButtonListener implements ActionListener {
     GameOverPanel gameOverPanel;
 

@@ -7,10 +7,6 @@ import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
-
-/**
- *
- */
 public class GameOverPanel extends JPanel {
     private final JButton retryButton;
     private final JButton exitButton;

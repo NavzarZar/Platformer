@@ -5,9 +5,7 @@ import menus.panels.ControlsPanel;
 import menus.panels.FinishedGamePanel;
 
 import javax.swing.*;
-/**
- *
- */
+
 public class FinishedGameWindow extends JFrame {
     public static final int width = 640;
     public static final int height = 420;

@@ -4,9 +4,7 @@ import menus.panels.GameOverPanel;
 import menus.panels.StartMenuPanel;
 
 import javax.swing.*;
-/**
- *
- */
+
 public class GameOverWindow extends JFrame {
     public static final int width = 640;
     public static final int height = 480;
@@ -25,7 +23,9 @@ public class GameOverWindow extends JFrame {
 
         //Sets the window to pop up in centre
         jframe.setLocationRelativeTo(null);
-        //We ses the frame
+
+        //We see the frame and it can not be resized
+        jframe.setResizable(false);
         jframe.setVisible(true);
     }
 }

@@ -1,14 +1,23 @@
 package game;
 
-import javax.swing.*;
-
+import menus.FinishedGameMenu;
+import menus.LevelCompleteMenu;
+import physics.Collision;
 import inputs.mouseAndKeyboard.KeyboardInputs;
-import menus.panels.PauseMenuPanel;
+import menus.GameOverMenu;
+import java.awt.event.WindowEvent;
+import static menus.GlobalMethods.getFrameForComponent;
 
 public class Game implements Runnable {
-    private final GamePanel gamePanel;
+    public static boolean pressedRestart = false;
+    public GamePanel gamePanel;
     private final Player player = new Player();
-    private final PauseMenuPanel pauseMenuPanel;
+    public static boolean isPaused = false;
+    public static boolean gameOver = false;
+    private static boolean levelWon = false;
+    public static boolean pressedReturnToMainMenu = false;
+
+    private static int level = 1;
 
     private void startGameLoop() {
         Thread gameThread = new Thread(this);
@@ -18,59 +27,99 @@ public class Game implements Runnable {
     public void run() {
         int SET_FPS = 120;
         double timePerFrame = 1000000000.0 / SET_FPS;
-        boolean gameOver = false;
         long lastFrame = System.nanoTime();
         long now;
-        JLabel coordinateLabel1 = new JLabel();
-        JLabel coordinateLabel2 = new JLabel();
-        JLabel coordinateLabel3 = new JLabel();
-        JLabel coordinateLabel4 = new JLabel();
-
-        coordinateLabel1.setSize(400, 50);
-        coordinateLabel2.setSize(400, 100);
-        coordinateLabel3.setSize(400, 150);
-        coordinateLabel4.setSize(400, 200);
-
-        coordinateLabel1.setLocation(10, 0);
-        coordinateLabel2.setLocation(10, 5);
-        coordinateLabel3.setLocation(10, 15);
-        coordinateLabel4.setLocation(10, 20);
 
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
-                coordinateLabel1.setText("Up-left Corner: " + "X: " + player.getPlayerX() + " Y: " + player.getPlayerY());
-                gamePanel.add(coordinateLabel1);
-
-                coordinateLabel2.setText("Up-right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + player.getPlayerY());
-                gamePanel.add(coordinateLabel2);
-
-                coordinateLabel3.setText("Down-Left Corner: " + "X: " + player.getPlayerX() + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
-                gamePanel.add(coordinateLabel3);
-
-                coordinateLabel4.setText("Down-Right Corner: " + "X: " + (player.getPlayerX() + player.getPlayerWidth()) + " Y: " + (player.getPlayerY() + player.getPlayerHeight()));
-                gamePanel.add(coordinateLabel4);
-
-
-                if (KeyboardInputs.movingLeft) {
-                    player.moveLeft();
-                } else if (KeyboardInputs.movingRight) {
-                    player.moveRight();
+                if(pressedReturnToMainMenu){
+                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                    pressedReturnToMainMenu = false;
                 }
-                player.makePlayerFall();
-                player.setPlayerX((int) (player.getPlayerX() + player.getPlayerVelocityX()));
+
+                if (player.getPlayerX() > GameWindow.width * 3 - 160) {
+                    levelWon = true;
+                }
+
+                if (Collision.collisionSpike(player) || player.getPlayerY() + player.getPlayerHeight() > GameWindow.height - 200) {
+                    player.setVelocityX(0);
+                    gameOver = true;
+                    new GameOverMenu();
+                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                }
+
+                if (!isPaused) {
+                    if (KeyboardInputs.movingLeft) {
+                        player.moveLeft();
+                    } else if (KeyboardInputs.movingRight) {
+                        player.moveRight();
+                    }
+                    player.makePlayerFall();
+                }
+
+                if(pressedRestart){
+                    KeyboardInputs.movingLeft = false;
+                    KeyboardInputs.movingRight = false;
+                    player.setPlayerIsJumping(false);
+                    player.setPlayerX(0);
+                    player.setPlayerY(500);
+                    pressedRestart = false;
+                }
+
+
+                if (levelWon) {
+                    while (player.getPlayerY() + player.getPlayerHeight() > 0) {
+                        player.setPlayerY(player.getPlayerY() - 1);
+                        try {
+                            Thread.sleep(2);
+                            gamePanel.repaint();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    if(Game.getLevel() < 3) {
+                        new LevelCompleteMenu();
+                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        levelWon = false;
+                        KeyboardInputs.movingRight = false;
+                        KeyboardInputs.movingLeft = false;
+                        break;
+                    }
+                    else if(Game.getLevel() == 3){
+                        new FinishedGameMenu();
+                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        KeyboardInputs.movingRight = false;
+                        KeyboardInputs.movingLeft = false;
+                        break;
+                    }
+                }
+
+                if (gameOver) {
+                    KeyboardInputs.movingRight = false;
+                    KeyboardInputs.movingLeft = false;
+                }
 
                 gamePanel.repaint();
                 lastFrame = now;
+
             }
+
         }
     }
 
     public Game() {
         gamePanel = new GamePanel(player);
-        pauseMenuPanel = new PauseMenuPanel();
-        GameWindow gameWindow = new GameWindow(gamePanel);
+        new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startGameLoop();
+    }
+
+    public static int getLevel() {
+        return level;
+    }
+
+    public static void setLevel(int level) {
+        Game.level = level;
     }
 }

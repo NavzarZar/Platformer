@@ -1,8 +1,5 @@
 package levels;
 
-/**
- *
- */
 public abstract class Level {
     public static final int levelHeight = 500;
     public static final int mapElementWidth = 80;

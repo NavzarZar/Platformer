@@ -10,6 +10,7 @@ import menus.windows.ControlsWindow;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 
 import static menus.GlobalMethods.getFrameForComponent;
@@ -25,7 +26,7 @@ public class ControlMouseButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == controlsPanel.getReturnButton()) {
             new GameMenu();
-            (getFrameForComponent(controlsPanel.getReturnButton())).dispose();
+            getFrameForComponent(controlsPanel).dispatchEvent(new WindowEvent(getFrameForComponent(controlsPanel), WindowEvent.WINDOW_CLOSING));
         }
     }
 }

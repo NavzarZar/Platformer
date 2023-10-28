@@ -1,17 +1,17 @@
 package inputs.mouseAndKeyboard;
 
+import game.Game;
+import game.GamePanel;
 import game.Player;
 import menus.PauseMenu;
-import menus.panels.PauseMenuPanel;
-import menus.windows.PauseMenuWindow;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardInputs implements KeyListener {
 
     private final Player player;
-
     public KeyboardInputs(Player player) {
         this.player = player;
     }
@@ -23,24 +23,28 @@ public class KeyboardInputs implements KeyListener {
 
     public static boolean movingLeft = false;
     public static boolean movingRight = false;
+    public static boolean isJumping = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //Searches for keyboard input, changes the pos where the rectangle is drawn (X,Y) in regards with said input
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_A -> {
-                movingLeft = true;
-                movingRight = false;
-            }
-            case KeyEvent.VK_D -> {
-                movingLeft = false;
-                movingRight = true;
-            }
-            case KeyEvent.VK_SPACE -> {
-                player.jump();
-            }
-            case KeyEvent.VK_ESCAPE -> {
-                new PauseMenu();
+        if (!Game.gameOver) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_A -> {
+                    movingLeft = true;
+                    movingRight = false;
+                }
+                case KeyEvent.VK_D -> {
+                    movingLeft = false;
+                    movingRight = true;
+                }
+                case KeyEvent.VK_SPACE -> {
+                    isJumping = true;
+                    player.jump();
+                }
+                case KeyEvent.VK_ESCAPE -> {
+                    Game.isPaused = true;
+                    new PauseMenu();
+                }
             }
         }
     }
@@ -48,14 +52,16 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_A && movingLeft) {
-            player.setVelocityX(0);
-            movingLeft = false;
-        }
+        if (!Game.gameOver) {
+            if (key == KeyEvent.VK_A && movingLeft) {
+                player.setVelocityX(0);
+                movingLeft = false;
+            }
 
-        if (key == KeyEvent.VK_D && !movingLeft) {
-            player.setVelocityX(0);
-            movingRight = false;
+            if (key == KeyEvent.VK_D && !movingLeft) {
+                player.setVelocityX(0);
+                movingRight = false;
+            }
         }
     }
 }

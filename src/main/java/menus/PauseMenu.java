@@ -1,5 +1,6 @@
 package menus;
 
+import game.Player;
 import menus.panels.PauseMenuPanel;
 import menus.windows.PauseMenuWindow;
 
@@ -8,7 +9,7 @@ public class PauseMenu {
     PauseMenuWindow pauseMenuWindow;
     public PauseMenu()
     {
-       pauseMenuPanel = new PauseMenuPanel();
-       pauseMenuWindow = new PauseMenuWindow(pauseMenuPanel);
+        pauseMenuPanel = new PauseMenuPanel();
+        pauseMenuWindow = new PauseMenuWindow(pauseMenuPanel);
     }
 }

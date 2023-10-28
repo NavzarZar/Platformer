@@ -8,9 +8,6 @@ import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
-/**
- *
- */
 public class LevelCompletePanel extends JPanel {
     private JButton mainMenuButton, exitButton, continueButton;
     private LevelCompleteButtonListener levelCompleteButtonListener;

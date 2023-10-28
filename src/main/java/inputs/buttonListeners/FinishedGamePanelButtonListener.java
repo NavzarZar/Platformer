@@ -9,9 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
-/**
- *
- */
+
 public class FinishedGamePanelButtonListener implements ActionListener {
     FinishedGamePanel finishedGamePanel;
     public FinishedGamePanelButtonListener(FinishedGamePanel finishedGamePanel){

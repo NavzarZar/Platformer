@@ -10,9 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-/**
- *
- */
+
 public class GameWindow extends JFrame {
     public static final int width = 1440;
     public static final int height = 1080;

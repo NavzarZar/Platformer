@@ -13,9 +13,6 @@ import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
 
-/**
- *
- */
 public class LevelCompleteButtonListener implements ActionListener {
     LevelCompletePanel levelCompletePanel;
 

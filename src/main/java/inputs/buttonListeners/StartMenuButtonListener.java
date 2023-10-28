@@ -1,14 +1,15 @@
 package inputs.buttonListeners;
 
 import game.Game;
+import menus.ChooseLevelMenu;
 import menus.ControlMenu;
-import menus.panels.ControlsPanel;
 import menus.panels.PauseMenuPanel;
 import menus.panels.StartMenuPanel;
-import menus.windows.ControlsWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.util.IllegalFormatWidthException;
 
 import static menus.GlobalMethods.getFrameForComponent;
 
@@ -24,18 +25,20 @@ public class StartMenuButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startMenuPanel.getStartButton()) {
+            Game.isPaused = false;
             new Game();
-            getFrameForComponent(startMenuPanel.getStartButton()).dispose();
+            getFrameForComponent(startMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(startMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
-        if (e.getSource() == startMenuPanel.getExitButton()) {
+        else if (e.getSource() == startMenuPanel.getExitButton()) {
             System.exit(0);
         }
-        if (e.getSource() == startMenuPanel.getChooseLvlButton()) {
-            System.out.println(1);
+        else if (e.getSource() == startMenuPanel.getChooseLvlButton()) {
+            new ChooseLevelMenu();
+            getFrameForComponent(startMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(startMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
-        if (e.getSource() == startMenuPanel.getControlsButton()) {
+        else if (e.getSource() == startMenuPanel.getControlsButton()) {
             new ControlMenu();
-            getFrameForComponent(startMenuPanel.getControlsButton()).dispose();
+            getFrameForComponent(startMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(startMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
 
     }
