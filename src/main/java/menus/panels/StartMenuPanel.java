@@ -1,25 +1,32 @@
 package menus.panels;
 
+import game.Game;
 import inputs.buttonListeners.StartMenuButtonListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import static menus.GlobalMethods.styledButton;
 
 public class StartMenuPanel extends JPanel {
     private JButton startButton, exitButton, chooseLvlButton, controlsButton;
     private JLabel titleLabel;
-    StartMenuButtonListener startMenuButtonListener;
+    private StartMenuButtonListener startMenuButtonListener;
+    private BufferedImage image;
 
     public StartMenuPanel() {
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(480, 640));
 
         GridBagConstraints gbc = new GridBagConstraints();
-
         startMenuButtonListener = new StartMenuButtonListener(this);
+
+
         titleLabel = new JLabel("Welcome to game!");
 
         startButton = styledButton("Start Game");
@@ -62,7 +69,6 @@ public class StartMenuPanel extends JPanel {
         titleLabel.setVisible(true);
         startButton.setVisible(true);
         exitButton.setVisible(true);
-
 
     }
 
