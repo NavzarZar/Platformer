@@ -28,7 +28,6 @@ public class Collision {
         }
         int heightOfMapLeftOfPlayer = Map.mapList.get((player.getPlayerX() - player.moveSpeed) / Map.mapElementWidth) - 1;
 
-        System.out.println(heightOfPlayerInBlocks + " " + heightOfMapLeftOfPlayer);
         return heightOfPlayerInBlocks < heightOfMapLeftOfPlayer;
     }
 
@@ -48,7 +47,6 @@ public class Collision {
             heightOfPlayerInBlocks = (GameWindow.height - (Map.levelHeight + player.getPlayerY() + player.getPlayerHeight() + Map.mapElementHeight)) / Map.mapElementHeight;
         }
 
-
         return heightOfPlayerInBlocks < heightOfMapRightOfPlayer;
     }
 
@@ -60,7 +58,6 @@ public class Collision {
         int playerRightY = player.getPlayerY() + player.getPlayerHeight();
 
         for (int spike : Map.spikePositionList) {
-            System.out.println(spike);
 
             int x1 = spike * Map.mapElementWidth;
             int y1 = GameWindow.height - (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(spike)-1));

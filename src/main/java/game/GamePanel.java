@@ -2,20 +2,35 @@ package game;
 
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import inputs.mouseAndKeyboard.MouseInputs;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class GamePanel extends JPanel {
     public final Player player;
     private int frames = 0;
     private long lastChecked = 0;
 
+    final BufferedImage image;
+
+    int alpha = 127; // 50% transparent
+    Color purple = new Color(140, 46, 199, alpha);
+    Color playerColor = Color.decode("#eb8d00");
+
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
         addKeyListener(new KeyboardInputs(player));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
+        try {
+            image  = ImageIO.read(new File("src/main/resources/images/background2.png"));
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
 
         this.player = player;
 
@@ -28,6 +43,7 @@ public class GamePanel extends JPanel {
 
         super.paintComponent(g);
 
+        g.drawImage(image, 0, 0, null);
         drawMap(g);
         drawPlayer(g);
 
@@ -56,7 +72,7 @@ public class GamePanel extends JPanel {
     }
 
     private void drawPlayer(Graphics g) {
-        g.setColor(Color.red);
+        g.setColor(playerColor);
         g.fillRect(player.getPlayerX() - player.getPlayerX() / GameWindow.width * GameWindow.width, player.getPlayerY(), player.getPlayerWidth(), player.getPlayerHeight());
         g.setColor(Color.black);
     }
@@ -68,6 +84,14 @@ public class GamePanel extends JPanel {
                 continue;
             }
             for (int j = -((GameWindow.height-Map.levelHeight)/Map.mapElementHeight); j < Map.mapList.get(i + Map.mapOffset); j++) {
+                g.setColor(purple);
+                g.fillRect(
+                        i * Map.mapElementWidth,
+                        GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),
+                        Map.mapElementWidth,
+                        Map.mapElementHeight
+                );
+                g.setColor(Color.black);
                 g.drawRect(
                         i * Map.mapElementWidth,
                         GameWindow.height - (Map.levelHeight + j * Map.mapElementHeight),

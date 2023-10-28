@@ -27,17 +27,19 @@ public class Game implements Runnable {
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
+
                 if(pressedReturnToMainMenu){
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                     pressedReturnToMainMenu = false;
                 }
+
                 if (Collision.collisionSpike(player)) {
-                    System.out.println("Hit spike");
                     player.setVelocityX(0);
                     gameOver = true;
                     new GameOverMenu();
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                 }
+
                 if (!isPaused) {
                     if (KeyboardInputs.movingLeft) {
                         player.moveLeft();
@@ -46,6 +48,7 @@ public class Game implements Runnable {
                     }
                     player.makePlayerFall();
                 }
+
                 if(pressedRestart){
                     KeyboardInputs.movingLeft = false;
                     KeyboardInputs.movingRight = false;
