@@ -14,8 +14,6 @@ public class Collision {
             return true;
         }
 
-
-        //
         int playerXRelativeToMap = (player.getPlayerX() - player.moveSpeed - 1) / Map.mapElementWidth;
         int heightOfPlayerInBlocks;
 
@@ -54,85 +52,39 @@ public class Collision {
         return heightOfPlayerInBlocks < heightOfMapRightOfPlayer;
     }
 
-    public static boolean collisionSpikeLeft(Player player) {
-        int px = player.getPlayerX();
-        int py= player.getPlayerY() + player.getPlayerHeight();
-
-        for (int spike : Map.spikePositionList) {
-            System.out.println(spike);
-
-            int x1 = spike * Map.mapElementWidth;
-            int y1 = GameWindow.height - (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(spike)-1));
-
-            int x2 = x1 + Map.mapElementWidth;
-            int y2 = y1;
-
-            int x3 = x1 + Map.mapElementWidth / 2;
-            int y3 = y1 - Map.spikeHeight;
-
-            System.out.println("Point1: " + (x1) + " " + (y1) + "\nPoint2: " + x2 + " " + y2 + "\nPoint3: " + x3 + " " + y3);
-
-            // get the area of the triangle
-            float areaOrig = abs( (x2-x1)*(y3-y1) - (x3-x1)*(y2-y1) );
-
-            // get the area of 3 triangles made between the point
-            // and the corners of the triangle
-            float area1 =    abs( (x1-px)*(y2-py) - (x2-px)*(y1-py) );
-            float area2 =    abs( (x2-px)*(y3-py) - (x3-px)*(y2-py) );
-            float area3 =    abs( (x3-px)*(y1-py) - (x1-px)*(y3-py) );
-
-            // if the sum of the three areas equals the original,
-            // we're inside the triangle!
-            System.out.println((area1 + area2 + area3) + " " + areaOrig);
-
-            if (area1 + area2 + area3 <= areaOrig) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    public static boolean collisionSpikeRight(Player player) {
-        int px = player.getPlayerX() + player.getPlayerWidth();
-        int py= player.getPlayerY() + player.getPlayerHeight();
-
-        for (int spike : Map.spikePositionList) {
-            System.out.println(spike);
-
-            int x1 = spike * Map.mapElementWidth;
-            int y1 = GameWindow.height - (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(spike)-1));
-
-            int x2 = x1 + Map.mapElementWidth;
-            int y2 = y1;
-
-            int x3 = x1 + Map.mapElementWidth / 2;
-            int y3 = y1 - Map.spikeHeight;
-
-
-            // get the area of the triangle
-            float areaOrig = abs( (x2-x1)*(y3-y1) - (x3-x1)*(y2-y1) );
-
-            // get the area of 3 triangles made between the point
-            // and the corners of the triangle
-            float area1 =    abs( (x1-px)*(y2-py) - (x2-px)*(y1-py) );
-            float area2 =    abs( (x2-px)*(y3-py) - (x3-px)*(y2-py) );
-            float area3 =    abs( (x3-px)*(y1-py) - (x1-px)*(y3-py) );
-
-            // if the sum of the three areas equals the original,
-            // we're inside the triangle!
-            System.out.println((area1 + area2 + area3) + " " + areaOrig);
-
-            if (area1 + area2 + area3 <= areaOrig) {
-                return true;
-            }
-        }
-
-        return false;
-    }
     public static boolean collisionSpike(Player player) {
-        return Collision.collisionSpikeLeft(player) || Collision.collisionSpikeRight(player);
+        int playerLeftX = player.getPlayerX();
+        int playerLeftY = player.getPlayerY() + player.getPlayerHeight();
+
+        int playerRightX = player.getPlayerX() + player.getPlayerWidth();
+        int playerRightY = player.getPlayerY() + player.getPlayerHeight();
+
+        for (int spike : Map.spikePositionList) {
+            System.out.println(spike);
+
+            int x1 = spike * Map.mapElementWidth;
+            int y1 = GameWindow.height - (Map.levelHeight + Map.mapElementHeight * (Map.mapList.get(spike)-1));
+
+            int x2 = x1 + Map.mapElementWidth;
+
+            int x3 = x1 + Map.mapElementWidth / 2;
+            int y3 = y1 - Map.spikeHeight;
+
+            if (playerIsInsideTriangle(x1, x2, x3, y1, y1, y3, playerLeftX, playerLeftY) || playerIsInsideTriangle(x1, x2, x3, y1, y1, y3, playerRightX, playerRightY)) return true;
+
+        }
+        return false;
+    }
+
+    private static boolean playerIsInsideTriangle(int x1, int x2, int x3, int y1, int y2, int y3, int px,  int py) {
+        float areaOrig = abs( (x2 - x1)*(y3 - y1));
+
+        float area1 =    abs( (x1 - px)*(y2 - py) - (x2 - px)*(y1 - py) );
+        float area2 =    abs( (x2 - px)*(y3 - py) - (x3 - px)*(y2 - py) );
+        float area3 =    abs( (x3 - px)*(y1 - py) - (x1 - px)*(y3 - py) );
+
+
+        return area1 + area2 + area3 <= areaOrig;
     }
 
     public static boolean mapBlockUnderPlayer(Player player) {
