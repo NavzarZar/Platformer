@@ -1,5 +1,6 @@
 package game;
 
+import menus.FinishedGameMenu;
 import menus.LevelCompleteMenu;
 import physics.Collision;
 import inputs.mouseAndKeyboard.KeyboardInputs;
@@ -77,12 +78,21 @@ public class Game implements Runnable {
                             throw new RuntimeException(e);
                         }
                     }
-                    new LevelCompleteMenu();
-                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
-                    levelWon = false;
-                    KeyboardInputs.movingRight = false;
-                    KeyboardInputs.movingLeft = false;
-                    break;
+                    if(Game.getLevel() < 3) {
+                        new LevelCompleteMenu();
+                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        levelWon = false;
+                        KeyboardInputs.movingRight = false;
+                        KeyboardInputs.movingLeft = false;
+                        break;
+                    }
+                    else if(Game.getLevel() == 3){
+                        new FinishedGameMenu();
+                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        KeyboardInputs.movingRight = false;
+                        KeyboardInputs.movingLeft = false;
+                        break;
+                    }
                 }
 
                 if (gameOver) {

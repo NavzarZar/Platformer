@@ -11,7 +11,7 @@ public class LevelTwo extends Level {
                                   4, 3, 2, 2, 3, 3, 2, 1, 2, 2, 3, 3, 2, 3, 3, 2, 2, 2,
                                   2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4, 5, 5, 5};
 
-        int[] spikes = new int[]{11, 12, 13, 23, 24, 25, 30, 43, 44, 49};
+        int[] spikes = new int[]{11, 12, 13, 23, 24, 30, 43, 45, 49};
 
         int[] holes = new int[]{4, 6, 8, 20, 21, 26, 38, 39, 40};
         for (int spike : spikes) {

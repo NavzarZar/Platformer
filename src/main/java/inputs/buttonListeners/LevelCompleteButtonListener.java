@@ -1,6 +1,7 @@
 package inputs.buttonListeners;
 
 import game.Game;
+import menus.FinishedGameMenu;
 import menus.GameMenu;
 import menus.panels.LevelCompletePanel;
 import physics.Collision;
@@ -25,9 +26,14 @@ public class LevelCompleteButtonListener implements ActionListener {
             System.exit(0);
         }
         if (e.getSource() == levelCompletePanel.getContinueButton()) {
-            Collision.setLevel(Game.getLevel() + 1);
-            Game.setLevel(Game.getLevel() + 1);
-            new Game();
+            if(Game.getLevel() < 3 ) {
+                Collision.setLevel(Game.getLevel() + 1);
+                Game.setLevel(Game.getLevel() + 1);
+                new Game();
+            }
+            else if(Game.getLevel() == 3){
+                new FinishedGameMenu();
+            }
             getFrameForComponent(levelCompletePanel).dispatchEvent(new WindowEvent(getFrameForComponent(levelCompletePanel), WindowEvent.WINDOW_CLOSING));
 
         }
