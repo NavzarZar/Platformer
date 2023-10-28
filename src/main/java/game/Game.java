@@ -67,6 +67,15 @@ public class Game implements Runnable {
                 }
 
                 if (levelWon) {
+                    while (player.getPlayerY() + player.getPlayerHeight() > 0) {
+                        player.setPlayerY(player.getPlayerY() - 1);
+                        try {
+                            Thread.sleep(2);
+                            gamePanel.repaint();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                     new LevelCompleteMenu();
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                     levelWon = false;
