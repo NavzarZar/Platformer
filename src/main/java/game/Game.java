@@ -1,16 +1,10 @@
 package game;
 
-import javax.swing.*;
-
 import physics.Collision;
-import inputs.buttonListeners.PauseMenuButtonListener;
 import inputs.mouseAndKeyboard.KeyboardInputs;
 import menus.GameOverMenu;
-
 import java.awt.event.WindowEvent;
-
 import static menus.GlobalMethods.getFrameForComponent;
-
 
 public class Game implements Runnable {
     public static boolean pressedRestart = false;
@@ -38,7 +32,7 @@ public class Game implements Runnable {
                     pressedReturnToMainMenu = false;
                 }
 
-                if (player.hasHitSpike()) {
+                if (Collision.collisionSpike(player)) {
                     System.out.println("Hit spike");
                     player.setVelocityX(0);
                     gameOver = true;

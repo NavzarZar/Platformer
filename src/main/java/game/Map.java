@@ -5,10 +5,8 @@ import java.util.ArrayList;
 public class Map {
     public static final ArrayList<Integer> mapList = new ArrayList<>();
     public static final ArrayList<Integer> spikePositionList = new ArrayList<>();
-
     public static final ArrayList<Integer> holePositionList = new ArrayList<>();
     public static final int levelHeight = 500;
-
     public static final int mapElementWidth = 80;
     public static final int mapElementHeight = 60;
 
