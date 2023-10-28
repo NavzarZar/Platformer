@@ -31,7 +31,7 @@ public class Game implements Runnable {
         while (!gameOver) {
             now = System.nanoTime();
             if (now - lastFrame >= timePerFrame) {
-
+                System.out.println(player.getPlayerX()/Map.mapElementWidth);
                 if(pressedReturnToMainMenu){
                     getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
                     pressedReturnToMainMenu = false;
@@ -61,7 +61,6 @@ public class Game implements Runnable {
                     player.setPlayerY(500);
                     pressedRestart = false;
                 }
-
                 gamePanel.repaint();
                 lastFrame = now;
 
