@@ -19,13 +19,20 @@ public class ChooseLevelButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == chooseLevelPanel.getLvlOne()){
-            System.out.println("1");
+            Game.setLevel(1);
+            new Game();
+            getFrameForComponent(chooseLevelPanel).dispatchEvent(new WindowEvent(getFrameForComponent(chooseLevelPanel), WindowEvent.WINDOW_CLOSING));
         }
         if(e.getSource() == chooseLevelPanel.getLvlTwo()){
-            System.out.println("2");
+            Game.setLevel(2);
+            Game.gameOver = false;
+            new Game();
+            getFrameForComponent(chooseLevelPanel).dispatchEvent(new WindowEvent(getFrameForComponent(chooseLevelPanel), WindowEvent.WINDOW_CLOSING));
         }
         if(e.getSource() == chooseLevelPanel.getLvlThree()){
-            System.out.println("3");
+            Game.setLevel(3);
+            new Game();
+            getFrameForComponent(chooseLevelPanel).dispatchEvent(new WindowEvent(getFrameForComponent(chooseLevelPanel), WindowEvent.WINDOW_CLOSING));
         }
         if(e.getSource() == chooseLevelPanel.getReturnToMenu())
         {
