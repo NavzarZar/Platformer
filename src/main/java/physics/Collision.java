@@ -29,39 +29,7 @@ public class Collision {
     static ArrayList<Integer> mapList;
 
     static {
-        CurrentLevel  = switch (Game.getLevel()) {
-            case 1 -> LevelOne.class;
-            case 2 -> LevelTwo.class;
-            case 3 -> LevelThree.class;
-            default -> throw new IllegalStateException("Unexpected value: " + Game.getLevel());
-        };
-        try {
-            Field field = CurrentLevel.getField("mapOffset");
-            mapOffset = field.getInt(null);
-
-            field = CurrentLevel.getField("mapElementWidth");
-            mapElementWidth = field.getInt(null);
-
-            field = CurrentLevel.getField("mapElementHeight");
-            mapElementHeight = field.getInt(null);
-
-            field = CurrentLevel.getField("levelHeight");
-            levelHeight = field.getInt(null);
-
-            field = CurrentLevel.getField("spikeHeight");
-            spikeHeight = field.getInt(null);
-
-            field = CurrentLevel.getField("holePositionList");
-            holePositionList = (ArrayList<Integer>) field.get(null);
-
-            field = CurrentLevel.getField("spikePositionList");
-            spikePositionList = (ArrayList<Integer>) field.get(null);
-
-            field = CurrentLevel.getField("mapList");
-            mapList = (ArrayList<Integer>) field.get(null);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
+        setLevel(1);
     }
 
 
@@ -168,5 +136,41 @@ public class Collision {
         }
         return collisionOnLeftCorner
                 || collisionOnRightCorner;
+    }
+
+    public static void setLevel (int level){
+        CurrentLevel  = switch (level) {
+            case 1 -> LevelOne.class;
+            case 2 -> LevelTwo.class;
+            case 3 -> LevelThree.class;
+            default -> throw new IllegalStateException("Unexpected value: " + Game.getLevel());
+        };
+        try {
+            Field field = CurrentLevel.getField("mapOffset");
+            mapOffset = field.getInt(null);
+
+            field = CurrentLevel.getField("mapElementWidth");
+            mapElementWidth = field.getInt(null);
+
+            field = CurrentLevel.getField("mapElementHeight");
+            mapElementHeight = field.getInt(null);
+
+            field = CurrentLevel.getField("levelHeight");
+            levelHeight = field.getInt(null);
+
+            field = CurrentLevel.getField("spikeHeight");
+            spikeHeight = field.getInt(null);
+
+            field = CurrentLevel.getField("holePositionList");
+            holePositionList = (ArrayList<Integer>) field.get(null);
+
+            field = CurrentLevel.getField("spikePositionList");
+            spikePositionList = (ArrayList<Integer>) field.get(null);
+
+            field = CurrentLevel.getField("mapList");
+            mapList = (ArrayList<Integer>) field.get(null);
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class Game implements Runnable {
     private static boolean levelWon = false;
     public static boolean pressedReturnToMainMenu = false;
 
-    private static int level = 3;
+    private static int level = 1;
 
 
     private void startGameLoop() {
