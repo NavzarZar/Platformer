@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
 
     final int alpha3 = 180;
     Color[] blockColors = new Color[]{new Color(140, 46, 199, alpha), new Color(44, 22, 135, alpha), new Color(86, 97, 79, alpha3)};
-    Color[] playerColors = new Color[]{Color.decode("#eb8d00"), Color.decode("#4f2b8f"), Color.decode("#324029")};
+    Color[] playerColors = new Color[]{Color.decode("#6237b8"), Color.decode("#4f2b8f"), Color.decode("#324029")};
 
     public GamePanel(Player player) {
         MouseInputs mouseInputs = new MouseInputs(this);
