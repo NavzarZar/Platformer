@@ -1,11 +1,11 @@
 # Platformer Game Read Me
 
 ## Introduction
-Welcome to our Platformer Game project, developed as a part of our Challenge-Based Learning (CBL) project for our programming course. This game is a simple 2D platformer written in Java. The main focus of this project was to learn and implement game physics (collision, gravity, and map generation) and version control using Git. We hope you enjoy playing our game and find this project informative.
+Welcome to our Platformer Game project, developed as a part of our Challenge-Based Learning (CBL) project for our Programming course (2IP90). This game is a simple 2D platformer written in Java. The main focus of this project was to learn and implement game physics (collision, gravity, and map generation) and version control using Git. We hope you enjoy playing our game and find this project informative.
 
 ### Team Members
 - Razvan Craciun (1987143)
-- Stefan (1923897)
+- Stefan Avram(1923897)
 
 ## Learning Goals
 As part of this project, we had two primary learning goals:
@@ -13,7 +13,7 @@ As part of this project, we had two primary learning goals:
 1. **Game Physics**
     - *Collision*: Understanding and implementing collision detection and response mechanisms to ensure our player interacts with the game environment correctly.
     - *Gravity*: Implementing gravity to provide a realistic and engaging player experience.
-    - *Map Generation*: Creating multiple levels but also make it easily customizable by us, while still making sure that the physics work.
+    - *Map Generation*: Creating multiple levels but also making them easily customizable by us, while still making sure that the physics work.
 
 2. **Version Control with Git**
     - Learning how to use Git for version control in a collaborative programming project.
@@ -38,6 +38,10 @@ To run the project, follow these steps:
    ```
    javac src/main/java/game/Main.java
    java src/main/java/game/Main
+   ```
+5. Make sure you check the Controls before playing!
+   ```
+    The controls can be found in the Main Menu of the game, by pressing the "Controls" button.
    ```
 
 ## Project Structure
