@@ -55,7 +55,6 @@ The project structure is organized with 6 packages. Here's a brief overview of t
 - `inputs`: Contains the Java source code for the inputs.
 - `physics`: Contains the Java source code for the physics of the game.
 - `images`: Contains the images used.
-- `pom.xml`: The Maven Project Object Model file that manages project dependencies and build configurations.
 
 ## DISCLAIMER
 The Code Runner extension in VS Code does not recognize the packages with the classes. Instead of running the program
