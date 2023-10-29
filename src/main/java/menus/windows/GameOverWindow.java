@@ -1,31 +1,42 @@
 package menus.windows;
 
 import menus.panels.GameOverPanel;
-import menus.panels.StartMenuPanel;
 
 import javax.swing.*;
 
+/**
+ * The GameOverWindow class represents the window for displaying a game over screen.
+ * It displays the GameOverPanel within the window.
+ */
 public class GameOverWindow extends JFrame {
     public static final int width = 640;
     public static final int height = 480;
 
+    /**
+     * Constructs a new GameOverWindow.
+     *
+     * @param gameOverPanel The GameOverPanel to be displayed within the window.
+     */
     public GameOverWindow(GameOverPanel gameOverPanel) {
-
-        //Create new JFrame frame object
+        // Create a new JFrame object
         JFrame jframe = new JFrame();
+
+        // Set the size of the window
         jframe.setSize(width, height);
 
-        //The program stops running when the frame is closed
+        // Specify that the program stops running when the frame is closed
         jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //We add the panel with the menu inside the frame
+        // Add the panel with the game over screen inside the frame
         jframe.add(gameOverPanel);
 
-        //Sets the window to pop up in centre
+        // Set the window to pop up in the center of the screen
         jframe.setLocationRelativeTo(null);
 
-        //We see the frame and it can not be resized
+        // Make the frame non-resizable
         jframe.setResizable(false);
+
+        // Make the frame visible
         jframe.setVisible(true);
     }
 }
