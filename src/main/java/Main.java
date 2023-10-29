@@ -1,5 +1,3 @@
-package game;
-
 import menus.GameMenu;
 
 /**

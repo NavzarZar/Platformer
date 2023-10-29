@@ -37,8 +37,8 @@ To run the project, follow these steps:
 
 4. Run the game by executing the Main.java file:
    ```
-   javac src/main/java/game/Main.java
-   java src/main/java/game/Main
+   javac src/main/java/Main.java
+   java src/main/java/Main
    ```
 5. Make sure you check the Controls before playing!
    ```
