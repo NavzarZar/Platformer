@@ -5,51 +5,56 @@ Welcome to our Platformer Game project, developed as a part of our Challenge-Bas
 
 ### Team Members
 - Razvan Craciun (1987143)
-- Stefan Avram(1923897)
+- Stefan Avram (1923897)
 
 ## Learning Goals
 As part of this project, we had two primary learning goals:
 
 1. **Game Physics**
-    - *Collision*: Understanding and implementing collision detection and response mechanisms to ensure our player interacts with the game environment correctly.
-    - *Gravity*: Implementing gravity to provide a realistic and engaging player experience.
-    - *Map Generation*: Creating multiple levels but also making them easily customizable by us, while still making sure that the physics work.
+   - *Collision*: Understanding and implementing collision detection and response mechanisms to ensure our player interacts with the game environment correctly.
+   - *Gravity*: Implementing gravity to provide a realistic and engaging player experience.
+   - *Map Generation*: Creating multiple levels but also making them easily customizable by us, while still making sure that the physics work.
 
 2. **Version Control with Git**
-    - Learning how to use Git for version control in a collaborative programming project.
-    - Managing code changes, resolving conflicts, and maintaining a history of our project development.
-    - We have also sent the .git file, so you can check our version control.
+   - Learning how to use Git for version control in a collaborative programming project.
+   - Managing code changes, resolving conflicts, and maintaining a history of our project development.
+   - We have also sent the .git file, so you can check our version control.
 
 ## Getting Started
 To run the project, follow these steps:
 
-1. Clone this repository to your local machine using Git:
-   ```
+1. Clone this repository to your local machine using Git or download the project as a ZIP file:
+   ```sh
    git clone [repository_url]
    ```
 
 2. Make sure you have [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html) installed on your system.
 
 3. Navigate to the project directory:
-   ```
+   ```sh
    cd [project_directory]
    ```
 
-4. Run the game by executing the Main.java file:
+4. Run the game by executing the Main.java file in the `game` package:
+   ```sh
+   javac game/Main.java
+   java game/Main
    ```
-   javac src/main/java/game/Main.java
-   java src/main/java/game/Main
-   ```
+
 5. Make sure you check the Controls before playing!
    ```
-    The controls can be found in the Main Menu of the game, by pressing the "Controls" button.
+   The controls can be found in the Main Menu of the game, by pressing the "Controls" button.
    ```
 
 ## Project Structure
-The project structure is organized as a Maven project. Here's a brief overview of the directory structure:
+The project structure is organized with 6 packages. Here's a brief overview of the directory structure:
 
-- `src/main/java`: Contains the Java source code for the game.
-- `src/main/resources`: Contains game assets, such as images or configuration files.
+- `game`: Contains the Java source code for the game.
+- `levels`: Contains the Java source code for the levels.
+- `menus`: Contains the Java source code for the menus.
+- `inputs`: Contains the Java source code for the inputs.
+- `physics`: Contains the Java source code for the physics of the game.
+- `images`: Contains the images used.
 - `pom.xml`: The Maven Project Object Model file that manages project dependencies and build configurations.
 
 Enjoy playing our Platformer Game! 🎮
