@@ -47,9 +47,4 @@ The project structure is organized as a Maven project. Here's a brief overview o
 - `src/main/resources`: Contains game assets, such as images or configuration files.
 - `pom.xml`: The Maven Project Object Model file that manages project dependencies and build configurations.
 
-
-## Credits
-- Razvan
-- Stefan
-
 Enjoy playing our Platformer Game! 🎮
