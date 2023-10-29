@@ -18,6 +18,7 @@ As part of this project, we had two primary learning goals:
 2. **Version Control with Git**
     - Learning how to use Git for version control in a collaborative programming project.
     - Managing code changes, resolving conflicts, and maintaining a history of our project development.
+    - We have also sent the .git file, so you can check our version control.
 
 ## Getting Started
 To run the project, follow these steps:
