@@ -2,7 +2,6 @@ package physics;
 
 import game.Game;
 import game.GameWindow;
-import game.Map;
 import game.Player;
 import levels.Level;
 import levels.LevelOne;

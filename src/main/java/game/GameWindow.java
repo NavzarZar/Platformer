@@ -1,35 +1,41 @@
 package game;
 
 import javax.swing.*;
-
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-
+/**
+ * The `GameWindow` class represents the main game window for displaying the game panel.
+ */
 public class GameWindow extends JFrame {
     public static final int width = 1440;
     public static final int height = 1080;
 
+    /**
+     * Constructs a new `GameWindow` with the specified game panel.
+     *
+     * @param gamePanel The game panel to be displayed within the window.
+     */
     public GameWindow(GamePanel gamePanel) {
-        //Create new JFrame frame object
+        // Create a new JFrame object with the specified dimensions.
         JFrame jframe = new JFrame();
         jframe.setSize(width, height);
 
-        //The program stops running when the frame is closed
+        // Set the default close operation to exit when the frame is closed.
         jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //We add the panel with the drawings inside the frame
+
+        // Add the game panel to the frame for rendering.
         jframe.add(gamePanel);
 
-
-        //Sets the window to pop up in centre
+        // Center the window on the screen.
         jframe.setLocationRelativeTo(null);
-        //We see the frame and we set the window to not be resized
+
+        // Set the window to not be resizable.
         jframe.setResizable(false);
+
+        // Make the window visible.
         jframe.setVisible(true);
     }
 }

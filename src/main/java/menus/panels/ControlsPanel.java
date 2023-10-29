@@ -4,15 +4,18 @@ import inputs.buttonListeners.ControlMouseButtonListener;
 import menus.windows.ControlsWindow;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import static menus.GlobalMethods.styledButton;
 
+/**
+ * Represents the panel displaying game control instructions.
+ */
 public class ControlsPanel extends JPanel {
     private JButton returnButton;
     ControlMouseButtonListener controlMouseButtonListener;
 
+    // Override the paintComponent method to customize the appearance of the panel
     protected void paintComponent(Graphics g) {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -31,11 +34,12 @@ public class ControlsPanel extends JPanel {
 
         // Draw keyboard keys
         drawKey(g, "A", 50, 200, 40, 40);
-        drawKey(g, "D", 100, 200 ,40, 40);
+        drawKey(g, "D", 100, 200, 40, 40);
         drawKey(g, "SPACE", 150, 200, 73, 40);
         drawKey(g, "ESC", 233, 200, 45, 40);
     }
 
+    // Helper method to draw a key label
     private void drawKey(Graphics g, String key, int x, int y, int width, int height) {
         g.setColor(Color.BLACK);
         g.drawRect(x, y, width, height);
@@ -43,6 +47,9 @@ public class ControlsPanel extends JPanel {
         g.drawString(key, x + 12, y + 25);
     }
 
+    /**
+     * Creates a new ControlsPanel.
+     */
     public ControlsPanel() {
         controlMouseButtonListener = new ControlMouseButtonListener(this);
         returnButton = styledButton("Return to Main Menu");
@@ -52,6 +59,11 @@ public class ControlsPanel extends JPanel {
         this.setVisible(true);
     }
 
+    /**
+     * Get the "Return to Main Menu" button.
+     *
+     * @return The "Return to Main Menu" button.
+     */
     public JButton getReturnButton() {
         return returnButton;
     }

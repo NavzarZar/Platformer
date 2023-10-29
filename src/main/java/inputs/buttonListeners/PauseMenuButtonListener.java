@@ -11,10 +11,18 @@ import java.awt.event.WindowEvent;
 
 import static menus.GlobalMethods.getFrameForComponent;
 
+/**
+ * The `PauseMenuButtonListener` class handles button click events on the PauseMenuPanel.
+ */
 public class PauseMenuButtonListener implements ActionListener {
     PauseMenuPanel pauseMenuPanel;
     Player player;
 
+    /**
+     * Constructs a `PauseMenuButtonListener` with a reference to the PauseMenuPanel.
+     *
+     * @param pauseMenuPanel The PauseMenuPanel to interact with.
+     */
     public PauseMenuButtonListener(PauseMenuPanel pauseMenuPanel) {
         this.pauseMenuPanel = pauseMenuPanel;
     }
@@ -22,18 +30,22 @@ public class PauseMenuButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pauseMenuPanel.getContinueButton()) {
+            // Resume the game and close the PauseMenuPanel window.
             Game.isPaused = false;
             getFrameForComponent(pauseMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(pauseMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
         if (e.getSource() == pauseMenuPanel.getRestartButton()) {
+            // Restart the game and close the PauseMenuPanel window.
             Game.pressedRestart = true;
             Game.isPaused = false;
             getFrameForComponent(pauseMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(pauseMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
         if (e.getSource() == pauseMenuPanel.getExitButton()) {
+            // Exit the application when the exit button is clicked.
             System.exit(0);
         }
         if (e.getSource() == pauseMenuPanel.getReturnToMenu()) {
+            // Return to the main menu and close the PauseMenuPanel window.
             Game.pressedReturnToMainMenu = true;
             new GameMenu();
             getFrameForComponent(pauseMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(pauseMenuPanel), WindowEvent.WINDOW_CLOSING));
