@@ -3,13 +3,18 @@ package menus;
 import menus.panels.StartMenuPanel;
 import menus.windows.StartMenuWindow;
 
+/**
+ * The GameMenu class represents the main menu of the game.
+ */
 public class GameMenu {
-    StartMenuPanel startMenuPanel;
-    StartMenuWindow startMenuWindow;
+    private StartMenuPanel startMenuPanel;
+    private StartMenuWindow startMenuWindow;
 
+    /**
+     * Constructs a new GameMenu and initializes its components.
+     */
     public GameMenu() {
         startMenuPanel = new StartMenuPanel();
         startMenuWindow = new StartMenuWindow(startMenuPanel);
     }
-
 }

@@ -8,12 +8,22 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The GlobalMethods class contains utility methods for styling Swing components.
+ */
 public abstract class GlobalMethods {
+
+    /**
+     * Creates a styled JButton with custom border, color, and hover effects.
+     *
+     * @param text The text to display on the button.
+     * @return The styled JButton.
+     */
     public static JButton styledButton(String text) {
         JButton button = new JButton(text);
-        int spacing = 5; // Adjust this value for the desired spacing
-        Color borderColor = Color.BLACK; // Customize the border color
-        int borderThickness = 3; // Customize the border thickness
+        int spacing = 5; // Adjust for the desired spacing
+        Color borderColor = Color.BLACK; // Customize border color
+        int borderThickness = 3; // Customize border thickness
 
         // Create a CompoundBorder with EmptyBorder and customized LineBorder
         CompoundBorder border = new CompoundBorder(
@@ -24,7 +34,7 @@ public abstract class GlobalMethods {
         button.setBorder(border);
 
         // Make the button edges round
-        int arc = 15; // Adjust this value for the desired roundness
+        int arc = 15; // Adjust for desired roundness
         button.setBorder(BorderFactory.createLineBorder(borderColor, borderThickness));
         button.setContentAreaFilled(false);
         button.setOpaque(true);
@@ -60,6 +70,12 @@ public abstract class GlobalMethods {
         return button;
     }
 
+    /**
+     * Gets the JFrame that contains a given component.
+     *
+     * @param comp The component for which to find the JFrame.
+     * @return The JFrame containing the component or null if not found.
+     */
     public static JFrame getFrameForComponent(Component comp) {
         if (comp == null) {
             return null;
