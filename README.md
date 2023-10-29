@@ -20,6 +20,11 @@ As part of this project, we had two primary learning goals:
    - Managing code changes, resolving conflicts, and maintaining a history of our project development.
    - We have also sent the .git file, so you can check our version control.
 
+## DISCLAIMER
+The Code Runner extension in VS Code does not recognize the packages with the classes. Instead of running the program
+with the "Run Code" mode, run it with "Run or Debug" -> "Run Java".
+Otherwise, just run from console as described below.
+
 ## Getting Started
 To run the project, follow these steps:
 
@@ -55,10 +60,5 @@ The project structure is organized with 6 packages. Here's a brief overview of t
 - `inputs`: Contains the Java source code for the inputs.
 - `physics`: Contains the Java source code for the physics of the game.
 - `images`: Contains the images used.
-
-## DISCLAIMER
-The Code Runner extension in VS Code does not recognize the packages with the classes. Instead of running the program
-with the "Run Code" mode, run it with "Run Java".
-Otherwise, just run from console as described above.
 
 Enjoy playing our Platformer Game! 🎮
