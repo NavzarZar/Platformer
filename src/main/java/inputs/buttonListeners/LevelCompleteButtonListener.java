@@ -49,7 +49,7 @@ public class LevelCompleteButtonListener implements ActionListener {
         }
         if (e.getSource() == levelCompletePanel.getMainMenuButton()) {
             // Return to the main menu and close the LevelCompletePanel window.
-            Game.pressedReturnToMainMenu = true;
+            Game.setPressedReturnToMainMenu(true);
             new GameMenu();
             getFrameForComponent(levelCompletePanel).dispatchEvent(new WindowEvent(getFrameForComponent(levelCompletePanel), WindowEvent.WINDOW_CLOSING));
         }

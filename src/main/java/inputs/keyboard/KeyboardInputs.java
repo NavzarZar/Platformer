@@ -29,7 +29,7 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (!Game.gameOver) {
+        if (!Game.isGameOver()) {
             // Handle key presses when the game is not over
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_A -> {
@@ -46,7 +46,7 @@ public class KeyboardInputs implements KeyListener {
                 }
                 case KeyEvent.VK_ESCAPE -> {
                     // Pause the game and open the PauseMenu when the Escape key is pressed
-                    Game.isPaused = true;
+                    Game.setIsPaused(true);
                     new PauseMenu();
                 }
             }
@@ -56,7 +56,7 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (!Game.gameOver) {
+        if (!Game.isGameOver()) {
             // Handle key releases when the game is not over
             if (key == KeyEvent.VK_A && movingLeft) {
                 player.setVelocityX(0);

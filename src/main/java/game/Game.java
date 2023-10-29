@@ -1,11 +1,11 @@
 package game;
 
-import menus.FinishedGameMenu;
-import menus.LevelCompleteMenu;
-import physics.Collision;
 import inputs.keyboard.KeyboardInputs;
+import menus.FinishedGameMenu;
 import menus.GameOverMenu;
+import menus.LevelCompleteMenu;
 import java.awt.event.WindowEvent;
+import physics.Collision;
 import static menus.GlobalMethods.getFrameForComponent;
 
 /**
@@ -13,15 +13,107 @@ import static menus.GlobalMethods.getFrameForComponent;
  * It manages the game loop and game state transitions.
  */
 public class Game implements Runnable {
-    public static boolean pressedRestart = false;
-    public GamePanel gamePanel;
-    private final Player player = new Player();
-    public static boolean isPaused = false;
-    public static boolean gameOver = false;
-    private static boolean levelWon = false;
-    public static boolean pressedReturnToMainMenu = false;
 
+
+    /**
+     * Indicates whether the game should be restarted.
+     */
+    private static boolean pressedRestart = false;
+
+    /**
+     * The panel where the game is displayed.
+     */
+    private GamePanel gamePanel;
+
+    /**
+     * The player character in the game.
+     */
+    private final Player player = new Player();
+
+    /**
+     * Indicates whether the game is currently paused.
+     */
+    private static boolean isPaused = false;
+
+    /**
+     * Indicates whether the game is over.
+     */
+    private static boolean gameOver = false;
+
+    /**
+     * Indicates whether the current level is won.
+     */
+    private static boolean levelWon = false;
+
+    /**
+     * Indicates whether the user wants to return to the main menu.
+     */
+    private static boolean pressedReturnToMainMenu = false;
+
+    /**
+     * The current level of the game.
+     */
     private static int level = 1;
+
+
+    /**
+     * Checks if the restart button is pressed.
+     *
+     * @return true if the restart button is pressed, false otherwise.
+     */
+    public static boolean isPressedRestart() {
+        return pressedRestart;
+    }
+
+    /**
+     * Sets the state of the restart button.
+     *
+     * @param pressedRestart true to indicate the restart button is pressed,
+     * false otherwise.
+     */
+    public static void setPressedRestart(boolean pressedRestart) {
+        Game.pressedRestart = pressedRestart;
+    }
+
+    /**
+     * Sets the state of the game's pause.
+     *
+     * @param isPaused true to indicate that the game is paused,
+     * false otherwise.
+     */
+    public static void setIsPaused(boolean isPaused) {
+        Game.isPaused = isPaused;
+    }
+
+    /**
+     * Checks if the game is over.
+     *
+     * @return true if the game is over, false otherwise.
+     */
+    public static boolean isGameOver() {
+        return gameOver;
+    }
+
+    /**
+     * Sets the state of the game's over status.
+     *
+     * @param gameOver true to indicate that the game is over, false otherwise.
+     */
+    public static void setGameOver(boolean gameOver) {
+        Game.gameOver = gameOver;
+    }
+
+    /**
+     * Sets the state of the user's desire to return to the main menu.
+     *
+     * @param pressedReturnToMainMenu true to indicate the user's intention
+     * to return to the main menu, false otherwise.
+     */
+    public static void setPressedReturnToMainMenu(
+            boolean pressedReturnToMainMenu) {
+        Game.pressedReturnToMainMenu = pressedReturnToMainMenu;
+    }
+
 
     /**
      * Starts the game loop in a separate thread.
@@ -31,12 +123,17 @@ public class Game implements Runnable {
         gameThread.start();
     }
 
+    public static boolean isIsPaused() {
+        return isPaused;
+    }
+
     /**
      * The main game loop. Manages game logic, rendering, and state transitions.
      */
     public void run() {
-        int SET_FPS = 120;
-        double timePerFrame = 1000000000.0 / SET_FPS;
+        int fps = 120;
+        double milliseconds = 1000000000.0;
+        double timePerFrame = milliseconds / fps;
         long lastFrame = System.nanoTime();
         long now;
 
@@ -45,25 +142,33 @@ public class Game implements Runnable {
             if (now - lastFrame >= timePerFrame) {
                 if (pressedReturnToMainMenu) {
                     // Close the game window when returning to the main menu.
-                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                    getFrameForComponent(gamePanel).dispatchEvent(
+                            new WindowEvent(getFrameForComponent(gamePanel),
+                                    WindowEvent.WINDOW_CLOSING));
                     pressedReturnToMainMenu = false;
                 }
 
-                if (player.getPlayerX() > GameWindow.width * 3 - 160) {
+                if (player.getPlayerX() > GameWindow.WIDTH * 3 - 160) {
                     // The player has won the level.
                     levelWon = true;
                 }
 
-                if (Collision.collisionSpike(player) || player.getPlayerY() + player.getPlayerHeight() > GameWindow.height - 200) {
-                    // Handle player collision with spikes or falling off the screen.
+                if (Collision.collisionSpike(player)
+                        || player.getPlayerY() + player.getPlayerHeight()
+                                > GameWindow.HEIGHT - 200) {
+                    // Handle player collision with spikes or
+                    // falling off the screen.
                     player.setVelocityX(0);
                     gameOver = true;
                     new GameOverMenu();
-                    getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                    getFrameForComponent(gamePanel).dispatchEvent(
+                            new WindowEvent(getFrameForComponent(gamePanel),
+                                    WindowEvent.WINDOW_CLOSING));
                 }
 
                 if (!isPaused) {
-                    // Handle player movement and gravity when the game is not paused.
+                    // Handle player movement and gravity
+                    // when the game is not paused.
                     if (KeyboardInputs.movingLeft) {
                         player.moveLeft();
                     } else if (KeyboardInputs.movingRight) {
@@ -95,7 +200,9 @@ public class Game implements Runnable {
                     }
                     if (Game.getLevel() < 3) {
                         new LevelCompleteMenu();
-                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        getFrameForComponent(gamePanel).dispatchEvent(
+                                new WindowEvent(getFrameForComponent(gamePanel),
+                                        WindowEvent.WINDOW_CLOSING));
                         levelWon = false;
                         KeyboardInputs.movingRight = false;
                         KeyboardInputs.movingLeft = false;
@@ -103,7 +210,9 @@ public class Game implements Runnable {
                     } else if (Game.getLevel() == 3) {
                         new FinishedGameMenu();
                         levelWon = false;
-                        getFrameForComponent(gamePanel).dispatchEvent(new WindowEvent(getFrameForComponent(gamePanel), WindowEvent.WINDOW_CLOSING));
+                        getFrameForComponent(gamePanel).dispatchEvent(
+                                new WindowEvent(getFrameForComponent(gamePanel),
+                                        WindowEvent.WINDOW_CLOSING));
                         KeyboardInputs.movingRight = false;
                         KeyboardInputs.movingLeft = false;
                         break;

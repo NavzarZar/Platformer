@@ -31,13 +31,13 @@ public class PauseMenuButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pauseMenuPanel.getContinueButton()) {
             // Resume the game and close the PauseMenuPanel window.
-            Game.isPaused = false;
+            Game.setIsPaused(false);
             getFrameForComponent(pauseMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(pauseMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
         if (e.getSource() == pauseMenuPanel.getRestartButton()) {
             // Restart the game and close the PauseMenuPanel window.
-            Game.pressedRestart = true;
-            Game.isPaused = false;
+            Game.setPressedRestart(true);
+            Game.setIsPaused(false);
             getFrameForComponent(pauseMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(pauseMenuPanel), WindowEvent.WINDOW_CLOSING));
         }
         if (e.getSource() == pauseMenuPanel.getExitButton()) {
@@ -46,7 +46,7 @@ public class PauseMenuButtonListener implements ActionListener {
         }
         if (e.getSource() == pauseMenuPanel.getReturnToMenu()) {
             // Return to the main menu and close the PauseMenuPanel window.
-            Game.pressedReturnToMainMenu = true;
+            Game.setPressedReturnToMainMenu(true);
             new GameMenu();
             getFrameForComponent(pauseMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(pauseMenuPanel), WindowEvent.WINDOW_CLOSING));
         }

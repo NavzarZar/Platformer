@@ -34,14 +34,14 @@ public class GameOverMouseButtonListener implements ActionListener {
         }
         if (e.getSource() == gameOverPanel.getRetryButton()) {
             // Start a new game when the retry button is clicked.
-            Game.gameOver = false;
+            Game.setGameOver(false);
             new Game();
             // Close the GameOverPanel window.
             getFrameForComponent(gameOverPanel).dispatchEvent(new WindowEvent(getFrameForComponent(gameOverPanel), WindowEvent.WINDOW_CLOSING));
         }
         if(e.getSource() == gameOverPanel.getMainMenu()){
             // Return to the main menu and close the GameOverPanel window.
-            Game.pressedReturnToMainMenu = true;
+            Game.setPressedReturnToMainMenu(true);
             new GameMenu();
             getFrameForComponent(gameOverPanel).dispatchEvent(new WindowEvent(getFrameForComponent(gameOverPanel), WindowEvent.WINDOW_CLOSING));
         }

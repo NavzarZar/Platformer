@@ -32,7 +32,7 @@ public class StartMenuButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startMenuPanel.getStartButton()) {
             // Start a new game and close the StartMenuPanel window.
-            Game.isPaused = false;
+            Game.setIsPaused(false);
             new Game();
             getFrameForComponent(startMenuPanel).dispatchEvent(new WindowEvent(getFrameForComponent(startMenuPanel), WindowEvent.WINDOW_CLOSING));
         } else if (e.getSource() == startMenuPanel.getExitButton()) {

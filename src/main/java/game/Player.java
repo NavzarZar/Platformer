@@ -6,23 +6,36 @@ import physics.Collision;
  * The `Player` class represents the player character in the game.
  */
 public class Player {
+    /**
+     * The vertical position (Y-coordinate) of the player character.
+     */
     private int playerY = 500;
+
+    /**
+     * The horizontal position (X-coordinate) of the player character.
+     */
     private int playerX = 0;
 
+    /**
+     * Indicates whether the player character is currently in a jumping state.
+     */
     private boolean playerIsJumping = false;
 
-    public int moveSpeed = 3;
+    /**
+     * The horizontal movement speed of the player character.
+     */
+    private int moveSpeed = 3;
 
-    public double velocityX = 0;
-    public double velocityY = 0;
+    /**
+     * The vertical velocity of the player character (used for jumping).
+     */
+    private double velocityY = 0;
 
-    public final int jumpHeight = 100;
-    public final int jumpSpeed = 2;
-    public int distanceJumped = 0;
-    public double fallingSpeed = 2;
+    /**
+     * The distance the player character has jumped.
+     */
+    private int distanceJumped = 0;
 
-    int playerWidth = 50;
-    int playerHeight = 75;
 
     /**
      * Gets the width of the player character.
@@ -30,7 +43,7 @@ public class Player {
      * @return The width of the player character.
      */
     public int getPlayerWidth() {
-        return playerWidth;
+        return 50;
     }
 
     /**
@@ -39,7 +52,7 @@ public class Player {
      * @return The height of the player character.
      */
     public int getPlayerHeight() {
-        return playerHeight;
+        return 75;
     }
 
     /**
@@ -48,7 +61,7 @@ public class Player {
      * @param velocityX The horizontal velocity to set.
      */
     public void setVelocityX(int velocityX) {
-        this.velocityX = velocityX;
+
     }
 
     /**
@@ -95,12 +108,15 @@ public class Player {
     public void makePlayerFall() {
         boolean playerHasBlockUnder = Collision.mapBlockUnderPlayer(this);
 
+        int jumpHeight = 100;
         if (!playerHasBlockUnder && !playerIsJumping) {
+            double fallingSpeed = 2;
             velocityY = fallingSpeed;
         } else if (distanceJumped >= jumpHeight) {
             distanceJumped = 0;
             playerIsJumping = false;
         } else if (playerIsJumping) {
+            int jumpSpeed = 2;
             velocityY = -jumpSpeed;
             distanceJumped += jumpSpeed;
         } else {
@@ -144,4 +160,21 @@ public class Player {
     public void setPlayerX(int playerX) {
         this.playerX = playerX;
     }
+
+    /**
+     * Gets the the move speed of the player.
+     * @return moveSpeed
+     */
+    public int getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    /**
+     * Gets the falling speed of the player.
+     * @return fallingSpeed
+     */
+    public int getFallingSpeed() {
+        return 2;
+    }
+
 }

@@ -32,7 +32,7 @@ public class PauseMenuWindow extends JFrame {
         jframe.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Game.isPaused = false;
+                Game.setIsPaused(false);
                 jframe.dispose();
             }
         });

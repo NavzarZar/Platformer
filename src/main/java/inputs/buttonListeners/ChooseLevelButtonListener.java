@@ -33,7 +33,7 @@ public class ChooseLevelButtonListener implements ActionListener {
             // Set the game level to 1 and start the game.
             Game.setLevel(1);
             Collision.setLevel(1);
-            Game.gameOver = false;
+            Game.setGameOver(false);
             new Game();
             // Close the ChooseLevelPanel window.
             getFrameForComponent(chooseLevelPanel).dispatchEvent(new WindowEvent(getFrameForComponent(chooseLevelPanel), WindowEvent.WINDOW_CLOSING));
@@ -42,7 +42,7 @@ public class ChooseLevelButtonListener implements ActionListener {
             // Set the game level to 2 and start the game.
             Game.setLevel(2);
             Collision.setLevel(2);
-            Game.gameOver = false;
+            Game.setGameOver(false);
             new Game();
             // Close the ChooseLevelPanel window.
             getFrameForComponent(chooseLevelPanel).dispatchEvent(new WindowEvent(getFrameForComponent(chooseLevelPanel), WindowEvent.WINDOW_CLOSING));
@@ -51,7 +51,7 @@ public class ChooseLevelButtonListener implements ActionListener {
             // Set the game level to 3 and start the game.
             Game.setLevel(3);
             Collision.setLevel(3);
-            Game.gameOver = false;
+            Game.setGameOver(false);
             new Game();
             // Close the ChooseLevelPanel window.
             getFrameForComponent(chooseLevelPanel).dispatchEvent(new WindowEvent(getFrameForComponent(chooseLevelPanel), WindowEvent.WINDOW_CLOSING));
