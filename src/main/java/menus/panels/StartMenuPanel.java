@@ -13,12 +13,19 @@ import java.io.IOException;
 
 import static menus.GlobalMethods.styledButton;
 
+/**
+ * The StartMenuPanel class represents the panel for the start menu screen.
+ * It contains buttons for starting the game, choosing a level, viewing controls, and exiting the game.
+ */
 public class StartMenuPanel extends JPanel {
     private JButton startButton, exitButton, chooseLvlButton, controlsButton;
     private JLabel titleLabel;
     private StartMenuButtonListener startMenuButtonListener;
     private BufferedImage image;
 
+    /**
+     * Constructs a new StartMenuPanel.
+     */
     public StartMenuPanel() {
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(480, 640));
@@ -26,14 +33,14 @@ public class StartMenuPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         startMenuButtonListener = new StartMenuButtonListener(this);
 
-
-        titleLabel = new JLabel("Welcome to game!");
+        titleLabel = new JLabel("Welcome to the game!");
 
         startButton = styledButton("Start Game");
         chooseLvlButton = styledButton("Choose Level");
         controlsButton = styledButton("Controls");
         exitButton = styledButton("Exit");
 
+        // Add action listeners to buttons
         startButton.addActionListener(startMenuButtonListener);
         exitButton.addActionListener(startMenuButtonListener);
         controlsButton.addActionListener(startMenuButtonListener);
@@ -69,24 +76,41 @@ public class StartMenuPanel extends JPanel {
         titleLabel.setVisible(true);
         startButton.setVisible(true);
         exitButton.setVisible(true);
-
     }
 
+    /**
+     * Gets the start button.
+     *
+     * @return The start button.
+     */
     public JButton getStartButton() {
         return startButton;
     }
 
+    /**
+     * Gets the exit button.
+     *
+     * @return The exit button.
+     */
     public JButton getExitButton() {
         return exitButton;
     }
 
+    /**
+     * Gets the choose level button.
+     *
+     * @return The choose level button.
+     */
     public JButton getChooseLvlButton() {
         return chooseLvlButton;
     }
 
+    /**
+     * Gets the controls button.
+     *
+     * @return The controls button.
+     */
     public JButton getControlsButton() {
         return controlsButton;
     }
-
-
 }
