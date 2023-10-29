@@ -57,4 +57,9 @@ The project structure is organized with 6 packages. Here's a brief overview of t
 - `images`: Contains the images used.
 - `pom.xml`: The Maven Project Object Model file that manages project dependencies and build configurations.
 
+## DISCLAIMER
+The Code Runner extension in VS Code does not recognize the packages with the classes. Instead of running the program
+with the "Run Code" mode, run it with "Run Java".
+Otherwise, just run from console as described above.
+
 Enjoy playing our Platformer Game! 🎮
